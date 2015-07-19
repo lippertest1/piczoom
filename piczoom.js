@@ -73,8 +73,12 @@
                 this.nthZoom = 0;
                 this.lastZoomCenter = false;
                 this.hasInteraction = true;
+                this.startAngle = 0;
             },
 
+            handleFirstZoom: function (event) {
+                this.startAngle = this.getRotateAngle(this.getTouches(event));
+            },
             handleZoom: function (event, newScale) {
 
                 // a relative scale factor is used
@@ -88,6 +92,8 @@
 
                     this.scale(scale, touchCenter);
                     this.drag(touchCenter, this.lastZoomCenter);
+                    this.rotate(touchCenter, this.lastZoomCenter);
+                    this.rotateAngle = this.getRotateAngle(this.getTouches(event)) - this.startAngle;
                 }
                 this.lastZoomCenter = touchCenter;
             },
@@ -177,6 +183,18 @@
                 }
             },
 
+            rotate: function (center, lastCenter) {
+
+            },
+
+            //return first two touch angle
+            getRotateAngle: function (touches) {
+                if(touches.length > 1){
+                    var delX = touches[1].x-touches[0].x;
+                    var delY = touches[1].y-touches[0].y;
+                    return delX?Math.atan(delY/delX):0;
+                }
+            },
             
             //Calculates the touch center of multiple touches
             getTouchCenter: function (touches) {
@@ -410,12 +428,14 @@
                     this.updatePlaned = false;
                     this.updateAspectRatio();
 
+                    console.log(this.rotateAngle);
+
                     var zoomFactor = this.getInitialZoomFactor() * this.zoomFactor,
                         offsetX = -this.offset.x / zoomFactor,
                         offsetY = -this.offset.y / zoomFactor,
-                        transform3d =   'scale3d('     + zoomFactor + ', '  + zoomFactor + ',1) ' +
+                        transform3d =   'rotate('+this.rotateAngle+'rad) scale3d('     + zoomFactor + ', '  + zoomFactor + ',1) ' +
                             'translate3d(' + offsetX    + 'px,' + offsetY    + 'px,0px)',
-                        transform2d =   'scale('       + zoomFactor + ', '  + zoomFactor + ') ' +
+                        transform2d =   'rotate('+this.rotateAngle+'rad) scale('       + zoomFactor + ', '  + zoomFactor + ') ' +
                             'translate('   + offsetX    + 'px,' + offsetY    + 'px)',
                         removeClone = (function () {
                             if (this.clone) {
@@ -428,6 +448,16 @@
                     // but they also reduce the quality.
                     // PicZoom uses the 3d transformations during interactions
                     // after interactions it falls back to 2d transformations
+
+                        this.el.css({
+                            '-webkit-transform-origin': 50+'% '+50+'%',
+                            '-moz-transform-origin': 50+'% '+50+'%',
+                            '-ms-transform-origin': 50+'% '+50+'%',
+                            '-o-transform-origin': 50+'% '+50+'%',
+                            'transform-origin': 50+'% '+50+'%',
+                        });
+
+
                     if (!this.options.use2d || this.hasInteraction || this.inAnimation) {
                         this.is3d = true;
                         removeClone();
@@ -579,6 +609,11 @@
                     if (firstMove) {
                         updateInteraction(event);
                         if (interaction) {
+                            switch (interaction) {
+                                case 'zoom':
+                                    target.handleFirstZoom(event);
+                                    break;
+                            }
                             cancelEvent(event);
                         }
                         startTouches = targetTouches(event.touches);
