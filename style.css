@@ -11,10 +11,21 @@ body{
 }
 
 div.page{
+    width: 70%;
     margin: 50px auto 50px auto;
     max-width: 500px;
     position: relative;
     text-align: left;
+}
+div.border_image{
+    border:30px solid transparent;
+    border-right:30px;
+    border-bottom:20px;
+    border-left:30px;
+    -moz-border-image:url(border.jpg) 70 70 round;   /* Old Firefox */
+    -webkit-border-image:url(border.jpg) 70 70 round;    /* Safari and Chrome */
+    -o-border-image:url(border.jpg) 70 70 round;     /* Opera */
+    border-image:url(border.jpg) 70 70 round;
 }
 
 div.pic-zoom {
