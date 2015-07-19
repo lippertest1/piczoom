@@ -570,7 +570,7 @@
                 if(target.enabled) {
                     firstMove = true;
                     fingers = event.touches.length;
-                    detectDoubleTap(event);
+                    // detectDoubleTap(event);
                 }
             });
 
