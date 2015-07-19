@@ -94,6 +94,8 @@
                     this.drag(touchCenter, this.lastZoomCenter);
                     this.rotate(touchCenter, this.lastZoomCenter);
                     this.rotateAngle = this.getRotateAngle(this.getTouches(event)) - this.startAngle;
+                    this.rotateAngle += this.lastAngle||0;
+
                 }
                 this.lastZoomCenter = touchCenter;
             },
@@ -428,7 +430,7 @@
                     this.updatePlaned = false;
                     this.updateAspectRatio();
 
-                    console.log(this.rotateAngle);
+                    // console.log(this.rotateAngle);
 
                     var zoomFactor = this.getInitialZoomFactor() * this.zoomFactor,
                         offsetX = -this.offset.x / zoomFactor,
@@ -638,6 +640,7 @@
 
             el.addEventListener('touchend', function (event) {
                 if(target.enabled) {
+                    target.lastAngle = target.rotateAngle;
                     fingers = event.touches.length;
                     updateInteraction(event);
                 }
