@@ -722,6 +722,8 @@
                     t.drawPoint(); //绘制路线 
                 }
                 t.lock = true;
+                e.stopPropagation();
+                e.preventDefault();
             };
             /*鼠标移动事件*/
             this.canvas['on' + t.MoveEvent] = function(e) {
@@ -740,6 +742,8 @@
                         t.drawPoint(); //绘制路线 
                     }
                 }
+                e.stopPropagation();
+                e.preventDefault();
             };
             this.canvas['on' + t.EndEvent] = function(e) {
                 /*重置数据*/
@@ -749,6 +753,8 @@
                 t.clickDrag = [];
                 clearInterval(t.Timer);
                 t.Timer = null;
+                e.stopPropagation();
+                e.preventDefault();
             };
             this.revocation.onclick = function() {
                 t.redraw();
