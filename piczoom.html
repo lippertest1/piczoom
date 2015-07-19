@@ -1,0 +1,36 @@
+<html>
+<head>
+    <title>Demo</title>
+
+    <style type="text/css">
+        div.pic-zoom,
+        div.pic-zoom img{
+            width: 100%;
+            -webkit-user-drag: none;
+        }
+
+    </style>
+    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <script type="text/javascript" src="zepto.min.js"></script>
+    <script type="text/javascript" src="piczoom.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('div.pic-zoom').each(function () {
+                new PicZoom($(this), {});
+            });
+        })
+    </script>
+</head>
+<body>
+
+    <div class="page">
+        <div class="pic-zoom">
+            <img src="lipper.jpg"/>
+            <a href="http://www.lipperhome.com">your own text</a>
+        </div>
+    </div>
+
+</body>
+</html>
