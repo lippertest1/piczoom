@@ -16,24 +16,17 @@
 
     <script type="text/javascript" src="zepto.min.js"></script>
     <script type="text/javascript" src="piczoom.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            $('div.pic-zoom').each(function () {
-                new PicZoom($(this), {});
-            });
-            paint.init()
-        })
-    </script>
 </head>
 <body>
 
-    <div class="page border_image">
-        <div class="pic-zoom">
-            <img src="lipper.jpg"/>
-            <a href="http://www.lipperhome.com">your own text</a>
+    <div class="pic-container">
+        <div class="page border_image">
+            <div class="pic-zoom">
+                <img src="lipper.jpg"/>
+                <a href="http://www.lipperhome.com">your own text</a>
+            </div>
         </div>
     </div>
-
     
     <div class="fa"> 
         <div class="top"> 
@@ -64,7 +57,8 @@
         <canvas id="canvas" width="300px" height="420">您的浏览器不支持 canvas 标签</canvas> 
         <div id="div1"></div> 
     </div>
-        <div id="html"> 
+    
+    <div id="html"> 
     </div> 
 
 </body>

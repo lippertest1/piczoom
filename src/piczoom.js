@@ -862,3 +862,13 @@
     };
     window.paint = paint;
 }).call(this);
+
+
+$(function () {
+    $('div.pic-zoom').each(function () {
+        new PicZoom($(this), {});
+    });
+    paint.init();
+    // $('.pic-container').hide();
+
+});
