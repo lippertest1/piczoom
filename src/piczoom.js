@@ -922,6 +922,10 @@ $(function () {
 
     var area = $.getQuery('area');
     if (area) {
+        if(area=='all'){
+            $('.viewport-show').show();
+            $('.viewport-canvas').show();
+        }
         $('.viewport-'+area).show();
     }
     else{
