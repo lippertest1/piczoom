@@ -155,6 +155,9 @@ div.pic-zoom div.description p{
     background-color: #fff;
     color: #000;
 }
+.commentBox *{
+    margin: 5px 0px;
+}
 
 .avatar{
     display:inline-block;
@@ -168,7 +171,10 @@ div.pic-zoom div.description p{
     display:inline-block;
     margin-left: 10px;
 }
-
+.comment *{
+    color: #747474;
+    font-size: 1.5em;
+}
 
 
 ul{
