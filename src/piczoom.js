@@ -863,6 +863,21 @@
     window.paint = paint;
 }).call(this);
 
+$(function(){
+    $.getQuery = function( key , url )
+    {
+        url = url || window.location.href;
+        var rts = [],rt;
+        queryReg = new RegExp( '(^|\\?|&)' + key + '=([^&]*)(?=&|#|$)' , 'g' );
+        while ( ( rt = queryReg.exec( url ) ) != null )
+        {
+            rts.push( decodeURIComponent( rt[ 2 ] ) );
+        }
+        if ( rts.length == 0 ) return null;
+        if ( rts.length == 1 ) return rts[ 0 ];
+        return rts;
+    };
+});
 
 $(function () {
     $('div.pic-zoom').each(function () {
@@ -893,7 +908,21 @@ $(function () {
 
     $('.pic-container').hide();
     $('.pic-container').show();
-    $('.viewport-1').hide();
-    
+
+
+
+
+
+
+    $('.viewport-show').hide();
+    $('.viewport-canvas').hide();
+
+    var area = $.getQuery('area');
+    if (area) {
+        $('.viewport-'+area).show();
+    }
+    else{
+        $('.viewport-show').show();
+    }
 
 });
