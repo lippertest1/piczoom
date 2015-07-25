@@ -884,6 +884,8 @@ $(function () {
         new PicZoom($(this), {});
     });
     paint.init();
+    document.getElementById('canvas').width  = window.innerWidth;
+    // document.getElementById('canvas').height = window.innerHeight;
 
 
     var upfile = document.querySelector('#uploadBtn');

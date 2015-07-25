@@ -102,7 +102,8 @@
                 <input id="revocation" type="button" value="撤销" style="width:80px;"> 
                 <input id="imgurl" type="button" value="导出图片路径" style="width:80px;"> 
             </div> 
-            <canvas id="canvas">您的浏览器不支持 canvas 标签</canvas> 
+            <!--canvas大小要写在dom，不用px，否则像素出错-->
+            <canvas id="canvas" width='500' height='300'>您的浏览器不支持 canvas 标签</canvas> 
         </div>    
     </div> 
 
