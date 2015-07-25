@@ -1,6 +1,6 @@
 
 *{margin:0;padding:0;} 
-.fa{width:80%; margin: 0 auto;} 
+.fa{background:#000;width:100%; margin: 0 auto;} 
 .top{margin:20px 0;} 
 .top input{width:25px;height:25px;border:1px solid #fff;border-radius:4px;background:#ddd;} 
 .top .i1{background:#000000;} 
@@ -23,11 +23,14 @@ html{
 }
 
 body{
-    background-color: #333;
+    background-color: #f7f7f7;
     font-family: Georgia;
 }
 div.pic-container{
     background-color: #f7f7f7;
+    box-orient: vertical;
+        -webkit-box-orient: vertical;
+        -moz-box-orient: vertical;
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
@@ -46,7 +49,7 @@ div.pic-container{
 }
 div.page{
     width: 70%;
-    margin: 50px auto 50px auto;
+    margin: 10px auto 10px auto;
     max-width: 500px;
     position: relative;
     text-align: left;
@@ -54,7 +57,7 @@ div.page{
 div.border_image{
     border:15px solid transparent;
     border-color:#F3BF2E #F6CD51 #F3BF2E #F3C030;
-    
+    display: block;
     //border-right:30px;
     //border-bottom:20px;
     //border-left:30px;
@@ -92,6 +95,25 @@ div.pic-zoom div.description h1{
 div.pic-zoom div.description p{
     margin: 0px;
 }
+
+.infoBox{
+    color:#000;
+    background-color: #f7f7f7;
+    box-orient: vertical;
+        -webkit-box-orient: vertical;
+        -moz-box-orient: vertical;
+    -webkit-box-align: center;
+        -moz-box-align: center;
+        -ms-flex-align: center;
+    -webkit-align-items: center;
+        align-items: center;
+    -webkit-box-pack: center;
+        -moz-box-pack: center;
+        -ms-flex-pack: center;
+    -webkit-justify-content: center;
+        justify-content: center;
+}
+
 
 ul{
     margin: 0;
