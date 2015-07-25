@@ -19,7 +19,7 @@
 .canvas-bk{
     position: absolute;
     width:100%;
-    height:40%;
+    height:300px;
     color: #949494;
     background-color:#dadada;
 }
