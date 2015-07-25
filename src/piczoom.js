@@ -869,6 +869,9 @@ $(function () {
         new PicZoom($(this), {});
     });
     paint.init();
-    // $('.pic-container').hide();
+
+
+    $('.pic-container').hide();
+    $('.pic-container').show();
 
 });
