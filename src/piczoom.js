@@ -873,14 +873,23 @@ $(function () {
 
     var upfile = document.querySelector('#uploadBtn');
      
-    upfile.onchange = function(evt)
-    {
-      var e = evt || window.event;
-      if(upfile.files)  // upfile.files，一般来说这个对象也是由系统提供的，不可以自己生成
-      {
-          alert(upfile.files);
-       }
+    upfile.onchange = function (evt) {
+        var files = evt.target.files;
+        for(var i = 0, f; f = files[i]; i++){
+            if(!f.type.match('image.*')) continue;
+            
+            var reader = new FileReader();
+            reader.onload = (function(theFile){
+                return function(e){
+                    var img = $(".pic-zoom img")[0];//document.createElement('img');
+                    img.title = theFile.name;
+                    img.src = e.target.result;
+                }
+            })(f);
+            reader.readAsDataURL(f);
+        }  
     }
+
 
     $('.pic-container').hide();
     $('.pic-container').show();
