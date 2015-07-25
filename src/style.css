@@ -135,6 +135,13 @@ div.pic-zoom div.description p{
     margin-bottom: 20px;    
 }
 
+.infoBox *{
+    margin: 5px 0px;
+}
+.nfoBox-loading *{
+    margin: 8px 0px;
+}
+
 .price-text{  
     color:#967F47;
     font: normal normal normal 14px/1 FontAwesome;
@@ -156,7 +163,7 @@ div.pic-zoom div.description p{
     color: #000;
 }
 .commentBox *{
-    margin: 5px 0px;
+    margin: 8px 0px;
 }
 
 .avatar{
@@ -176,6 +183,14 @@ div.pic-zoom div.description p{
     font-size: 1.5em;
 }
 
+.button-container{
+}
+.button{
+    background-color: #1e1e1e;
+    color:#fff;
+    width:50%;
+    padding:10px 40px;
+}
 
 ul{
     margin: 0;
