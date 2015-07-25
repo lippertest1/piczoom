@@ -20,92 +20,91 @@
     <script type="text/javascript" src="piczoom.js"></script>
 </head>
 <body>
+    <div class='viewport-1'>
+        <div class="pic-container box-center">
+            <div class="page border_image">
+                <div class="pic-zoom">
+                    <img src="lipper.jpg"/>
+                    <a href="http://www.lipperhome.com">your own text</a>
+                </div>
+            </div>
+        </div>
+        <div class="infoBox">       
+            <div class="price-text box-center">
+                <i class="fa fa-camera-retro fa-4x"></i>
+                <i class="fa fa-4x">$8,900</i>
+                <i class="fa fa-list-ol fa-4x"></i>
+                
+            </div>
+            <div class="split box-center">
+                <i class="fa fa-star"></i>&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="line"></div>&nbsp;&nbsp;&nbsp;&nbsp;
+                <i class="fa fa-star"></i>
+            </div>
+            <div class="name-show box-center">
+                <div class="fa fa-2x">《夜晚的伦敦皮卡迪亚》</div>
+            </div>
+        </div>
 
-    <div class="pic-container box-center">
-        <div class="page border_image">
-            <div class="pic-zoom">
-                <img src="lipper.jpg"/>
-                <a href="http://www.lipperhome.com">your own text</a>
+        <div class="infoBox-loading" style="display:none">   
+            <div class="box-center">
+                <div class="fa fa-4x">砖家正在讨论中</div>
+            </div>
+            <div class="box-center">
+                <div class="fa fa-4x">。。。。。。</div>
+            </div>
+        </div>
+
+        <div class="commentBox">   
+            <div>
+                <div class="avatar fa-2x">&nbsp;</div>
+                <div class="nickname fa-2x">伦博朗</div>
+            </div>
+            <div class="box-center comment">
+                <i class="fa fa-quote-left" style="margin-top:-5px">&nbsp;</i>
+                <div>这是一个为了艺术可以不顾一切的人</div>
+                <i class="fa fa-quote-right" style="margin-bottom:-5px"></i>
+            </div>
+            <div class="box-center button-container">
+                <div class="button fa-2x" onclick=" document.getElementById('uploadBtn').click(); ">
+                    <i class="fa fa-camera-retro"></i>&nbsp;&nbsp;
+                    测试我的作品
+                </div>
+                <input id="uploadBtn" type="file" accept="image/*" style="visibility: hidden; width: 0px; height: 0px" />
             </div>
         </div>
     </div>
-    <div class="infoBox">       
-        <div class="price-text box-center">
-            <i class="fa fa-camera-retro fa-4x"></i>
-            <i class="fa fa-4x">$8,900</i>
-            <i class="fa fa-list-ol fa-4x"></i>
-            
-        </div>
-        <div class="split box-center">
-            <i class="fa fa-star"></i>&nbsp;&nbsp;&nbsp;&nbsp;
-            <div class="line"></div>&nbsp;&nbsp;&nbsp;&nbsp;
-            <i class="fa fa-star"></i>
-        </div>
-        <div class="name-show box-center">
-            <div class="fa fa-2x">《夜晚的伦敦皮卡迪亚》</div>
-        </div>
-    </div>
-
-    <div class="infoBox-loading" style="display:none">   
-        <div class="box-center">
-            <div class="fa fa-4x">砖家正在讨论中</div>
-        </div>
-        <div class="box-center">
-            <div class="fa fa-4x">。。。。。。</div>
-        </div>
-    </div>
-
-    <div class="commentBox">   
-        <div>
-            <div class="avatar fa-2x">&nbsp;</div>
-            <div class="nickname fa-2x">伦博朗</div>
-        </div>
-        <div class="box-center comment">
-            <i class="fa fa-quote-left" style="margin-top:-5px">&nbsp;</i>
-            <div>这是一个为了艺术可以不顾一切的人</div>
-            <i class="fa fa-quote-right" style="margin-bottom:-5px"></i>
-        </div>
-        <div class="box-center button-container">
-            <div class="button fa-2x" onclick=" document.getElementById('uploadBtn').click(); ">
-                <i class="fa fa-camera-retro"></i>&nbsp;&nbsp;
-                测试我的作品
-            </div>
-            <input id="uploadBtn" type="file" accept="image/*" style="visibility: hidden; width: 0px; height: 0px" />
-        </div>
-    </div>
-
     
-    <div class="faa"> 
-        <div class="top"> 
-            <div id="color"> 
-                <input class="i1" type="button" value=""> 
-                <input class="i2" type="button" value=""> 
-                <input class="i3" type="button" value=""> 
-                <input class="i4" type="button" value=""> 
-                <input class="i5" type="button" value=""> 
-                <input class="i6" type="button" value=""> 
-                <input class="i7" type="button" value=""> 
-                <input class="i8" type="button" value=""> 
-                <input class="i9" type="button" value=""> 
+    <div class='viewport-canvas'>
+        <div class="faa"> 
+            <div class="top"> 
+                <div id="color"> 
+                    <input class="i1" type="button" value=""> 
+                    <input class="i2" type="button" value=""> 
+                    <input class="i3" type="button" value=""> 
+                    <input class="i4" type="button" value=""> 
+                    <input class="i5" type="button" value=""> 
+                    <input class="i6" type="button" value=""> 
+                    <input class="i7" type="button" value=""> 
+                    <input class="i8" type="button" value=""> 
+                    <input class="i9" type="button" value=""> 
+                </div> 
+                <div class="font" id="font"> 
+                    <input type="button" value="细"> 
+                    <input type="button" value="中" class="grea"> 
+                    <input type="button" value="粗"> 
+                </div> 
+                <div> 
+                    <span id="error">如果有错误，请使用橡皮擦：</span> 
+                    <input id="eraser" style="width:60px;font-size:14px;" type="button" value="橡皮擦"> 
+                </div> 
+                <input id="clear" type="button" value="清除画布" style="width:80px;"> 
+                <input id="revocation" type="button" value="撤销" style="width:80px;"> 
+                <input id="imgurl" type="button" value="导出图片路径" style="width:80px;"> 
             </div> 
-            <div class="font" id="font"> 
-                <input type="button" value="细"> 
-                <input type="button" value="中" class="grea"> 
-                <input type="button" value="粗"> 
-            </div> 
-            <div> 
-                <span id="error">如果有错误，请使用橡皮擦：</span> 
-                <input id="eraser" style="width:60px;font-size:14px;" type="button" value="橡皮擦"> 
-            </div> 
-            <input id="clear" type="button" value="清除画布" style="width:80px;"> 
-            <input id="revocation" type="button" value="撤销" style="width:80px;"> 
-            <input id="imgurl" type="button" value="导出图片路径" style="width:80px;"> 
-        </div> 
-        <canvas id="canvas" width="300px" height="420">您的浏览器不支持 canvas 标签</canvas> 
-        <div id="div1"></div> 
-    </div>
-    
-    <div id="html"> 
+            <canvas id="canvas" width="300px" height="420">您的浏览器不支持 canvas 标签</canvas> 
+            <div id="div1"></div> 
+        </div>    
     </div> 
 
 </body>

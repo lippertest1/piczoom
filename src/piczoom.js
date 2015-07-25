@@ -893,5 +893,7 @@ $(function () {
 
     $('.pic-container').hide();
     $('.pic-container').show();
+    $('.viewport-1').hide();
+    
 
 });
