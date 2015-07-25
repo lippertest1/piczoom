@@ -114,6 +114,7 @@ div.pic-zoom div.description p{
         -ms-flex-pack: center;
     -webkit-justify-content: center;
         justify-content: center;
+    margin-bottom: 20px;
 }
 .infoBox-loading{
     color:#000;
@@ -131,6 +132,7 @@ div.pic-zoom div.description p{
         -ms-flex-pack: center;
     -webkit-justify-content: center;
         justify-content: center;
+    margin-bottom: 20px;    
 }
 
 .price-text{  
