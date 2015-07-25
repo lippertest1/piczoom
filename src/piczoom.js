@@ -871,6 +871,17 @@ $(function () {
     paint.init();
 
 
+    var upfile = document.querySelector('#uploadBtn');
+     
+    upfile.onchange = function(evt)
+    {
+      var e = evt || window.event;
+      if(upfile.files)  // upfile.files，一般来说这个对象也是由系统提供的，不可以自己生成
+      {
+          alert(upfile.files);
+       }
+    }
+
     $('.pic-container').hide();
     $('.pic-container').show();
 
