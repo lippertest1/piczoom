@@ -12,9 +12,15 @@
 .top .i7{background:#408080;} 
 .top .i8{background:#8000FF;} 
 .top .i9{background:#CCCC00;} 
-#canvas{background:#eee;cursor:default;z-index: 200;position: absolute;opacity:0.7;} 
+#canvas{background:#eee;cursor:default;z-index: 200;position: relative;opacity:0.7;} 
 .font input{font-size:14px;} 
 .top .grea{background:#aaa;} 
+.font{
+    position: relative;
+    margin-bottom: -5px;
+    background-color: rgba(255,255,255,0);
+    border:none;
+}
 
 .canvas-bk{
     position: absolute;
