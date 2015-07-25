@@ -886,7 +886,8 @@ $(function () {
     paint.init();
     document.getElementById('canvas').width  = window.innerWidth;
     // document.getElementById('canvas').height = window.innerHeight;
-
+    // var cxt = document.getElementById('canvas').getContext('2d');
+    // cxt.globalAlpha = "0.5";
 
     var upfile = document.querySelector('#uploadBtn');
      
