@@ -36,6 +36,17 @@
     margin-top: 20%;
 }
 
+.canvas-bottom{
+    background-color: #fff;
+    color: #000;
+    width: 100%;
+    height: 500px;
+}
+
+.btn-use-nick{
+    background-color: #435984;
+}
+
 
 body,
 html{
