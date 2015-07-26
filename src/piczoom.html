@@ -66,15 +66,32 @@
                 <i class="fa fa-quote-right" style="margin-bottom:-5px"></i>
             </div>
             <div class="box-center button-container">
-                <div class="button fa-2x" onclick=" document.getElementById('uploadBtn').click(); ">
+                <div class="button fa-2x" id="button-show">
                     <i class="fa fa-camera-retro"></i>&nbsp;&nbsp;
                     测试我的作品
                 </div>
-                <input id="uploadBtn" type="file" accept="image/*" style="visibility: hidden; width: 0px; height: 0px" />
             </div>
         </div>
     </div>
     
+
+    <div class='viewport-intro'>
+        <div class="box-center">
+            <img src="lipper.jpg" style="height:400px"></img>
+        </div>
+
+        <div class="commentBox">   
+            <div class="box-center button-container">
+                <div class="button fa-2x" onclick=" document.getElementById('uploadBtn').click(); " style="width:40%;background-color: #435984; margin:20px 0">
+                    <i class="fa fa-camera-retro"></i>&nbsp;&nbsp;
+                    上传作品
+                </div>
+                <input id="uploadBtn" type="file" accept="image/*" style="visibility: hidden; width: 0px; height: 0px" />
+            </div>
+        </div>
+    </div> 
+
+
     <div class='viewport-canvas'>
         <div class="faa"> 
             <div class="top" style="display:none"> 
@@ -126,6 +143,8 @@
             </div>
         </div>   
     </div> 
+
+
 
 </body>
 </html>

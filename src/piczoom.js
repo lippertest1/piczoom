@@ -889,6 +889,29 @@ $(function () {
     // var cxt = document.getElementById('canvas').getContext('2d');
     // cxt.globalAlpha = "0.5";
 
+    var goTo = function(area){
+        $('.viewport-show').hide();
+        $('.viewport-intro').hide();
+        $('.viewport-canvas').hide();
+        if (area) {
+            if(area=='all'){
+                $('.viewport-show').show();
+                $('.viewport-intro').show();
+                $('.viewport-canvas').show();
+            }
+            $('.viewport-'+area).show();
+        }
+        else{
+            $('.viewport-show').show();
+        }
+    }
+
+    document.querySelector('#button-show').onclick=function(){
+        goTo('intro');
+    }
+
+
+
     var upfile = document.querySelector('#uploadBtn');
      
     upfile.onchange = function (evt) {
@@ -899,13 +922,14 @@ $(function () {
             var reader = new FileReader();
             reader.onload = (function(theFile){
                 return function(e){
-                    var img = $(".pic-zoom img")[0];//document.createElement('img');
+                    var img = $(".viewport-show .pic-zoom img")[0];//document.createElement('img');
                     img.title = theFile.name;
                     img.src = e.target.result;
                 }
             })(f);
             reader.readAsDataURL(f);
         }  
+        goTo('show');
     }
 
 
@@ -917,19 +941,8 @@ $(function () {
 
 
 
-    $('.viewport-show').hide();
-    $('.viewport-canvas').hide();
 
     var area = $.getQuery('area');
-    if (area) {
-        if(area=='all'){
-            $('.viewport-show').show();
-            $('.viewport-canvas').show();
-        }
-        $('.viewport-'+area).show();
-    }
-    else{
-        $('.viewport-show').show();
-    }
+    goTo(area);
 
 });
