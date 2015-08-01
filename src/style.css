@@ -112,13 +112,13 @@ div.border_image{
     border:15px solid transparent;
     border-color:#F3BF2E #F6CD51 #F3BF2E #F3C030;
     display: block;
-    //border-right:30px;
-    //border-bottom:20px;
-    //border-left:30px;
-    //-moz-border-image:url(border.jpg) 70 70 round;   /* Old Firefox */
-    //-webkit-border-image:url(border.jpg) 70 70 round;    /* Safari and Chrome */
-    //-o-border-image:url(border.jpg) 70 70 round;     /* Opera */
-    //border-image:url(border.jpg) 70 70 round;
+    border-right:30px;
+    border-bottom:20px;
+    border-left:30px;
+    -moz-border-image:url(border.jpg) 70 70 round;   /* Old Firefox */
+    -webkit-border-image:url(border.jpg) 70 70 round;    /* Safari and Chrome */
+    -o-border-image:url(border.jpg) 70 70 round;     /* Opera */
+    border-image:url(border.jpg) 70 70 round;
 }
 
 div.pic-zoom {
