@@ -73,7 +73,7 @@
 
     top:0px;
     width:100%;
-    background: #3f3f3f;
+    background: #fff;
 }
 
 .slider-wrapper {
@@ -105,22 +105,22 @@
     background-size: 100% 100% !important;
     float: left;
 }
-.slide-page-1{background: #f00;}
-.slide-page-2{background: #f90;}
-.slide-page-3{background: #ff0;}
-.slide-page-4{background: #0f0;}
-.slide-page-5{background: #f00;}
-.slide-page-6{background: #f90;}
-.slide-page-7{background: #ff0;}
-.slide-page-8{background: #0f0;}
-.slide-page-9{background: #f00;}
-.slide-page-10{background: #f90;}
-.slide-page-11{background: #ff0;}
-.slide-page-12{background: #0f0;}
-.slide-page-13{background: #f00;}
-.slide-page-14{background: #f90;}
-.slide-page-15{background: #ff0;}
-.slide-page-16{background: #0f0;}
+.slide-page-1{background-image: url("http://7xkkuk.com2.z0.glb.qiniucdn.com/hk-s-木质1.png");}
+.slide-page-2{background-image: url("http://7xkkuk.com2.z0.glb.qiniucdn.com/hk-s-木质2.png");}
+.slide-page-3{background-image: url("http://7xkkuk.com2.z0.glb.qiniucdn.com/hk-s-木质3.png");}
+.slide-page-4{background-image: url("http://7xkkuk.com2.z0.glb.qiniucdn.com/hk-s-塑料制1.png");}
+.slide-page-5{background-image: url("http://7xkkuk.com2.z0.glb.qiniucdn.com/hk-s-塑料制2.png");}
+.slide-page-6{background-image: url("http://7xkkuk.com2.z0.glb.qiniucdn.com/hk-s-现代1.png");}
+.slide-page-7{background-image: url("http://7xkkuk.com2.z0.glb.qiniucdn.com/hk-s-现代带黑框黑.png");}
+.slide-page-8{background-image: url("http://7xkkuk.com2.z0.glb.qiniucdn.com/hk-s-现代带框黑.png");}
+.slide-page-9{background-image: url("http://7xkkuk.com2.z0.glb.qiniucdn.com/hk-s-hk-s-现代带框红.png");}
+.slide-page-10{background-image: url("http://7xkkuk.com2.z0.glb.qiniucdn.com/hk-s-现代带框黄.png");}
+.slide-page-11{background-image: url("http://7xkkuk.com2.z0.glb.qiniucdn.com/hk-s-现代带框青.png");}
+.slide-page-12{background-image: url("http://7xkkuk.com2.z0.glb.qiniucdn.com/hk-s-现代带青框红.png");}
+.slide-page-13{background-image: url("http://7xkkuk.com2.z0.glb.qiniucdn.com/hk-s-现代红.png");}
+.slide-page-14{background-image: url("http://7xkkuk.com2.z0.glb.qiniucdn.com/hk-s-现代黄.png");}
+.slide-page-15{background-image: url("http://7xkkuk.com2.z0.glb.qiniucdn.com/hk-s-现代青.png");}
+.slide-page-16{background-image: url("http://7xkkuk.com2.z0.glb.qiniucdn.com/hk-s-现代青.png");}
 
 
 
