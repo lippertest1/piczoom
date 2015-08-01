@@ -1,13 +1,13 @@
 
 
 
-var uploader = Qiniu.uploader({
+window.uploader = Qiniu.uploader({
     runtimes: 'html5,flash,html4',
     browse_button: 'uploadBtn',
     container: 'button-container',
     drop_element: 'button-container',
     max_file_size: '100mb',
-    // flash_swf_url: 'js/plupload/Moxie.swf',
+    flash_swf_url: 'Moxie.swf',
     dragdrop: true,
     chunk_size: '4mb',
     uptoken_url: 'http://192.168.1.116/X_1_FirstWebAPI/api/qiniu/get',
