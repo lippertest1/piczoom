@@ -262,7 +262,13 @@ window.view = {
                     if (ajax.readyState === 4 && ajax.status === 200) {
                         var res = parseJSON(ajax.responseText);
                         console.log(res);
-                        
+                        var commentIdList = res.commentIdList.split(",");
+                        if(commentIdList.length){
+                            $(".discusing").hide();
+                            commentIdList.forEach(function(c, i){
+                                console.log(c);
+                            });
+                        }
                     }
                 };
                 ajax.send(JSON.stringify(data));
