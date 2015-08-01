@@ -201,7 +201,15 @@ window.view = {
     },
     render:function(area,data){
         if(area == "show" || !area){
-            
+            console.log("render");
+            if(G&&G.pic&&G.pic["bkg"]){
+                var img = $(".viewport-show .pic-zoom img")[0];//document.createElement('img');
+                img.title = "";
+                img.src = G.pic.host+G.pic["bkg"];
+            }
+            if(history.state.state == "finishUpload"){
+                
+            }
             $('.viewport-show');
         }
     }

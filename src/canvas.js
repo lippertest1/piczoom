@@ -117,9 +117,9 @@
                         var res=JSON.parse(xhr.responseText);
                         typeof(G)!="undefined"&&G&&G.pic&&(G.pic["border"] = res.key);
                         goTo('show','finishUpload');
-                        var img = $(".viewport-show .pic-zoom img")[0];//document.createElement('img');
-                        img.title = file[file.length-1].name;
-                        img.src = G.pic.host+G.pic["bkg"];
+                        // var img = $(".viewport-show .pic-zoom img")[0];//document.createElement('img');
+                        // img.title = file[file.length-1].name;
+                        // img.src = G.pic.host+G.pic["bkg"];
                     }
                 }
                 xhr.open("POST", url, true); 
