@@ -17,9 +17,19 @@
 .top .grea{background:#aaa;} 
 .font{
     position: relative;
-    margin-bottom: -5px;
+    margin: -34px 20px 0 0;
     background-color: rgba(255,255,255,0);
-    border:none;
+    border: none;
+    z-index: 300;
+    float: right;
+}
+.font input{
+    border-width: 0px;
+    width: 17px;
+    color: #fff;
+    background-color: #fff;
+    border-radius: 50%;
+    margin-right: 12px;
 }
 
 .canvas-bk{
@@ -46,6 +56,11 @@
 .btn-use-nick{
     background-color: #435984;
 }
+
+
+
+
+
 
 
 body,
