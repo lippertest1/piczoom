@@ -112,6 +112,30 @@ $(function(){
 
 });
 
+commentIdList = [
+    {"name":"莫奈",  "comment":"光与影的绝妙组合"},
+    {"name":"安格尔", "comment":"这幅作品放到下个世纪也难以被人超越！"},
+    {"name":"毕加索", "comment":"这幅作品比我的只差了那么一点点"},
+    {"name":"达芬奇", "comment":"你有着热爱艺术的心，就是技术有待提高"},
+    {"name":"梵高",  "comment":"幸好我没自挖双目，才能遇见这绝世的佳作"},
+    {"name":"德加",  "comment":"还好我们生活在不同的时代"},
+    {"name":"德拉克洛瓦",   "comment":"我的艺术理念后继有人了！"},
+    {"name":"佛里达", "comment":"你又激发了我的创作灵感"},
+    {"name":"戈雅",  "comment":"抽象派与野兽派的完美结合"},
+    {"name":"卡拉瓦乔",    "comment":"运气与实力混杂各半造就的成品"},
+    {"name":"库贝尔", "comment":"一幅作品中蕴藏着一个别样的世界"},
+    {"name":"拉斐尔", "comment":"我看到了人世间的悲欢离合"},
+    {"name":"雷诺阿", "comment":"此情此景不禁让我潸然泪下"},
+    {"name":"达利",  "comment":"在你的作品中，我仿佛看到了又一个梦境"},
+    {"name":"鲁本斯", "comment":"灵与肉，生命与死亡，你与我，感同身受。"},
+    {"name":"伦勃朗", "comment":"作品没有好坏，只有喜欢不喜欢"},
+    {"name":"马蒂斯", "comment":"我想将这幅作品挂到我家的壁炉上"},
+    {"name":"米开朗琪罗",   "comment":"犹如写意的笔墨，挥洒自如"},
+    {"name":"米勒",  "comment":"如何用一副作品去探讨一个生与死的主题"},
+    {"name":"委拉斯开兹",   "comment":"摄影师与变态，只差一步"}
+]
+
+
 window.parseJSON = function(data) {
     // Attempt to parse using the native JSON parser first
     if (window.JSON && window.JSON.parse) {
@@ -246,8 +270,8 @@ window.view = {
             if(history.state.state == ""){
                 $('.show-init').show();
 
-                // $(".show-sign").show();
-                // $(".borderChoose").show();
+                $(".show-finishUpload").show();
+                $(".borderChoose").show();
             }
             else if(history.state.state == "finishUpload"){
                 $(".show-finishUpload").show();
@@ -262,10 +286,19 @@ window.view = {
                     if (ajax.readyState === 4 && ajax.status === 200) {
                         var res = parseJSON(ajax.responseText);
                         console.log(res);
-                        var commentIdList = res.commentIdList.split(",");
-                        if(commentIdList.length){
+                        $(".commentBox-comment").show();
+                        var name = commentIdList[res.commentIdList[0]-1].name;
+                        var comment = commentIdList[res.commentIdList[0]-1].comment;
+                        $(".commentBox-comment .nickname").html(name);
+                        $(".commentBox-comment .comment-content").html(comment);
+                        
+
+
+                        var dialogIdList = res.dialogIdList.split(",");
+
+                        if(dialogIdList.length){
                             $(".discusing").hide();
-                            commentIdList.forEach(function(c, i){
+                            dialogIdList.forEach(function(c, i){
                                 console.log(c);
                             });
                         }
