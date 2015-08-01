@@ -338,6 +338,7 @@ function QiniuJsSDK() {
                     var ext = that.getFileExtension(file.name);
                     key = ext ? that.getFileName(file.name) + "-" + Guid() + '.' + ext : Guid();
                     console.log(key);
+                    G&&G.pic&&G.pic.type&&(G.pic[G.pic.type] = key);
                 }
             }
             return key;

@@ -51,6 +51,7 @@ var uploader = Qiniu.uploader({
         },
         'UploadComplete': function() {
             console.log("UploadComplete");
+            alert(G.pic.type+" "+G.pic[G.pic.type]);
             // $('#success').show();
         },
         'FileUploaded': function(up, file, info) {
@@ -144,6 +145,10 @@ window.addEventListener("popstate", function() {
     var currentState = history.state;
     view.onshow(history.state.area);                                         
 });
+
+window.G = {};
+G.pic={};
+G.pic.type="bkg";//or border
 
 window.view = {
     init:function(){
