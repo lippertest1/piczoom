@@ -242,15 +242,15 @@ window.view = {
             if(history.state.state == ""){
                 $('.show-init').show();
 
-                $(".show-sign").show();
-                $(".borderChoose").show();
+                // $(".show-sign").show();
+                // $(".borderChoose").show();
             }
             else if(history.state.state == "finishUpload"){
-                $(".show-sign").show();
+                $(".show-finishUpload").show();
                 $(".borderChoose").show();
             }
             else if(history.state.state == "confirm"){
-                $('.show-finish').show();
+                $('.show-confirm').show();
 
                 var ajax = new XMLHttpRequest();
                 ajax.open('GET', 'http://192.168.1.116/X_1_FirstWebAPI/api/art/get?data='+data, true);
