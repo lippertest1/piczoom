@@ -253,7 +253,7 @@ window.view = {
                 $('.show-finish').show();
 
                 var ajax = new XMLHttpRequest();
-                ajax.open('GET', 'http://192.168.1.116/X_1_FirstWebAPI/api/art/get?data=222', true);
+                ajax.open('GET', 'http://192.168.1.116/X_1_FirstWebAPI/api/art/get?data='+data, true);
                 ajax.onreadystatechange = function() {
                     if (ajax.readyState === 4 && ajax.status === 200) {
                         var res = parseJSON(ajax.responseText);
