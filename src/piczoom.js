@@ -49,9 +49,14 @@ var uploader = Qiniu.uploader({
 
             // progress.setProgress(file.percent + "%", file.speed, chunk_size);
         },
-        'UploadComplete': function() {
+        'UploadComplete': function(up, file) {
             console.log("UploadComplete");
-            alert(G.pic.type+" "+G.pic[G.pic.type]);
+            // alert(G.pic.type+" "+G.pic[G.pic.type]);
+            var img = $(".viewport-show .pic-zoom img")[0];//document.createElement('img');
+            img.title = file[file.length-1].name;
+            img.src = G.pic.host+G.pic["bkg"];
+
+            goTo('show');
             // $('#success').show();
         },
         'FileUploaded': function(up, file, info) {
@@ -148,6 +153,7 @@ window.addEventListener("popstate", function() {
 
 window.G = {};
 G.pic={};
+G.pic.host="http://7xkkuk.com2.z0.glb.qiniucdn.com/";
 G.pic.type="bkg";//or border
 
 window.view = {
@@ -211,24 +217,24 @@ $(function () {
     // cxt.globalAlpha = "0.5";
 
     //上传图片按钮
-    var upfile = document.querySelector('#uploadBtn');
-    upfile.onchange = function (evt) {
-        var files = evt.target.files;
-        for(var i = 0, f; f = files[i]; i++){
-            if(!f.type.match('image.*')) continue;
+    // var upfile = document.querySelector('#uploadBtn');
+    // upfile.onchange = function (evt) {
+    //     var files = evt.target.files;
+    //     for(var i = 0, f; f = files[i]; i++){
+    //         if(!f.type.match('image.*')) continue;
             
-            var reader = new FileReader();
-            reader.onload = (function(theFile){
-                return function(e){
-                    var img = $(".viewport-show .pic-zoom img")[0];//document.createElement('img');
-                    img.title = theFile.name;
-                    img.src = e.target.result;
-                }
-            })(f);
-            reader.readAsDataURL(f);
-        }  
-        goTo('show');
-    }
+    //         var reader = new FileReader();
+    //         reader.onload = (function(theFile){
+    //             return function(e){
+    //                 var img = $(".viewport-show .pic-zoom img")[0];//document.createElement('img');
+    //                 img.title = theFile.name;
+    //                 img.src = e.target.result;
+    //             }
+    //         })(f);
+    //         reader.readAsDataURL(f);
+    //     }  
+    //     goTo('show');
+    // }
 
     document.querySelector('#button-show').onclick=function(){
         goTo('intro');

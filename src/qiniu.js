@@ -336,9 +336,10 @@ function QiniuJsSDK() {
                 } else {
                     // key = file.name + Guid();    
                     var ext = that.getFileExtension(file.name);
-                    key = ext ? that.getFileName(file.name) + "-" + Guid() + '.' + ext : Guid();
+                    // key = ext ? that.getFileName(file.name) + "-" + Guid() + '.' + ext : Guid();
+                    key = ext ? file.id + '.' + ext : file.id;
                     console.log(key);
-                    G&&G.pic&&G.pic.type&&(G.pic[G.pic.type] = key);
+                    typeof(G)!="undefined"&&G&&G.pic&&G.pic.type&&(G.pic[G.pic.type] = key);
                 }
             }
             return key;
