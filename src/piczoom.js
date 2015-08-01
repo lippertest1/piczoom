@@ -207,8 +207,20 @@ window.view = {
                 img.title = "";
                 img.src = G.pic.host+G.pic["bkg"];
             }
-            if(history.state.state == "finishUpload"){
-                
+
+
+            $('.infoBox').hide();
+            $(".commentBox").hide();
+
+            if(history.state.state == ""){
+                $('.show-init').show();
+            }
+            else if(history.state.state == "finishUpload"){
+                $(".show-sign").show();
+                $(".borderChoose").show();
+            }
+            else if(history.state.state == "finish"){
+                $('.show-finish').show();
             }
             $('.viewport-show');
         }
