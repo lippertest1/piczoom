@@ -205,6 +205,10 @@ window.view = {
                 $('.viewport-canvas').show();
             }
             $('.viewport-'+area).show();
+            if(area=="intro"){
+                $(".finishUpload").show();
+                $("#uploadDiv").show();
+            }
         }
         else{
             $('.viewport-show').show();
