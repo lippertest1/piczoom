@@ -112,13 +112,19 @@
                 var xhr = new XMLHttpRequest();
                 
                 xhr.onreadystatechange=function(){
-                    if (xhr.readyState==4){
+                    if (xhr.readyState==4 && xhr.status=="200"){
                         xhr.responseText;
+                        var res=JSON.parse(xhr.responseText);
+                        typeof(G)!="undefined"&&G&&G.pic&&(G.pic["border"] = res.key);
+                        goTo('show','finishUpload');
+                        var img = $(".viewport-show .pic-zoom img")[0];//document.createElement('img');
+                        img.title = file[file.length-1].name;
+                        img.src = G.pic.host+G.pic["bkg"];
                     }
                 }
                 xhr.open("POST", url, true); 
                 xhr.setRequestHeader("Content-Type", "application/octet-stream"); 
-                xhr.setRequestHeader("Authorization", "UpToken TCZ4q7OROJf39XpZLh1ogRJjz63d7RPHGVe9S4FN:Q_jPLgHQs8iD1YTODFd24phVXOA=:eyJzY29wZSI6InZhcnQtY2FtcGFpZ24iLCJkZWFkbGluZSI6MTQzODQ1MTI4OSwiaW5zZXJ0T25seSI6MCwiZGV0ZWN0TWltZSI6MCwiZnNpemVMaW1pdCI6MCwiY2FsbGJhY2tGZXRjaEtleSI6MH0="); 
+                xhr.setRequestHeader("Authorization", "UpToken "+G.pic.token); 
                 xhr.send(pic);
             };
             /*橡皮擦*/

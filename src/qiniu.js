@@ -304,6 +304,9 @@ function QiniuJsSDK() {
                     if (ajax.readyState === 4 && ajax.status === 200) {
                         var res = that.parseJSON(ajax.responseText);
                         that.token = res.uptoken;
+                        typeof(G)!="undefined"&&G&&G.pic&&(G.pic.token = res.uptoken);
+                
+                        
                     }
                 };
                 ajax.send();

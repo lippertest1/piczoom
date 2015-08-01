@@ -139,9 +139,9 @@ window.parseJSON = function(data) {
     }
 };
 
-window.goTo = function(area){
+window.goTo = function(area,state){
     console.log("goTo area="+area);
-    history.pushState({area:area,state:"test"}, "页面标题", "piczoom.html?area="+area+"&state=test")
+    history.pushState({area:area,state:state||""}, "页面标题", "piczoom.html?area="+area+"&state=test")
     view.onshow(area);
 }
 
@@ -154,6 +154,8 @@ window.addEventListener("popstate", function() {
 window.G = {};
 G.pic={};
 G.pic.host="http://7xkkuk.com2.z0.glb.qiniucdn.com/";
+// G.pic[G.pic.type]
+// G.pic["bkg"] G.pic["border"]
 G.pic.type="bkg";//or border
 
 window.view = {
