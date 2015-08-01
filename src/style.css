@@ -312,10 +312,42 @@ div.pic-zoom div.description p{
     border-radius: 15px;
     margin-left: 30px;
 }
+
+.avatar-right{
+    display:inline-block;
+    background-image: url(lipper.jpg);
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+
+    float: right;
+    margin: -10px 20px;
+}
+
 .nickname{
     display:inline-block;
     margin-left: 10px;
 }
+.nickname-right {
+    display: inline-block;
+    margin: -9px 10px 10px;
+    float: right;
+}
+
+.colorA{
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #20ACD1;
+    color: white;
+}
+
+.colorB{
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #56BE89;
+    color: white;
+}
+
 .comment *{
     color: #747474;
     font-size: 1.2em;
