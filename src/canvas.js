@@ -105,7 +105,21 @@
             };
             this.changeColor();
             this.imgurl.onclick = function() {
-                t.getUrl();
+                var base64 = t.getUrl();
+
+                var pic = base64.split(",")[1];
+                var url = "http://up.qiniu.com/putb64/-1"; 
+                var xhr = new XMLHttpRequest();
+                
+                xhr.onreadystatechange=function(){
+                    if (xhr.readyState==4){
+                        xhr.responseText;
+                    }
+                }
+                xhr.open("POST", url, true); 
+                xhr.setRequestHeader("Content-Type", "application/octet-stream"); 
+                xhr.setRequestHeader("Authorization", "UpToken TCZ4q7OROJf39XpZLh1ogRJjz63d7RPHGVe9S4FN:Q_jPLgHQs8iD1YTODFd24phVXOA=:eyJzY29wZSI6InZhcnQtY2FtcGFpZ24iLCJkZWFkbGluZSI6MTQzODQ1MTI4OSwiaW5zZXJ0T25seSI6MCwiZGV0ZWN0TWltZSI6MCwiZnNpemVMaW1pdCI6MCwiY2FsbGJhY2tGZXRjaEtleSI6MH0="); 
+                xhr.send(pic);
             };
             /*橡皮擦*/
             this.$("eraser").onclick = function(e) {
@@ -187,6 +201,7 @@
         },
         getUrl: function() {
             console.log(this.canvas.toDataURL());
+            return this.canvas.toDataURL();
             // this.$("html").innerHTML = this.canvas.toDataURL();
         },
         resetEraser: function(_x, _y, touch) {
