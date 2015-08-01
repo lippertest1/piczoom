@@ -3,7 +3,7 @@
 
 window.uploader = Qiniu.uploader({
     runtimes: 'html5,flash,html4',
-    browse_button: 'uploadBtn',
+    browse_button: 'uploadDiv',
     container: 'button-container',
     drop_element: 'button-container',
     max_file_size: '100mb',
