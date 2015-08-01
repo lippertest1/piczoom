@@ -26,45 +26,51 @@ var uploader = Qiniu.uploader({
     auto_start: true,
     init: {
         'FilesAdded': function(up, files) {
-            $('table').show();
-            $('#success').hide();
-            plupload.each(files, function(file) {
-                var progress = new FileProgress(file, 'fsUploadProgress');
-                progress.setStatus("等待...");
-            });
+            console.log("FilesAdded");
+            // $('table').show();
+            // $('#success').hide();
+            // plupload.each(files, function(file) {
+            //     var progress = new FileProgress(file, 'fsUploadProgress');
+            //     progress.setStatus("等待...");
+            // });
         },
         'BeforeUpload': function(up, file) {
-            var progress = new FileProgress(file, 'fsUploadProgress');
-            var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
-            if (up.runtime === 'html5' && chunk_size) {
-                progress.setChunkProgess(chunk_size);
-            }
+            console.log("BeforeUpload");
+            // var progress = new FileProgress(file, 'fsUploadProgress');
+            // var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
+            // if (up.runtime === 'html5' && chunk_size) {
+            //     progress.setChunkProgess(chunk_size);
+            // }
         },
         'UploadProgress': function(up, file) {
-            var progress = new FileProgress(file, 'fsUploadProgress');
-            var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
+            console.log("UploadProgress");
+            // var progress = new FileProgress(file, 'fsUploadProgress');
+            // var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
 
-            progress.setProgress(file.percent + "%", file.speed, chunk_size);
+            // progress.setProgress(file.percent + "%", file.speed, chunk_size);
         },
         'UploadComplete': function() {
-            $('#success').show();
+            console.log("UploadComplete");
+            // $('#success').show();
         },
         'FileUploaded': function(up, file, info) {
-            var progress = new FileProgress(file, 'fsUploadProgress');
-            progress.setComplete(up, info);
+            console.log("FileUploaded");
+            // var progress = new FileProgress(file, 'fsUploadProgress');
+            // progress.setComplete(up, info);
         },
         'Error': function(up, err, errTip) {
-                $('table').show();
-                var progress = new FileProgress(err.file, 'fsUploadProgress');
-                progress.setError();
-                progress.setStatus(errTip);
-            }
-            // ,
-            // 'Key': function(up, file) {
-            //     var key = "";
-            //     // do something with key
-            //     return key
-            // }
+            console.log("Error");
+            // $('table').show();
+            // var progress = new FileProgress(err.file, 'fsUploadProgress');
+            // progress.setError();
+            // progress.setStatus(errTip);
+        }
+        // ,
+        // 'Key': function(up, file) {
+        //     var key = "";
+        //     // do something with key
+        //     return key
+        // }
     }
 });
 
