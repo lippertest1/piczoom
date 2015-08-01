@@ -134,6 +134,26 @@ commentIdList = [
     {"name":"米勒",  "comment":"如何用一副作品去探讨一个生与死的主题"},
     {"name":"委拉斯开兹",   "comment":"摄影师与变态，只差一步"}
 ]
+dialogIdList =[
+    {"name1":"安格尔", "dialog1":"请问你的作品都在表达什么？","name2":   "毕加索","dialog2": "漂亮就行！"},
+    {"name1":"德加",  "dialog1":"你喜欢油画还是素描？","name2":  "德拉克洛瓦","dialog2":   "只要心情对了，白纸也是艺术"},
+    {"name1":"夏加尔", "dialog1":"你在画中看到了什么？","name2":  "库尔贝","dialog2": "是朕为你打下的江山啊！"},
+    {"name1":"伦勃朗", "dialog1":"有人说你自画像丑","name2":    "毕加索","dialog2": "那是他们没看过我真人，那才叫丑"},
+    {"name1":"佛里达", "dialog1":"如果让我来一幅一幅一幅的剖析你的画……","name2": "戈雅","dialog2":  "你会坐牢的我跟你讲"},
+    {"name1":"米开朗琪罗",   "dialog1":"我能欣赏一下你的《星空》吗？","name2":  "梵高","dialog2":  "****       *****"},
+    {"name1":"拉斐尔", "dialog1":"你见过最美丽的人是蒙娜丽莎还是……","name2":   "达芬奇","dialog2": "是我！"},
+    {"name1":"卡拉瓦乔",    "dialog1":"我还以为在这里见不到像样的作品呢！","name2":   "库尔贝","dialog2": "在哪儿呢？！"},
+    {"name1":"米勒",  "dialog1":"这幅作品的名字是什么啊？","name2":    "委拉斯开兹","dialog2":   "我画你猜！"},
+    {"name1":"毕加索", "dialog1":"听说你很羡慕我？","name2":    "梵高","dialog2":  "卢浮宫没请你去开业剪彩吗？"},
+    {"name1":"鲁本斯", "dialog1":"给爷扭个秧歌儿？","name2":    "马蒂斯","dialog2": "老子会画不代表老子会跳！"},
+    {"name1":"毕加索", "dialog1":"活的久了真是什么都能见到啊。","name2":  "梵高","dialog2":  "滚开！老不死的！"},
+    {"name1":"米开朗琪罗",   "dialog1":"现在几点了？","name2":  "达利","dialog2":  "我的钟，看的是命运，而不是时间。"},
+    {"name1":"委拉斯开兹",   "dialog1":"您觉得这幅画能卖多少钱呢？","name2":   "雷诺阿","dialog2": "无价、无~价!"},
+    {"name1":"德加",  "dialog1":"除了草垛子，你还会画什么！","name2":   "莫奈","dialog2":  "  总比你整天画舞妹子强，变态大叔！ "},
+    {"name1":"德加",  "dialog1":"今天这张跳舞的妹子画的好成功。","name2": "雷诺阿","dialog2": "妹子？什么妹子？哪的妹子？身材如何！ "},
+    {"name1":"库尔贝", "dialog1":"年轻人，不用在意画的好坏，美与丑，善与恶，到头来都是一片虚无。","name2": "鲁本斯","dialog2": "画家界最伟大的鸡汤大师，鸡汤界最伟大的画家。"},
+    {"name1":"佛里达", "dialog1":"谁说自己画的比我好？！来决斗！","name2": "卡拉瓦乔","dialog2":    "决斗？！我喜欢！在哪里？"}
+]
 
 
 window.parseJSON = function(data) {
@@ -292,8 +312,6 @@ window.view = {
                         $(".commentBox-comment .nickname").html(name);
                         $(".commentBox-comment .comment-content").html(comment);
                         
-
-
                         var dialogIdList = res.dialogIdList.split(",");
 
                         if(dialogIdList.length){
