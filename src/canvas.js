@@ -115,7 +115,7 @@
                     if (xhr.readyState==4 && xhr.status=="200"){
                         xhr.responseText;
                         var res=JSON.parse(xhr.responseText);
-                        typeof(G)!="undefined"&&G&&G.pic&&(G.pic["border"] = res.key);
+                        typeof(G)!="undefined"&&G&&G.pic&&(G.pic["sign"] = res.key);
                         goTo('show','finishUpload');
                         // var img = $(".viewport-show .pic-zoom img")[0];//document.createElement('img');
                         // img.title = file[file.length-1].name;

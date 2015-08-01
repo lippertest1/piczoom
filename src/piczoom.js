@@ -155,7 +155,7 @@ window.G = {};
 G.pic={};
 G.pic.host="http://7xkkuk.com2.z0.glb.qiniucdn.com/";
 // G.pic[G.pic.type]
-// G.pic["bkg"] G.pic["border"]
+// G.pic["bkg"] G.pic["border"] G.pic["sign"]
 G.pic.type="bkg";//or border
 
 window.view = {
@@ -237,6 +237,7 @@ window.view = {
 
             $('.infoBox').hide();
             $(".commentBox").hide();
+            $(".borderChoose").hide();
 
             if(history.state.state == ""){
                 $('.show-init').show();
@@ -248,8 +249,19 @@ window.view = {
                 $(".show-sign").show();
                 $(".borderChoose").show();
             }
-            else if(history.state.state == "finish"){
+            else if(history.state.state == "confirm"){
                 $('.show-finish').show();
+
+                var ajax = new XMLHttpRequest();
+                ajax.open('GET', 'http://192.168.1.116/X_1_FirstWebAPI/api/art/get?data=222', true);
+                ajax.onreadystatechange = function() {
+                    if (ajax.readyState === 4 && ajax.status === 200) {
+                        var res = parseJSON(ajax.responseText);
+                        console.log(res);
+                        
+                    }
+                };
+                ajax.send(JSON.stringify(data));
             }
             $('.viewport-show');
         }
@@ -290,6 +302,32 @@ $(function () {
     document.querySelector('#button-show').onclick=function(){
         goTo('intro');
     }
+
+    document.querySelector('#confirm').onclick=function(){
+        G.artId = Guid();
+        G.artName = $("#artName").val();
+        G.css = $(".border_image").attr("style");
+        G.uploadDate = (new Date()).getTime();
+
+        var data = {
+            artId : G.artId,
+            artName : G.artName,
+            openId : "",
+            picKey : G.pic.bkg,
+            css : G.css,
+            bordeId : G.pic.border,
+            signKey : G.pic.sign,
+            uploadDate : G.uploadDate 
+            // score : ,
+            // commentIdList : 
+        }
+
+
+        goTo('show',"confirm");
+
+        
+    }
+    
 
     $('.pic-container').hide();
     $('.pic-container').show();
