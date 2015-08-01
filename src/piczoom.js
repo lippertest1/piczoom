@@ -1783,17 +1783,17 @@ $(function(){
 
     window.Qiniu = new QiniuJsSDK();
 
-    var uploader = Qiniu.uploader({
+    window.uploader = Qiniu.uploader({
         runtimes: 'html5,flash,html4',
-        browse_button: 'pickfiles',
-        container: 'container',
-        drop_element: 'container',
+        browse_button: 'uploadBtn',
+        container: 'button-container',
+        drop_element: 'button-container',
         max_file_size: '100mb',
         flash_swf_url: 'js/plupload/Moxie.swf',
         dragdrop: true,
         chunk_size: '4mb',
         uptoken_url: 'http://192.168.1.116/X_1_FirstWebAPI/api/qiniu/get',
-        domain: "<%= domain %>",//$('#domain').val(),
+        domain: "http://7xkkuk.com2.z0.glb.qiniucdn.com/",//$('#domain').val(),
         // downtoken_url: '/downtoken',
         // unique_names: true,
         // save_key: true,
@@ -1808,45 +1808,47 @@ $(function(){
         auto_start: true,
         init: {
             'FilesAdded': function(up, files) {
-                $('table').show();
-                $('#success').hide();
-                plupload.each(files, function(file) {
-                    var progress = new FileProgress(file, 'fsUploadProgress');
-                    progress.setStatus("等待...");
-                });
+                // $('table').show();
+                // $('#success').hide();
+                // plupload.each(files, function(file) {
+                //     var progress = new FileProgress(file, 'fsUploadProgress');
+                //     progress.setStatus("等待...");
+                // });
             },
             'BeforeUpload': function(up, file) {
-                var progress = new FileProgress(file, 'fsUploadProgress');
-                var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
-                if (up.runtime === 'html5' && chunk_size) {
-                    progress.setChunkProgess(chunk_size);
-                }
+                // var progress = new FileProgress(file, 'fsUploadProgress');
+                // var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
+                // if (up.runtime === 'html5' && chunk_size) {
+                //     progress.setChunkProgess(chunk_size);
+                // }
             },
             'UploadProgress': function(up, file) {
-                var progress = new FileProgress(file, 'fsUploadProgress');
-                var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
+                // var progress = new FileProgress(file, 'fsUploadProgress');
+                // var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
 
-                progress.setProgress(file.percent + "%", file.speed, chunk_size);
+                // progress.setProgress(file.percent + "%", file.speed, chunk_size);
             },
             'UploadComplete': function() {
-                $('#success').show();
+                console.log("UploadComplete succ");
+                // $('#success').show();
             },
             'FileUploaded': function(up, file, info) {
-                var progress = new FileProgress(file, 'fsUploadProgress');
-                progress.setComplete(up, info);
+                // var progress = new FileProgress(file, 'fsUploadProgress');
+                console.log("FileUploaded succ");
+                // progress.setComplete(up, info);
             },
             'Error': function(up, err, errTip) {
-                    $('table').show();
-                    var progress = new FileProgress(err.file, 'fsUploadProgress');
-                    progress.setError();
-                    progress.setStatus(errTip);
-                }
-                // ,
-                // 'Key': function(up, file) {
-                //     var key = "";
-                //     // do something with key
-                //     return key
-                // }
+                // $('table').show();
+                // var progress = new FileProgress(err.file, 'fsUploadProgress');
+                // progress.setError();
+                // progress.setStatus(errTip);
+            }
+            // ,
+            // 'Key': function(up, file) {
+            //     var key = "";
+            //     // do something with key
+            //     return key
+            // }
         }
     });
 });
