@@ -48,6 +48,19 @@ function QiniuJsSDK() {
         return ext;
     };
 
+    this.getFileName = function(filename) {
+        var tempArr = filename.split(".");
+        var fName;
+        if (tempArr.length === 1 || (tempArr[0] === "" && tempArr.length === 2)) {
+            fName = "";
+        } else {
+            tempArr.pop();
+            fName = tempArr.join("."); //get the extension and make it lower-case
+        }
+        return fName;
+    };
+
+
     this.utf8_encode = function(argString) {
         // http://kevin.vanzonneveld.net
         // +   original by: Webtoolkit.info (http://www.webtoolkit.info/)
@@ -300,6 +313,15 @@ function QiniuJsSDK() {
             // that.token = 'TCZ4q7OROJf39XpZLh1ogRJjz63d7RPHGVe9S4FN:V3eC5JJZnLkkFNzLEJ4-ChNuR4Q=:eyJzY29wZSI6InZhcnQtY2FtcGFpZ24iLCJkZWFkbGluZSI6MTQzNzkwNjQ3NCwiaW5zZXJ0T25seSI6MCwiZGV0ZWN0TWltZSI6MCwiZnNpemVMaW1pdCI6MCwiY2FsbGJhY2tGZXRjaEtleSI6MH0=';
         };
 
+        //https://github.com/vczero/OurTimes/blob/master/server/util/guid.js
+        window.Guid =function(){
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0,
+                    v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            }).toUpperCase();
+        };
+    
         var getFileKey = function(up, file, func) {
             var key = '',
                 unique_names = false;
@@ -312,7 +334,10 @@ function QiniuJsSDK() {
                 } else if (typeof func === 'function') {
                     key = func(up, file);
                 } else {
-                    key = file.name;
+                    // key = file.name + Guid();    
+                    var ext = that.getFileExtension(file.name);
+                    key = ext ? that.getFileName(file.name) + "-" + Guid() + '.' + ext : Guid();
+                    console.log(key);
                 }
             }
             return key;
