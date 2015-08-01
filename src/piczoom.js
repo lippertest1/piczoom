@@ -56,7 +56,7 @@ window.uploader = Qiniu.uploader({
             img.title = file[file.length-1].name;
             img.src = G.pic.host+G.pic["bkg"];
 
-            goTo('show');
+            goTo('canvas');
             // $('#success').show();
         },
         'FileUploaded': function(up, file, info) {
