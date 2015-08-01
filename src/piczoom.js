@@ -1851,6 +1851,33 @@ $(function(){
     });
 });
 
+window.parseJSON = function(data) {
+    // Attempt to parse using the native JSON parser first
+    if (window.JSON && window.JSON.parse) {
+        return window.JSON.parse(data);
+    }
+
+    if (data === null) {
+        return data;
+    }
+    if (typeof data === "string") {
+
+        // Make sure leading/trailing whitespace is removed (IE can't handle it)
+        data = this.trim(data);
+
+        if (data) {
+            // Make sure the incoming data is actual JSON
+            // Logic borrowed from http://json.org/json2.js
+            if (/^[\],:{}\s]*$/.test(data.replace(/\\(?:["\\\/bfnrt]|u[\da-fA-F]{4})/g, "@").replace(/"[^"\\\r\n]*"|true|false|null|-?(?:\d+\.|)\d+(?:[eE][+-]?\d+|)/g, "]").replace(/(?:^|:|,)(?:\s*\[)+/g, ""))) {
+
+                return (function() {
+                    return data;
+                })();
+            }
+        }
+    }
+};
+
 window.goTo = function(area){
     console.log("goTo area="+area);
     history.pushState({area:area,state:"test"}, "页面标题", "piczoom.html?area="+area+"&state=test")
@@ -1871,6 +1898,7 @@ window.view = {
         this.onshow();
     },
     onshow:function(area){
+        var that = this;
         console.log("onshow area="+area);
         //render which view
         $('.viewport-show').hide();
@@ -1888,13 +1916,26 @@ window.view = {
             $('.viewport-show').show();
         }
 
-        
-        if(area == "show"){
 
+        if(area == "show" || !area){
+            var ajax = new XMLHttpRequest();
+            ajax.open('GET', 'http://192.168.1.116/X_1_FirstWebAPI/api/art/get', true);
+            // ajax.setRequestHeader("If-Modified-Since", "0");
+            ajax.onreadystatechange = function() {
+                if (ajax.readyState === 4 && ajax.status === 200) {
+                    var res = parseJSON(ajax.responseText);
+                    console.log(res);
+                    that.render(area,res)
+                }
+            };
+            ajax.send();
         }
     },
-    render:function(){
-        $('.viewport-show');
+    render:function(area,data){
+        if(area == "show" || !area){
+            
+            $('.viewport-show');
+        }
     }
 };
 
@@ -1909,13 +1950,29 @@ $(function () {
     // var cxt = document.getElementById('canvas').getContext('2d');
     // cxt.globalAlpha = "0.5";
 
-    
+    //上传图片按钮
+    var upfile = document.querySelector('#uploadBtn');
+    upfile.onchange = function (evt) {
+        var files = evt.target.files;
+        for(var i = 0, f; f = files[i]; i++){
+            if(!f.type.match('image.*')) continue;
+            
+            var reader = new FileReader();
+            reader.onload = (function(theFile){
+                return function(e){
+                    var img = $(".viewport-show .pic-zoom img")[0];//document.createElement('img');
+                    img.title = theFile.name;
+                    img.src = e.target.result;
+                }
+            })(f);
+            reader.readAsDataURL(f);
+        }  
+        goTo('show');
+    }
 
     document.querySelector('#button-show').onclick=function(){
         goTo('intro');
     }
-
-    
 
     $('.pic-container').hide();
     $('.pic-container').show();
