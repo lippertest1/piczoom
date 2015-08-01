@@ -186,6 +186,7 @@
             }
         },
         getUrl: function() {
+            console.log(this.canvas.toDataURL());
             this.$("html").innerHTML = this.canvas.toDataURL();
         },
         resetEraser: function(_x, _y, touch) {
