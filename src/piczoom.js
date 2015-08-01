@@ -160,12 +160,25 @@ G.pic.type="bkg";//or border
 
 window.view = {
     init:function(){
+
         this.onload();
     },
     onload:function(){
         this.onshow();
     },
     onshow:function(area){
+        var slide_title_div = new Slider('.slide_title_outer', {
+            widthScale: 1.2/5,
+            moveFromScale: 1.2/5,
+            X: true,
+            Y: false,
+            Xfrom: true,
+            Yfrom: false,
+            resizeInInit: true,
+            offsetPageCount: 2,
+            allPageCountPercent: 15,
+            slideBackScale: 11
+        });
         var that = this;
         console.log("onshow area="+area);
         //render which view
@@ -214,6 +227,9 @@ window.view = {
 
             if(history.state.state == ""){
                 $('.show-init').show();
+
+                $(".show-sign").show();
+                $(".borderChoose").show();
             }
             else if(history.state.state == "finishUpload"){
                 $(".show-sign").show();
