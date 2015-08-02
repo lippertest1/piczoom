@@ -290,8 +290,8 @@ window.view = {
             if(history.state.state == ""){
                 $('.show-init').show();
 
-                $(".show-finishUpload").show();
-                $(".borderChoose").show();
+                // $(".show-finishUpload").show();
+                // $(".borderChoose").show();
             }
             else if(history.state.state == "finishUpload"){
                 $(".show-finishUpload").show();
@@ -307,12 +307,21 @@ window.view = {
                         var res = parseJSON(ajax.responseText);
                         console.log(res);
                         $(".commentBox-comment").show();
-                        var name = commentIdList[res.commentIdList[0]-1].name;
-                        var comment = commentIdList[res.commentIdList[0]-1].comment;
+                        var name = commentIdList[res.commentIdList-1].name;
+                        var comment = commentIdList[res.commentIdList-1].comment;
                         $(".commentBox-comment .nickname").html(name);
                         $(".commentBox-comment .comment-content").html(comment);
-                        
-                        var dialogIdList = res.dialogIdList.split(",");
+                        $(".commentBox-comment .avatar").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+name+".jpg)");
+
+                        var dialogIdListSp = res.dialogIdList.split(",");
+                        var dialog = dialogIdList[dialogIdListSp[0]-1];
+
+                        $(".commentBox-discus").show();
+                        $(".commentBox-discus .nickname").html(dialog.dialog1);
+                        $(".commentBox-discus .nickname-right").html(dialog.dialog2);
+
+                        $(".commentBox-discus .avatar-left").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+dialog.name1+".jpg)");
+                        $(".commentBox-discus .avatar-right").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+dialog.name2+".jpg)");
 
                         if(dialogIdList.length){
                             $(".discusing").hide();

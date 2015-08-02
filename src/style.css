@@ -296,6 +296,10 @@ div.pic-zoom div.description p{
     width:60%;
 }
 
+.commentBox-discus{
+    height: 95px;
+}
+
 .commentBox{
     background-color: #fff;
     color: #000;
