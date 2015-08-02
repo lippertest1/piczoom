@@ -280,6 +280,11 @@ window.view = {
                 img.title = "";
                 img.src = G.pic.host+G.pic["bkg"];
             }
+            if(G&&G.pic&&G.pic["sign"]){
+                var img = $(".viewport-show .pic-sign img")[0];//document.createElement('img');
+                img.title = "";
+                img.src = G.pic.host+G.pic["sign"];
+            }
 
 
             $('.infoBox').hide();
