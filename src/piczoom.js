@@ -205,12 +205,6 @@ G.pic.type="bkg";//or border
 window.view = {
     init:function(){
 
-        this.onload();
-    },
-    onload:function(){
-        this.onshow();
-    },
-    onshow:function(area){
         var slide_title_div = new Slider('.slide_title_outer', {
             widthScale: 1.2/5,
             moveFromScale: 1.2/5,
@@ -235,6 +229,12 @@ window.view = {
             $(".-o-border-image").css("border-image",$(e.target).css("background-image").replace("qiniucdn.com/hk-s","qiniucdn.com/hk-l")+" 70 70 round");
 
         });
+        this.onload();
+    },
+    onload:function(){
+        this.onshow();
+    },
+    onshow:function(area){
 
         var that = this;
         console.log("onshow area="+area);
@@ -259,7 +259,7 @@ window.view = {
         }
 
 
-        if(area == "show" || !area){
+        if(area == "show"){
             var ajax = new XMLHttpRequest();
             ajax.open('GET', 'http://192.168.1.116/X_1_FirstWebAPI/api/art/get', true);
             // ajax.setRequestHeader("If-Modified-Since", "0");
@@ -368,6 +368,7 @@ $(function () {
     //     }  
     //     goTo('show');
     // }
+    view.init();
 
     document.querySelector('#button-show').onclick=function(){
         goTo('intro');
