@@ -1,88 +1,7 @@
 
 
 
-window.uploader = Qiniu.uploader({
-    runtimes: 'html5,flash,html4',
-    browse_button: 'uploadDiv',
-    container: 'button-container',
-    drop_element: 'button-container',
-    max_file_size: '100mb',
-    flash_swf_url: 'Moxie.swf',
-    dragdrop: true,
-    chunk_size: '4mb',
-    uptoken_url: 'http://192.168.1.116/X_1_FirstWebAPI/api/qiniu/get',
-    domain: 'http://7xkkuk.com2.z0.glb.qiniucdn.com/',
-    // downtoken_url: '/downtoken',
-    // unique_names: true,
-    // save_key: true,
-    // x_vars: {
-    //     'id': '1234',
-    //     'time': function(up, file) {
-    //         var time = (new Date()).getTime();
-    //         // do something with 'time'
-    //         return time;
-    //     },
-    // },
-    auto_start: true,
-    init: {
-        'FilesAdded': function(up, files) {
-            console.log("FilesAdded");
-            // $('table').show();
-            // $('#success').hide();
-            // plupload.each(files, function(file) {
-            //     var progress = new FileProgress(file, 'fsUploadProgress');
-            //     progress.setStatus("等待...");
-            // });
-        },
-        'BeforeUpload': function(up, file) {
-            console.log("BeforeUpload");
-            // var progress = new FileProgress(file, 'fsUploadProgress');
-            // var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
-            // if (up.runtime === 'html5' && chunk_size) {
-            //     progress.setChunkProgess(chunk_size);
-            // }
-        },
-        'UploadProgress': function(up, file) {
-            console.log("UploadProgress");
-            // var progress = new FileProgress(file, 'fsUploadProgress');
-            // var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
 
-            // progress.setProgress(file.percent + "%", file.speed, chunk_size);
-        },
-        'UploadComplete': function(up, file) {
-            console.log("UploadComplete");
-            // alert(G.pic.type+" "+G.pic[G.pic.type]);
-            var img = $(".viewport-show .pic-zoom img")[0];//document.createElement('img');
-            img.title = file[file.length-1].name;
-            img.src = G.pic.host+G.pic["bkg"];
-
-            goTo('canvas');
-            // $('#success').show();
-        },
-        'FileUploaded': function(up, file, info) {
-            console.log("FileUploaded");
-            // var progress = new FileProgress(file, 'fsUploadProgress');
-            // progress.setComplete(up, info);
-        },
-        'Error': function(up, err, errTip) {
-            console.log("Error");
-            // $('table').show();
-            // var progress = new FileProgress(err.file, 'fsUploadProgress');
-            // progress.setError();
-            // progress.setStatus(errTip);
-        }
-        // ,
-        // 'Key': function(up, file) {
-        //     var key = "";
-        //     // do something with key
-        //     return key
-        // }
-    }
-});
-
-uploader.bind('FileUploaded', function() {
-    console.log('hello man,a file is uploaded');
-});
 
 
 //tools
@@ -271,7 +190,90 @@ window.view = {
                 }
             };
             ajax.send();
-        }
+        }else if(area == "intro"){
+            window.uploader = Qiniu.uploader({
+                runtimes: 'html5,flash,html4',
+                browse_button: 'uploadDiv',
+                container: 'button-container',
+                drop_element: 'button-container',
+                max_file_size: '100mb',
+                flash_swf_url: 'Moxie.swf',
+                dragdrop: true,
+                chunk_size: '4mb',
+                uptoken_url: 'http://192.168.1.116/X_1_FirstWebAPI/api/qiniu/get',
+                domain: 'http://7xkkuk.com2.z0.glb.qiniucdn.com/',
+                // downtoken_url: '/downtoken',
+                // unique_names: true,
+                // save_key: true,
+                // x_vars: {
+                //     'id': '1234',
+                //     'time': function(up, file) {
+                //         var time = (new Date()).getTime();
+                //         // do something with 'time'
+                //         return time;
+                //     },
+                // },
+                auto_start: true,
+                init: {
+                    'FilesAdded': function(up, files) {
+                        console.log("FilesAdded");
+                        // $('table').show();
+                        // $('#success').hide();
+                        // plupload.each(files, function(file) {
+                        //     var progress = new FileProgress(file, 'fsUploadProgress');
+                        //     progress.setStatus("等待...");
+                        // });
+                    },
+                    'BeforeUpload': function(up, file) {
+                        console.log("BeforeUpload");
+                        // var progress = new FileProgress(file, 'fsUploadProgress');
+                        // var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
+                        // if (up.runtime === 'html5' && chunk_size) {
+                        //     progress.setChunkProgess(chunk_size);
+                        // }
+                    },
+                    'UploadProgress': function(up, file) {
+                        console.log("UploadProgress");
+                        // var progress = new FileProgress(file, 'fsUploadProgress');
+                        // var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
+
+                        // progress.setProgress(file.percent + "%", file.speed, chunk_size);
+                    },
+                    'UploadComplete': function(up, file) {
+                        console.log("UploadComplete");
+                        // alert(G.pic.type+" "+G.pic[G.pic.type]);
+                        var img = $(".viewport-show .pic-zoom img")[0];//document.createElement('img');
+                        img.title = file[file.length-1].name;
+                        img.src = G.pic.host+G.pic["bkg"];
+
+                        goTo('canvas');
+                        // $('#success').show();
+                    },
+                    'FileUploaded': function(up, file, info) {
+                        console.log("FileUploaded");
+                        // var progress = new FileProgress(file, 'fsUploadProgress');
+                        // progress.setComplete(up, info);
+                    },
+                    'Error': function(up, err, errTip) {
+                        console.log("Error");
+                        // $('table').show();
+                        // var progress = new FileProgress(err.file, 'fsUploadProgress');
+                        // progress.setError();
+                        // progress.setStatus(errTip);
+                    }
+                    // ,
+                    // 'Key': function(up, file) {
+                    //     var key = "";
+                    //     // do something with key
+                    //     return key
+                    // }
+                }
+            });
+
+            uploader.bind('FileUploaded', function() {
+                console.log('hello man,a file is uploaded');
+            });
+        } 
     },
     render:function(area,data){
         if(area == "show" || !area){
