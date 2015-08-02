@@ -242,9 +242,9 @@ window.view = {
                     'UploadComplete': function(up, file) {
                         console.log("UploadComplete");
                         // alert(G.pic.type+" "+G.pic[G.pic.type]);
-                        var img = $(".viewport-show .pic-zoom img")[0];//document.createElement('img');
-                        img.title = file[file.length-1].name;
-                        img.src = G.pic.host+G.pic["bkg"];
+                        // var img = $(".viewport-show .pic-zoom img")[0];//document.createElement('img');
+                        // img.title = file[file.length-1].name;
+                        // img.src = G.pic.host+G.pic["bkg"];
 
                         goTo('canvas');
                         // $('#success').show();
