@@ -179,8 +179,9 @@ window.view = {
 
 
         if(area == "show"){
+            var artId = $.getQuery("artId") || 'ECDB430C-EFD5-45C3-943B-4183AED0684D';
             var ajax = new XMLHttpRequest();
-            ajax.open('GET', 'http://192.168.1.116/X_1_FirstWebAPI/api/art/get', true);
+            ajax.open('GET', 'http://192.168.1.116/X_1_FirstWebAPI/api/art/get?artId='+artId, true);
             // ajax.setRequestHeader("If-Modified-Since", "0");
             ajax.onreadystatechange = function() {
                 if (ajax.readyState === 4 && ajax.status === 200) {
@@ -272,20 +273,9 @@ window.view = {
             });
         } 
     },
-    render:function(area,data){
+    render:function(area,res){
         if(area == "show"){
             console.log("render");
-            
-            if(G&&G.pic&&G.pic["bkg"]){
-                var img = $(".viewport-show .pic-zoom img")[0];//document.createElement('img');
-                img.title = "";
-                img.src = G.pic.host+G.pic["bkg"];
-            }
-            if(G&&G.pic&&G.pic["sign"]){
-                var img = $(".viewport-show .pic-sign img")[0];//document.createElement('img');
-                img.title = "";
-                img.src = G.pic.host+G.pic["sign"];
-            }
 
             var dialogIdRand = Math.floor(Math.random()*dialogIdList.length);
             var dialog = dialogIdList[dialogIdRand];
@@ -301,6 +291,29 @@ window.view = {
             $('.infoBox').hide();
             $(".commentBox").hide();
             $(".borderChoose").hide();
+
+            if(res){
+                G&&G.pic&&(G.pic["bkg"] = res.picKey);
+                G&&G.pic&&(G.pic["sign"] = res.signKey);
+                G&&G.pic&&(G.pic["css"] = res.css);
+
+            }
+
+            
+            if(G&&G.pic&&G.pic["bkg"]){
+                var img = $(".viewport-show .pic-zoom img")[0];//document.createElement('img');
+                img.title = "";
+                img.src = G.pic.host+G.pic["bkg"];
+            }
+            if(G&&G.pic&&G.pic["sign"]){
+                var img = $(".viewport-show .pic-sign img")[0];//document.createElement('img');
+                img.title = "";
+                img.src = G.pic.host+G.pic["sign"];
+            }
+            if(G&&G.pic&&G.pic["css"]){
+                var img = $(".viewport-show .pic-zoom")[0];
+                $(img).attr("style",G.pic["css"]);
+            }
 
             if(history.state.state == ""){
                 $('.show-init').show();
