@@ -273,7 +273,7 @@ window.view = {
         } 
     },
     render:function(area,data){
-        if(area == "show" || !area){
+        if(area == "show"){
             console.log("render");
             
             if(G&&G.pic&&G.pic["bkg"]){
