@@ -275,6 +275,7 @@ window.view = {
     render:function(area,data){
         if(area == "show" || !area){
             console.log("render");
+            
             if(G&&G.pic&&G.pic["bkg"]){
                 var img = $(".viewport-show .pic-zoom img")[0];//document.createElement('img');
                 img.title = "";
@@ -285,6 +286,16 @@ window.view = {
                 img.title = "";
                 img.src = G.pic.host+G.pic["sign"];
             }
+
+            var dialogIdRand = Math.floor(Math.random()*dialogIdList.length);
+            var dialog = dialogIdList[dialogIdRand];
+
+            $(".commentBox-discus").show();
+            $(".commentBox-discus .nickname").html(dialog.dialog1);
+            $(".commentBox-discus .nickname-right").html(dialog.dialog2);
+
+            $(".commentBox-discus .avatar-left").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+dialog.name1+".jpg)");
+            $(".commentBox-discus .avatar-right").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+dialog.name2+".jpg)");
 
 
             $('.infoBox').hide();
@@ -317,22 +328,7 @@ window.view = {
                         $(".commentBox-comment .comment-content").html(comment);
                         $(".commentBox-comment .avatar").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+name+".jpg)");
 
-                        var dialogIdRand = Math.floor(Math.random()*dialogIdList.length);
-                        var dialog = dialogIdList[dialogIdRand];
-
-                        $(".commentBox-discus").show();
-                        $(".commentBox-discus .nickname").html(dialog.dialog1);
-                        $(".commentBox-discus .nickname-right").html(dialog.dialog2);
-
-                        $(".commentBox-discus .avatar-left").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+dialog.name1+".jpg)");
-                        $(".commentBox-discus .avatar-right").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+dialog.name2+".jpg)");
-
-                        if(dialogIdList.length){
-                            $(".discusing").hide();
-                            dialogIdList.forEach(function(c, i){
-                                console.log(c);
-                            });
-                        }
+                        
                     }
                 };
                 ajax.send(JSON.stringify(data));
