@@ -314,7 +314,7 @@ window.view = {
             }
             else if(history.state.state == "confirm"){
                 $('.show-confirm').show();
-                
+
                 $.ajax({
                     url:'http://192.168.1.116/X_1_FirstWebAPI/api/art/post',
                     type:"POST",
@@ -358,9 +358,6 @@ $(function () {
     });
     paint.init();
     document.getElementById('canvas').width  = window.innerWidth;
-    // document.getElementById('canvas').height = window.innerHeight;
-    // var cxt = document.getElementById('canvas').getContext('2d');
-    // cxt.globalAlpha = "0.5";
 
     //上传图片按钮
     // var upfile = document.querySelector('#uploadBtn');
@@ -402,16 +399,9 @@ $(function () {
             // score : ,
             // commentIdList : 
         }
-
-
         goTo('show',"confirm");
-
-        
     }
-    
 
-    $('.pic-container').hide();
-    $('.pic-container').show();
 
     var area = $.getQuery('area');
     goTo(area);
