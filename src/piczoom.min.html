@@ -1,0 +1,212 @@
+<html>
+<head>
+    <title>Demo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+
+    <style type="text/css">
+        div.pic-zoom,
+        div.pic-zoom img{
+            width: 100%;
+            -webkit-user-drag: none;
+        }
+
+    </style>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+
+</head>
+<body>
+    <div class='viewport-show'>
+        <div class="pic-container box-center">
+            <div class="page border_image">
+                <div class="pic-zoom">
+                    <img src="lipper.jpg"/>
+                    <!--a href="http://www.lipperhome.com">your own text</a-->
+                </div>
+            </div>
+        </div>
+        <div class="pic-sign">
+            <img style="background-color:rgba(255,255,255,0.5)" src="http://7xkkuk.com2.z0.glb.qiniucdn.com//Fjc1A5UWpt9SMylmR_GroKiyS2Kx"/>
+        </div>
+
+        <div class="infoBox show-init" style="display:none">       
+            <div class="price-text box-center">
+                <i class="fa fa-4x">$ 8,900</i>
+                
+            </div>
+            <div class="split box-center">
+                <i class="fa fa-star"></i>&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="line"></div>&nbsp;&nbsp;&nbsp;&nbsp;
+                <i class="fa fa-star"></i>
+            </div>
+            <div class="name-show box-center">
+                <div class="fa fa-2x">《夜晚的伦敦皮卡迪亚》</div>
+            </div>
+        </div>
+
+        <div class="infoBox show-finishUpload" style="display:none">       
+            <div class="price-text box-center">
+                <input type="text" class="button fa-2x" id="artName" style="color:#000; background-color: #FFF; margin:20px 0 ;width: 80%;" placeholder="作品名">
+                    
+                </input>
+            </div>
+            <div class="box-center button-container" id="confirm">
+                <div class="button fa-2x" style="background-color: #435984; margin:20px 0 ">
+                    <i class="fa fa-camera-retro"></i>&nbsp;&nbsp;
+                    确认
+                </div>
+            </div>
+        </div>
+
+        <div class="infoBox show-confirm discusing" style="display:none">   
+            <div class="box-center">
+                <div class="fa fa-2x">砖家正在讨论中</div>
+            </div>
+            <div class="box-center">
+                <div class="fa fa-2x">。。。。。。</div>
+            </div>
+        </div>
+
+        <div class="infoBox show-confirm dialog" style="display:none">   
+            <div class="box-center">
+                <div class="fa fa-2x">砖家正在讨论中</div>
+            </div>
+            <div class="box-center">
+                <div class="fa fa-2x">。。。。。。</div>
+            </div>
+        </div>
+
+
+
+        <div class="commentBox show-init commentBox-comment">   
+            <div > 
+                <div class="avatar fa-2x" style="background-image:url(http://7xkkuk.com2.z0.glb.qiniucdn.com/伦勃朗.jpg)">&nbsp;</div>
+                <div class="nickname fa-2x" >伦勃朗</div>
+            </div>
+            <div class="box-center comment">
+                <i class="fa fa-quote-left" style="margin-top:-5px">&nbsp;</i>
+                <div class="comment-content">这是一个为了艺术可以不顾一切的人</div>
+                <i class="fa fa-quote-right" style="margin-bottom:-5px"></i>
+            </div>
+        </div>
+
+        <div class="commentBox show-init commentBox-discus">   
+            <div > 
+                <div class="avatar avatar-left fa-2x" style="background-image:url(http://7xkkuk.com2.z0.glb.qiniucdn.com/安格尔.jpg)">&nbsp;</div>
+                <div class="nickname fa-1x colorA" >请问你的作品都在表达什么？</div>
+            </div>
+            <div > 
+                <div class="avatar-right fa-2x" style="background-image:url(http://7xkkuk.com2.z0.glb.qiniucdn.com/毕加索.jpg)">&nbsp;</div>
+                <div class="nickname-right fa-1x colorB" >漂亮就行！</div>
+            </div>
+        </div>
+
+        <div class="borderChoose"> 
+            <div class="flt-djdt-nav slide_title_outer slider-container">
+                <div class="flt-djdt-nav-cnt slide_title_div slider-wrapper" id="slide_title_div">
+                    <div class="slider-page slide-page-1"></div>
+                    <div class="slider-page slide-page-2"></div>
+                    <div class="slider-page slide-page-3"></div>
+                    <div class="slider-page slide-page-4"></div>
+                    <div class="slider-page slide-page-5"></div>
+                    <div class="slider-page slide-page-6"></div>
+                    <div class="slider-page slide-page-7"></div>
+                    <div class="slider-page slide-page-8"></div>
+                    <div class="slider-page slide-page-9"></div>
+                    <div class="slider-page slide-page-10"></div>
+                    <div class="slider-page slide-page-11"></div>
+                    <div class="slider-page slide-page-12"></div>
+                    <div class="slider-page slide-page-13"></div>
+                    <div class="slider-page slide-page-14"></div>
+                    <div class="slider-page slide-page-15"></div>
+                </div>
+            </div>
+        </div> 
+
+        <div class="commentBox show-init"> 
+            <div class="box-center button-container">
+                <div class="button fa-2x" id="button-show">
+                    <i class="fa fa-camera-retro"></i>&nbsp;&nbsp;
+                    测试我的作品
+                </div>
+            </div>
+        </div> 
+    </div>
+    
+
+    <div class='viewport-intro'>
+        <div class="box-center">
+            <img src="lipper.jpg" style="height:400px"></img>
+        </div>
+
+        <div class="commentBox finishUpload">   
+            <div class="box-center button-container" id="button-container">
+                <div id="uploadDiv" class="button fa-2x" onclick=" document.getElementById('uploadBtn').click(); " style="background-color: #435984; margin:20px 0">
+                    <i class="fa fa-camera-retro"></i>&nbsp;&nbsp;
+                    上传作品
+                </div>
+                <!--input id="uploadBtn" type="file" accept="image/*" style="visibility: hidden; width: 0px; height: 0px" /-->
+            </div>
+        </div>
+    </div> 
+
+
+    <div class='viewport-canvas'>
+        <div class="faa"> 
+            <div class="top" style="display:none"> 
+                <div id="color"> 
+                    <input class="i1" type="button" value=""> 
+                    <input class="i2" type="button" value=""> 
+                    <input class="i3" type="button" value=""> 
+                    <input class="i4" type="button" value=""> 
+                    <input class="i5" type="button" value=""> 
+                    <input class="i6" type="button" value=""> 
+                    <input class="i7" type="button" value=""> 
+                    <input class="i8" type="button" value=""> 
+                    <input class="i9" type="button" value=""> 
+                </div> 
+                <div> 
+                    <span id="error">如果有错误，请使用橡皮擦：</span> 
+                    <input id="eraser" style="width:60px;font-size:14px;" type="button" value="橡皮擦"> 
+                </div> 
+                <!--input id="clear" type="button" value="清除画布" style="width:80px;"--> 
+                <input id="revocation" type="button" value="撤销" style="width:80px;"> 
+                <!--input id="imgurl" type="button" value="导出图片路径" style="width:80px;"--> 
+            </div> 
+            <!--canvas大小要写在dom，不用px，否则像素出错-->
+            <div class="canvas-bk ">
+                <div class="box-center tips-pencil">
+                    <i class="fa fa-pencil fa-2x">&nbsp;</i>
+                </div>
+                <div class="tips box-center">为自己的作品签上大名吧~</div>
+            </div>
+            <canvas id="canvas" placeholder='asd' width='500' height='300'>您的浏览器不支持 canvas 标签</canvas> 
+            <div class="font" id="font"> 
+                <input type="button" value="细" style="color: #4D4C52;background-color: #4D4C52;"> 
+                <input type="button" value="中" style="color: #3f3f3f;background-color: #3f3f3f;" class="grea"> 
+                <input type="button" value="粗" style="color: #000;background-color: #000;"> 
+            </div> 
+        </div> 
+        <div class="canvas-bottom">
+            <div class="box-center button-container">
+                <div id="clear" class="button fa-2x " style="background-color: #435984; margin:20px 0">
+                    清除
+                </div>
+            </div>
+            <div class="box-center button-container imgurl-container" id="imgurl-container">
+                <div id="imgurl" class="button fa-2x btn-sign-confirm" style="background-color: #333333; margin:20px 0" >
+                    确认签名
+                </div>
+            </div>
+                
+            </div>
+        </div>   
+    </div> 
+
+
+
+</body>
+    <script type="text/javascript" src="piczoom.min.js"></script>
+</html>
