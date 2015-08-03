@@ -316,7 +316,10 @@ window.view = {
                 $('.show-confirm').show();
 
                 var ajax = new XMLHttpRequest();
-                ajax.open('GET', 'http://192.168.1.116/X_1_FirstWebAPI/api/art/get?data='+data, true);
+                var data = [{"artId":7,"artName":"test007","openId":"","picKey":"lipper.jpg","css":"","borderId":7,"signKey":"FpAAO2CE7pZzNKFdpEUb4HQ_dRY9","uploadDate":"0001-01-01T00:00:00","score":1888,"commentIdList":"1,2,6"}];
+                ajax.open('POST', 'http://192.168.1.116/X_1_FirstWebAPI/api/art/post', true);            
+                // ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+                ajax.setRequestHeader("Content-Type", "application/json;charset=utf-8");
                 ajax.onreadystatechange = function() {
                     if (ajax.readyState === 4 && ajax.status === 200) {
                         var res = parseJSON(ajax.responseText);
