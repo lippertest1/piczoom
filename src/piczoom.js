@@ -414,6 +414,10 @@ $(function () {
     document.querySelector('#confirm').onclick=function(){
         G.artId = Guid();
         G.artName = $("#artName").val();
+        if(!artName){
+            alert("确定要做无名氏吗？");
+            return;
+        }
         G.css = $(".border_image").attr("style");
         G.uploadDate = (new Date()).getTime();
 
