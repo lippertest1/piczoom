@@ -421,17 +421,17 @@ $(function () {
         G.css = $(".border_image").attr("style");
         G.uploadDate = (new Date()).getTime();
 
-        var data = {
+        G.postData = {
             artId : G.artId,
             artName : G.artName,
-            openId : "",
+            openId : "openid",
             picKey : G.pic.bkg,
             css : G.css,
             bordeId : G.pic.border,
             signKey : G.pic.sign,
             uploadDate : G.uploadDate 
             // score : ,
-            // commentIdList : 
+            // commentIdList: "2" 
         }
         goTo('show',"confirm");
     }
