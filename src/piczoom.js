@@ -317,8 +317,8 @@ window.view = {
                         $(".commentBox-comment .comment-content").html(comment);
                         $(".commentBox-comment .avatar").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+name+".jpg)");
 
-                        var dialogIdListSp = res.dialogIdList.split(",");
-                        var dialog = dialogIdList[dialogIdListSp[0]-1];
+                        var dialogIdRand = Math.floor(Math.random()*dialogIdList.length);
+                        var dialog = dialogIdList[dialogIdRand];
 
                         $(".commentBox-discus").show();
                         $(".commentBox-discus .nickname").html(dialog.dialog1);
