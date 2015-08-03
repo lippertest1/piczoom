@@ -296,6 +296,8 @@ window.view = {
                 G&&G.pic&&(G.pic["bkg"] = res.picKey);
                 G&&G.pic&&(G.pic["sign"] = res.signKey);
                 G&&G.pic&&(G.pic["css"] = res.css);
+                G&&G.pic&&(G.pic["score"] = res.score);
+                G&&G.pic&&(G.pic["artName"] = res.artName);
 
             }
 
@@ -314,6 +316,21 @@ window.view = {
                 var img = $(".viewport-show .pic-zoom")[0];
                 $(img).attr("style",G.pic["css"]);
             }
+            if(G&&G.pic&&G.pic["score"]){
+                var div = $(".viewport-show .price-text i")[0];
+                var score = G.pic["score"];
+                if(score-score%1000){
+                    scoreStr = (score-score%1000)/1000 + "," +score%1000;
+                }else{
+                    scoreStr = score;
+                }
+                $(div).html("$ "+scoreStr);
+            }
+            if(G&&G.pic&&G.pic["artName"]){
+                var div = $(".viewport-show .name-show div")[0];
+                $(div).html("$ "+G.pic["artName"]);
+            }
+            
 
             if(history.state.state == ""){
                 $('.show-init').show();
