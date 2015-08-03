@@ -314,27 +314,37 @@ window.view = {
             }
             else if(history.state.state == "confirm"){
                 $('.show-confirm').show();
+                
+                $.ajax({
+                    url:'http://192.168.1.116/X_1_FirstWebAPI/api/art/post',
+                    type:"POST",
+                    // contentType:"application/json; charset=utf-8",
+                    data:{"":JSON.stringify({"artId":7,"artName":"test007","openId":"","picKey":"lipper.jpg","css":"","borderId":7,"signKey":"FpAAO2CE7pZzNKFdpEUb4HQ_dRY9","uploadDate":"0001-01-01T00:00:00","score":1888,"commentIdList":"1,2,6"})},
+                    success: function(){
+                        alert(1);
+                    }
+                })
 
-                var ajax = new XMLHttpRequest();
-                var data = [{"artId":7,"artName":"test007","openId":"","picKey":"lipper.jpg","css":"","borderId":7,"signKey":"FpAAO2CE7pZzNKFdpEUb4HQ_dRY9","uploadDate":"0001-01-01T00:00:00","score":1888,"commentIdList":"1,2,6"}];
-                ajax.open('POST', 'http://192.168.1.116/X_1_FirstWebAPI/api/art/post', true);            
-                // ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-                ajax.setRequestHeader("Content-Type", "application/json;charset=utf-8");
-                ajax.onreadystatechange = function() {
-                    if (ajax.readyState === 4 && ajax.status === 200) {
-                        var res = parseJSON(ajax.responseText);
-                        console.log(res);
-                        $(".commentBox-comment").show();
-                        var name = commentIdList[res.commentIdList-1].name;
-                        var comment = commentIdList[res.commentIdList-1].comment;
-                        $(".commentBox-comment .nickname").html(name);
-                        $(".commentBox-comment .comment-content").html(comment);
-                        $(".commentBox-comment .avatar").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+name+".jpg)");
+                // var ajax = new XMLHttpRequest();
+                // var data = [{"artId":7,"artName":"test007","openId":"","picKey":"lipper.jpg","css":"","borderId":7,"signKey":"FpAAO2CE7pZzNKFdpEUb4HQ_dRY9","uploadDate":"0001-01-01T00:00:00","score":1888,"commentIdList":"1,2,6"}];
+                // ajax.open('POST', 'http://192.168.1.116/X_1_FirstWebAPI/api/art/post', true);            
+                // // ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+                // ajax.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+                // ajax.onreadystatechange = function() {
+                //     if (ajax.readyState === 4 && ajax.status === 200) {
+                //         var res = parseJSON(ajax.responseText);
+                //         console.log(res);
+                //         $(".commentBox-comment").show();
+                //         var name = commentIdList[res.commentIdList-1].name;
+                //         var comment = commentIdList[res.commentIdList-1].comment;
+                //         $(".commentBox-comment .nickname").html(name);
+                //         $(".commentBox-comment .comment-content").html(comment);
+                //         $(".commentBox-comment .avatar").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+name+".jpg)");
 
                         
-                    }
-                };
-                ajax.send(JSON.stringify(data));
+                //     }
+                // };
+                // ajax.send(JSON.stringify(data));
             }
             $('.viewport-show');
         }
