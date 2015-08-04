@@ -105,7 +105,7 @@ window.parseJSON = function(data) {
 window.goTo = function(area,state){
     console.log("goTo area="+area);
     history.pushState({area:area,state:state||""}, "页面标题", "piczoom.html?area="+area+"&state=test")
-    view.onshow(area);
+    view.onshow(area,state);
 }
 
 window.addEventListener("popstate", function() {
@@ -153,7 +153,7 @@ window.view = {
     onload:function(){
         this.onshow();
     },
-    onshow:function(area){
+    onshow:function(area, state){
 
         var that = this;
         console.log("onshow area="+area);
@@ -178,7 +178,7 @@ window.view = {
         }
 
 
-        if(area == "show"){
+        if(area == "show" && state != "finishUpload" && state != "confirm"){
             var artId = $.getQuery("artId") || 'ECDB430C-EFD5-45C3-943B-4183AED0684D';
             var ajax = new XMLHttpRequest();
             ajax.open('GET', 'http://192.168.1.116/X_1_FirstWebAPI/api/art/get?artId='+artId, true);
@@ -191,7 +191,16 @@ window.view = {
                 }
             };
             ajax.send();
-        }else if(area == "intro"){
+        }
+        else if (area == "show" && state == "finishUpload"){
+            that.render(area);
+            var img = $(".viewport-show .pic-zoom")[0];
+            $(img).attr("style","");
+        }
+        else if (area == "show" && state == "confirm"){
+            that.render(area);
+        }
+        else if(area == "intro"){
             window.uploader = Qiniu.uploader({
                 runtimes: 'html5,flash,html4',
                 browse_button: 'uploadDiv',
