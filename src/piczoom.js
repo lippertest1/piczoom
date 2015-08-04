@@ -140,7 +140,7 @@ window.view = {
         $('.slide_title_outer').on('click', function(e){
             $(e.target).siblings().css("background-color","#fff");
             $(e.target).css("background-color","#3f3f3f");
-            G.pic.border = /\d+/.exec(e.target.className)[0];
+            G.pic.borderId = /\d+/.exec(e.target.className)[0];
 
             $(".border_image").css("border-image",$(e.target).css("background-image").replace("qiniucdn.com/hk-s","qiniucdn.com/hk-l")+" 70 70 round");
             $(".-moz-border-image").css("border-image",$(e.target).css("background-image").replace("qiniucdn.com/hk-s","qiniucdn.com/hk-l")+" 70 70 round");
@@ -427,7 +427,7 @@ $(function () {
             openId : "openid",
             picKey : G.pic.bkg,
             css : G.css,
-            bordeId : G.pic.border,
+            bordeId : G.pic.borderId,
             signKey : G.pic.sign,
             uploadDate : G.uploadDate 
             // score : ,
