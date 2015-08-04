@@ -328,7 +328,7 @@ window.view = {
             }
             if(G&&G.pic&&G.pic["artName"]){
                 var div = $(".viewport-show .name-show div")[0];
-                $(div).html("$ "+G.pic["artName"]);
+                $(div).html(G.pic["artName"]);
             }
             
 
@@ -349,9 +349,29 @@ window.view = {
                     url:'http://192.168.1.116/X_1_FirstWebAPI/api/art/post',
                     type:"POST",
                     // contentType:"application/json; charset=utf-8",
-                    data:{"":JSON.stringify({"artId":7,"artName":"test007","openId":"","picKey":"lipper.jpg","css":"","borderId":7,"signKey":"FpAAO2CE7pZzNKFdpEUb4HQ_dRY9","uploadDate":"0001-01-01T00:00:00","score":1888,"commentIdList":"1,2,6"})},
-                    success: function(){
-                        alert(1);
+                    data:{"":JSON.stringify(G.postData)},
+                    success: function(res){
+                        console.log("show share",res);
+                        if(res){
+                            G.pic = res;
+                            //替换分数和名字
+                            //显示评论和对话
+                            if(G&&G.pic&&G.pic["score"]){
+                                var div = $(".viewport-show .price-text i")[0];
+                                var score = G.pic["score"];
+                                if(score-score%1000){
+                                    scoreStr = (score-score%1000)/1000 + "," +score%1000;
+                                }else{
+                                    scoreStr = score;
+                                }
+                                $(div).html("$ "+scoreStr);
+                            }
+                            if(G&&G.pic&&G.pic["artName"]){
+                                var div = $(".viewport-show .name-show div")[0];
+                                $(div).html(G.pic["artName"]);
+                            }
+
+                        }
                     }
                 })
 
@@ -376,7 +396,6 @@ window.view = {
                 // };
                 // ajax.send(JSON.stringify(data));
             }
-            $('.viewport-show');
         }
     }
 };
@@ -418,7 +437,7 @@ $(function () {
             alert("确定要做无名氏吗？");
             return;
         }
-        G.css = $(".border_image").attr("style");
+        G.pic.css = $($(".viewport-show .pic-zoom")[0]).attr("style");
         G.uploadDate = (new Date()).getTime();
 
         G.postData = {
@@ -426,12 +445,13 @@ $(function () {
             artName : G.artName,
             openId : "openid",
             picKey : G.pic.bkg,
-            css : G.css,
+            css : G.pic.css,
             bordeId : G.pic.borderId,
             signKey : G.pic.sign,
-            uploadDate : G.uploadDate 
+            uploadDate : G.uploadDate ,
             // score : ,
             // commentIdList: "2" 
+            dialogIdList:"2"
         }
         goTo('show',"confirm");
     }
