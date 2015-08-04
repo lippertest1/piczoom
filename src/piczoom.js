@@ -370,6 +370,9 @@ window.view = {
                                 var div = $(".viewport-show .name-show div")[0];
                                 $(div).html(G.pic["artName"]);
                             }
+                            $(".show-init").show();
+                            $(".show-init-confirm-not").hide();
+                            $(".discusing").hide();
 
                         }
                     }
