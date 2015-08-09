@@ -181,7 +181,7 @@ window.view = {
         if(area == "show" && state != "finishUpload" && state != "confirm"){
             var artId = $.getQuery("artId") || 'ECDB430C-EFD5-45C3-943B-4183AED0684D';
             var ajax = new XMLHttpRequest();
-            ajax.open('GET', 'http://192.168.1.116/X_1_FirstWebAPI/api/art/get?artId='+artId, true);
+            ajax.open('GET', 'http://172.16.1.204/X_1_FirstWebAPI/api/art/get?artId='+artId, true);
             // ajax.setRequestHeader("If-Modified-Since", "0");
             ajax.onreadystatechange = function() {
                 if (ajax.readyState === 4 && ajax.status === 200) {
@@ -210,7 +210,7 @@ window.view = {
                 flash_swf_url: 'Moxie.swf',
                 dragdrop: true,
                 chunk_size: '4mb',
-                uptoken_url: 'http://192.168.1.116/X_1_FirstWebAPI/api/qiniu/get',
+                uptoken_url: 'http://172.16.1.204/X_1_FirstWebAPI/api/qiniu/get',
                 domain: 'http://7xkkuk.com2.z0.glb.qiniucdn.com/',
                 // downtoken_url: '/downtoken',
                 // unique_names: true,
@@ -296,7 +296,7 @@ window.view = {
                 G&&G.pic&&(G.pic["css"] = res.css);
                 G&&G.pic&&(G.pic["score"] = res.score);
                 G&&G.pic&&(G.pic["artName"] = res.artName);
-                // G&&G.pic&&(G.pic["artName"] = res.scoreComment);
+                G&&G.pic&&(G.pic["scoreComment"] = res.scoreComment);
                 G&&G.pic&&(G.pic["commentIdList"] = res.commentIdList);
             }
 
@@ -331,7 +331,8 @@ window.view = {
             }
             if(G&&G.pic&&G.pic["commentIdList"]){
                 var name = commentIdList[G.pic.commentIdList-1].name;
-                var comment = commentIdList[G.pic.commentIdList-1].comment;
+                // var comment = commentIdList[G.pic.commentIdList-1].comment;
+                var comment = G.pic.scoreComment;
                 $(".commentBox-comment .nickname").html(name);
                 $(".commentBox-comment .comment-content").html(comment);
                 $(".commentBox-comment .avatar").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+name+".jpg)");
@@ -352,7 +353,7 @@ window.view = {
                 $('.show-confirm').show();
 
                 $.ajax({
-                    url:'http://192.168.1.116/X_1_FirstWebAPI/api/art/post',
+                    url:'http://172.16.1.204/X_1_FirstWebAPI/api/art/post',
                     type:"POST",
                     // contentType:"application/json; charset=utf-8",
                     data:{"":JSON.stringify(G.postData)},
@@ -384,8 +385,8 @@ window.view = {
                             }
                             if(G&&G.pic&&G.pic["artName"]){
                                 var div = $(".viewport-show .name-show div")[0];
-                                // $(div).html(G.pic["artName"]);
-                                $(div).html(G.pic["scoreComment"]);
+                                $(div).html(G.pic["artName"]);
+                                // $(div).html(G.pic["scoreComment"]);
                                 
                             }
                             $(".show-init").show();
@@ -398,7 +399,7 @@ window.view = {
 
                 // var ajax = new XMLHttpRequest();
                 // var data = [{"artId":7,"artName":"test007","openId":"","picKey":"lipper.jpg","css":"","borderId":7,"signKey":"FpAAO2CE7pZzNKFdpEUb4HQ_dRY9","uploadDate":"0001-01-01T00:00:00","score":1888,"commentIdList":"1,2,6"}];
-                // ajax.open('POST', 'http://192.168.1.116/X_1_FirstWebAPI/api/art/post', true);            
+                // ajax.open('POST', 'http://172.16.1.204/X_1_FirstWebAPI/api/art/post', true);            
                 // // ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
                 // ajax.setRequestHeader("Content-Type", "application/json;charset=utf-8");
                 // ajax.onreadystatechange = function() {
