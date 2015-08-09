@@ -16,7 +16,7 @@
             //this.radius=5; 
             this.storageColor = "#000000";
             this.eraserRadius = 15; //擦除半径值 
-            this.color = ["#000000", "#FF0000", "#80FF00", "#00FFFF", "#808080", "#FF8000", "#408080", "#8000FF", "#CCCC00"]; //画笔颜色值 
+            this.color = ["#000000", "#FFFFFF", "#80FF00", "#00FFFF", "#808080", "#FF8000", "#408080", "#8000FF", "#CCCC00"]; //画笔颜色值 
             this.fontWeight = [2, 5, 8];
             this.$ = function(id) {
                 return typeof id == "string" ? document.getElementById(id) : id;
@@ -184,12 +184,33 @@
                     t.isEraser = false;
                 }
             }
+            // for (var i = 0, l = fontIptNum.length; i < l; i++) {
+            //     t.cxt.save();
+            //     fontIptNum[i].index = i;
+            //     fontIptNum[i].onclick = function() {
+            //         t.changeBackground(this.index);
+            //         t.cxt.lineWidth = t.fontWeight[this.index];
+            //         t.$("error").style.color = "#000";
+            //         t.$("error").innerHTML = "如果有错误，请使用橡皮擦：";
+            //         t.isEraser = false;
+            //         t.cxt.strokeStyle = t.storageColor;
+            //     }
+            // }
+
             for (var i = 0, l = fontIptNum.length; i < l; i++) {
                 t.cxt.save();
                 fontIptNum[i].index = i;
                 fontIptNum[i].onclick = function() {
-                    t.changeBackground(this.index);
-                    t.cxt.lineWidth = t.fontWeight[this.index];
+                    t.cxt.save();
+                    t.cxt.strokeStyle = t.color[this.index];
+                    t.storageColor = t.color[this.index];
+                    if(this.index==0){
+                        $("canvas").css("background","#eee")
+                    }
+                    else{         
+                        $("canvas").css("background","#000")
+                    }
+                    t.clear();
                     t.$("error").style.color = "#000";
                     t.$("error").innerHTML = "如果有错误，请使用橡皮擦：";
                     t.isEraser = false;
