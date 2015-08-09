@@ -58,6 +58,7 @@
 }
 
 .commentBox-discus .left  {
+    margin: 20px 0;
     -webkit-animation: fadeInLeftBig .5s .1s ease both;
     -moz-animation: fadeInLeftBig .5s .1s ease both;
 }
@@ -87,6 +88,7 @@
 }
 
 .commentBox-discus .right  {
+    margin: 20px 0;
     -webkit-animation: fadeInRightBig 2s .1s ease both;
     -moz-animation: fadeInRightBig 2s .1s ease both;
 }
