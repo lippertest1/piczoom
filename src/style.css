@@ -300,6 +300,20 @@ div.pic-zoom div.description p{
     margin: 0px;
 }
 
+.ui-progressbar{
+    height: 20px;
+    margin: 20px 40px;
+    border: 0px solid #e78f08;
+    background: #f6a828 50% 50% repeat-x;
+    color: #ffffff;
+    font-weight: bold;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    width: 30%;
+    text-align: left;
+}
+
+
 .infoBox{
     color:#000;
     background-color: #f7f7f7;

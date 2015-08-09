@@ -243,7 +243,8 @@ window.view = {
                         // }
                     },
                     'UploadProgress': function(up, file) {
-                        console.log("UploadProgress");
+                        console.log("UploadProgress",file.percent + "%");
+                        $(".ui-progressbar").css("width",file.percent*0.8 + "%");
                         // var progress = new FileProgress(file, 'fsUploadProgress');
                         // var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
 
