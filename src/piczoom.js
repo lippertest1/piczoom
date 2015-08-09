@@ -327,7 +327,7 @@ window.view = {
             }
             if(G&&G.pic&&G.pic["artName"]){
                 var div = $(".viewport-show .name-show div")[0];
-                $(div).html(G.pic["artName"]);
+                $(div).html("《"+G.pic["artName"]+"》");
             }
             if(G&&G.pic&&G.pic["commentIdList"]){
                 var name = commentIdList[G.pic.commentIdList-1].name;
@@ -385,10 +385,14 @@ window.view = {
                             }
                             if(G&&G.pic&&G.pic["artName"]){
                                 var div = $(".viewport-show .name-show div")[0];
-                                $(div).html(G.pic["artName"]);
-                                // $(div).html(G.pic["scoreComment"]);
-                                
+                                $(div).html("《"+G.pic["artName"]+"》");
                             }
+                            if(G&&G.pic&&G.pic["scoreComment"]){
+                                var div = $(".commentBox-comment .comment-content")[0];
+                                $(div).html(G.pic["scoreComment"]);
+                            }
+
+                                // $(div).html(G.pic["scoreComment"]);
                             $(".show-init").show();
                             $(".show-init-confirm-not").hide();
                             // $(".discusing").hide();
