@@ -261,10 +261,10 @@ div.border_image{
     border-right:30px;
     border-bottom:20px;
     border-left:30px;
-    -moz-border-image:url(border.jpg) 70 70 round;   /* Old Firefox */
-    -webkit-border-image:url(border.jpg) 70 70 round;    /* Safari and Chrome */
-    -o-border-image:url(border.jpg) 70 70 round;     /* Opera */
-    border-image:url(border.jpg) 70 70 round;
+    -moz-border-image:url(http://7xkkuk.com2.z0.glb.qiniucdn.com/hk-l-木质1.png) 70 70 round;   /* Old Firefox */
+    -webkit-border-image:url(http://7xkkuk.com2.z0.glb.qiniucdn.com/hk-l-木质1.png) 70 70 round;    /* Safari and Chrome */
+    -o-border-image:url(http://7xkkuk.com2.z0.glb.qiniucdn.com/hk-l-木质1.png) 70 70 round;     /* Opera */
+    border-image:url(http://7xkkuk.com2.z0.glb.qiniucdn.com/hk-l-木质1.png) 70 70 round;
 }
 
 .pic-zoom-container{
