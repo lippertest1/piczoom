@@ -6,7 +6,7 @@ module.exports = function (grunt) {
       options: {  
       },  
       dist: {  
-        src: ['src/zepto.min.js','src/plupload.full.min.js','src/Slide.js','src/zoom.js','src/canvas.js','src/qiniu.js','src/piczoom.js'],//src文件夹下包括子文件夹下的所有文件  
+        src: ['src/zepto.min.js','src/FileProgress.js','src/plupload.full.min.js','src/Slide.js','src/zoom.js','src/canvas.js','src/qiniu.js','src/piczoom.js'],//src文件夹下包括子文件夹下的所有文件  
         dest: 'dest/built.js'//合并文件在dist下名为built.js的文件  
       }  
     },
