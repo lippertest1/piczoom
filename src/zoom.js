@@ -382,6 +382,7 @@
             },
 
             setContainerY: function (y) {
+                y=274;
                 return this.container.height(y);
             },
 

@@ -267,6 +267,10 @@ div.border_image{
     border-image:url(border.jpg) 70 70 round;
 }
 
+.pic-zoom-container{
+    height: 274px;
+}
+
 div.pic-zoom {
     position: relative;
 }
