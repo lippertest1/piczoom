@@ -286,17 +286,6 @@ window.view = {
         if(area == "show"){
             console.log("render");
 
-            // var dialogIdRand = Math.floor(Math.random()*dialogIdList.length);
-            // var dialog = dialogIdList[dialogIdRand];
-
-            // $(".commentBox-discus").show();
-            // $(".commentBox-discus .nickname").html(dialog.dialog1);
-            // $(".commentBox-discus .nickname-right").html(dialog.dialog2);
-
-            // $(".commentBox-discus .avatar-left").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+dialog.name1+".jpg)");
-            // $(".commentBox-discus .avatar-right").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+dialog.name2+".jpg)");
-
-
             $('.infoBox').hide();
             $(".commentBox").hide();
             $(".borderChoose").hide();
@@ -368,6 +357,16 @@ window.view = {
                     data:{"":JSON.stringify(G.postData)},
                     success: function(res){
                         console.log("show share",res);
+                        var dialogIdRand = Math.floor(Math.random()*dialogIdList.length);
+                        var dialog = dialogIdList[dialogIdRand];
+
+                        $(".commentBox-discus .nickname").html(dialog.dialog1);
+                        $(".commentBox-discus .nickname-right").html(dialog.dialog2);
+
+                        $(".commentBox-discus .avatar-left").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+dialog.name1+".jpg)");
+                        $(".commentBox-discus .avatar-right").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+dialog.name2+".jpg)");
+
+                        $(".commentBox-discus").show();
                         if(res){
                             G.pic = res;
                             //替换分数和名字
@@ -388,7 +387,7 @@ window.view = {
                             }
                             $(".show-init").show();
                             $(".show-init-confirm-not").hide();
-                            $(".discusing").hide();
+                            // $(".discusing").hide();
 
                         }
                     }

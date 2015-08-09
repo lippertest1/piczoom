@@ -354,6 +354,25 @@ div.pic-zoom div.description p{
     width:60%;
 }
 
+.fixed-mask {
+    position: fixed;
+    z-index: 99;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: rgba(0,0,0,.9);
+}
+.flt-msk{
+    z-index: 999;
+    position: absolute;
+    top: 25%;
+    width: 100%;    
+    color: #fff;
+    font-size: 14px;
+}
+
 .commentBox-discus{
     height: 95px;
 }
