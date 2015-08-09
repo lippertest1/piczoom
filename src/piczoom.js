@@ -307,7 +307,7 @@ window.view = {
                 G&&G.pic&&(G.pic["css"] = res.css);
                 G&&G.pic&&(G.pic["score"] = res.score);
                 G&&G.pic&&(G.pic["artName"] = res.artName);
-
+                G&&G.pic&&(G.pic["commentIdList"] = res.commentIdList);
             }
 
             
@@ -338,6 +338,13 @@ window.view = {
             if(G&&G.pic&&G.pic["artName"]){
                 var div = $(".viewport-show .name-show div")[0];
                 $(div).html(G.pic["artName"]);
+            }
+            if(G&&G.pic&&G.pic["commentIdList"]){
+                var name = commentIdList[G.pic.commentIdList-1].name;
+                var comment = commentIdList[G.pic.commentIdList-1].comment;
+                $(".commentBox-comment .nickname").html(name);
+                $(".commentBox-comment .comment-content").html(comment);
+                $(".commentBox-comment .avatar").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+name+".jpg)");
             }
             
 
