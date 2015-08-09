@@ -253,7 +253,11 @@ window.view = {
                     'UploadComplete': function(up, file) {
                         console.log("UploadComplete");
                         // alert(G.pic.type+" "+G.pic[G.pic.type]);
-
+                        if(G&&G.pic&&G.pic["bkg"]){
+                            var img = $(".viewport-show .pic-zoom img")[0];//document.createElement('img');
+                            img.title = "";
+                            img.src = G.pic.host+G.pic["bkg"];
+                        }
                         goTo('canvas');
                         // $('#success').show();
                     },
