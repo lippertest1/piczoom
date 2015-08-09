@@ -366,7 +366,7 @@ window.view = {
                         $(".commentBox-discus .avatar-left").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+dialog.name1+".jpg)");
                         $(".commentBox-discus .avatar-right").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+dialog.name2+".jpg)");
 
-                        $(".commentBox-discus").show();
+                        $(".fixed-mask").show();
                         if(res){
                             G.pic = res;
                             //替换分数和名字
@@ -473,6 +473,11 @@ $(function () {
         }
         goTo('show',"confirm");
     }
+
+    document.querySelector('.fixed-mask').onclick=function(){
+        $(this).hide()
+    }
+    
 
 
     var area = $.getQuery('area');
