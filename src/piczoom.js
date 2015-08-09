@@ -296,6 +296,7 @@ window.view = {
                 G&&G.pic&&(G.pic["css"] = res.css);
                 G&&G.pic&&(G.pic["score"] = res.score);
                 G&&G.pic&&(G.pic["artName"] = res.artName);
+                // G&&G.pic&&(G.pic["artName"] = res.scoreComment);
                 G&&G.pic&&(G.pic["commentIdList"] = res.commentIdList);
             }
 
@@ -317,8 +318,8 @@ window.view = {
             if(G&&G.pic&&G.pic["score"]){
                 var div = $(".viewport-show .price-text i")[0];
                 var score = G.pic["score"];
-                if(score-score%1000){
-                    scoreStr = (score-score%1000)/1000 + "," +score%1000;
+                if(score.toString().length>3){
+                    scoreStr = score.replace(/(\d)(\d{3})(?=(?:\d{4})*(?!\d))/g,'$1,$2'); 
                 }else{
                     scoreStr = score;
                 }
@@ -374,8 +375,8 @@ window.view = {
                             if(G&&G.pic&&G.pic["score"]){
                                 var div = $(".viewport-show .price-text i")[0];
                                 var score = G.pic["score"];
-                                if(score-score%1000){
-                                    scoreStr = (score-score%1000)/1000 + "," +score%1000;
+                                if(score.toString().length>3){
+                                    scoreStr = score.replace(/(\d)(\d{3})(?=(?:\d{4})*(?!\d))/g,'$1,$2'); 
                                 }else{
                                     scoreStr = score;
                                 }
@@ -383,7 +384,9 @@ window.view = {
                             }
                             if(G&&G.pic&&G.pic["artName"]){
                                 var div = $(".viewport-show .name-show div")[0];
-                                $(div).html(G.pic["artName"]);
+                                // $(div).html(G.pic["artName"]);
+                                $(div).html(G.pic["scoreComment"]);
+                                
                             }
                             $(".show-init").show();
                             $(".show-init-confirm-not").hide();
