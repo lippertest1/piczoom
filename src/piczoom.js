@@ -286,15 +286,15 @@ window.view = {
         if(area == "show"){
             console.log("render");
 
-            var dialogIdRand = Math.floor(Math.random()*dialogIdList.length);
-            var dialog = dialogIdList[dialogIdRand];
+            // var dialogIdRand = Math.floor(Math.random()*dialogIdList.length);
+            // var dialog = dialogIdList[dialogIdRand];
 
-            $(".commentBox-discus").show();
-            $(".commentBox-discus .nickname").html(dialog.dialog1);
-            $(".commentBox-discus .nickname-right").html(dialog.dialog2);
+            // $(".commentBox-discus").show();
+            // $(".commentBox-discus .nickname").html(dialog.dialog1);
+            // $(".commentBox-discus .nickname-right").html(dialog.dialog2);
 
-            $(".commentBox-discus .avatar-left").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+dialog.name1+".jpg)");
-            $(".commentBox-discus .avatar-right").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+dialog.name2+".jpg)");
+            // $(".commentBox-discus .avatar-left").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+dialog.name1+".jpg)");
+            // $(".commentBox-discus .avatar-right").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+dialog.name2+".jpg)");
 
 
             $('.infoBox').hide();
