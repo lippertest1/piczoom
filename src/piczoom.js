@@ -111,7 +111,7 @@ window.goTo = function(area,state){
 window.addEventListener("popstate", function() {
     console.log("popState history.state="+JSON.stringify(history.state));
     var currentState = history.state;
-    view.onshow(history.state.area);                                         
+    // view.onshow(history.state && history.state.area);                                         
 });
 
 window.G = {};
@@ -349,7 +349,7 @@ window.view = {
             }
             if(G&&G.pic&&G.pic["scoreComment"]){
                 G.pic.commentIdList = Math.floor(commentIdList.length * Math.random());
-                var name = commentIdList[G.pic.commentIdList-1].name;
+                var name = commentIdList[G.pic.commentIdList%commentIdList.length].name;
                 // var comment = commentIdList[G.pic.commentIdList-1].comment;
                 var comment = G.pic.scoreComment;
                 $(".commentBox-comment .nickname").html(name);
@@ -358,17 +358,17 @@ window.view = {
             }
             
 
-            if(history.state && !history.state.state){
+            if(!history.state || (history.state && !history.state.state) ){
                 $('.show-init').show();
 
                 // $(".show-finishUpload").show();
                 // $(".borderChoose").show();
             }
-            else if(history.state.state == "finishUpload"){
+            else if(history.state && history.state.state == "finishUpload"){
                 $(".show-finishUpload").show();
                 $(".borderChoose").show();
             }
-            else if(history.state.state == "confirm"){
+            else if(history.state && history.state.state == "confirm"){
                 $('.show-confirm').show();
 
                 $.ajax({
