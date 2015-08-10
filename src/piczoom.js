@@ -441,6 +441,7 @@ $(function () {
     });
     paint.init();
     document.getElementById('canvas').width  = window.innerWidth;
+    paint.cxt.lineWidth=2;
 
     //上传图片按钮
     // var upfile = document.querySelector('#uploadBtn');
