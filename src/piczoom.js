@@ -492,10 +492,17 @@ $(function () {
     }
 
     document.querySelector('.fixed-mask').onclick=function(){
-        $(this).hide()
+        $(this).hide();
     }
     
+    document.querySelector('.rule-mask').onclick=function(){
+        $(this).hide();
+    }
 
+    document.querySelector('.rule-detail').onclick=function(){
+        $(".rule-mask").show();
+    }
+    
 
     var area = $.getQuery('area');
     goTo(area);
