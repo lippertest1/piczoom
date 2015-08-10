@@ -132,6 +132,8 @@ window.view = {
     },
     onshow:function(area, state){
 
+        G.pic.host="http://7xkkuk.com2.z0.glb.qiniucdn.com/";
+
         var that = this;
         console.log("onshow area="+area);
         //render which view
