@@ -245,6 +245,7 @@ window.view = {
                     'UploadProgress': function(up, file) {
                         console.log("UploadProgress",file.percent + "%");
                         $(".ui-progressbar").css("width",file.percent*0.8 + "%");
+                        $(".ui-progressbar-text").show();
                         // var progress = new FileProgress(file, 'fsUploadProgress');
                         // var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
 
@@ -258,6 +259,7 @@ window.view = {
                             img.title = "";
                             img.src = G.pic.host+G.pic["bkg"];
                         }
+                        $(".ui-progressbar-text").hide();
                         goTo('canvas');
                         // $('#success').show();
                     },
