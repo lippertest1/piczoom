@@ -263,6 +263,9 @@ window.view = {
                             img.title = "";
                             img.src = G.pic.host+G.pic["bkg"];
                         }
+                        var img = $(".viewport-show .pic-sign img")[0];//document.createElement('img');
+                        img.title = "";
+                        img.src = "";
                         $(".ui-progressbar-text").hide();
                         goTo('canvas');
                         // $('#success').show();
