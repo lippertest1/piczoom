@@ -13609,6 +13609,7 @@ window.plupload = plupload;
             },
 
             setContainerY: function (y) {
+                y=274;
                 return this.container.height(y);
             },
 
@@ -13904,7 +13905,7 @@ window.plupload = plupload;
             //this.radius=5; 
             this.storageColor = "#000000";
             this.eraserRadius = 15; //擦除半径值 
-            this.color = ["#000000", "#FF0000", "#80FF00", "#00FFFF", "#808080", "#FF8000", "#408080", "#8000FF", "#CCCC00"]; //画笔颜色值 
+            this.color = ["#000000", "#FFFFFF", "#80FF00", "#00FFFF", "#808080", "#FF8000", "#408080", "#8000FF", "#CCCC00"]; //画笔颜色值 
             this.fontWeight = [2, 5, 8];
             this.$ = function(id) {
                 return typeof id == "string" ? document.getElementById(id) : id;
@@ -14072,12 +14073,33 @@ window.plupload = plupload;
                     t.isEraser = false;
                 }
             }
+            // for (var i = 0, l = fontIptNum.length; i < l; i++) {
+            //     t.cxt.save();
+            //     fontIptNum[i].index = i;
+            //     fontIptNum[i].onclick = function() {
+            //         t.changeBackground(this.index);
+            //         t.cxt.lineWidth = t.fontWeight[this.index];
+            //         t.$("error").style.color = "#000";
+            //         t.$("error").innerHTML = "如果有错误，请使用橡皮擦：";
+            //         t.isEraser = false;
+            //         t.cxt.strokeStyle = t.storageColor;
+            //     }
+            // }
+
             for (var i = 0, l = fontIptNum.length; i < l; i++) {
                 t.cxt.save();
                 fontIptNum[i].index = i;
                 fontIptNum[i].onclick = function() {
-                    t.changeBackground(this.index);
-                    t.cxt.lineWidth = t.fontWeight[this.index];
+                    t.cxt.save();
+                    t.cxt.strokeStyle = t.color[this.index];
+                    t.storageColor = t.color[this.index];
+                    if(this.index==0){
+                        $("canvas").css("background","#eee")
+                    }
+                    else{         
+                        $("canvas").css("background","#000")
+                    }
+                    t.clear();
                     t.$("error").style.color = "#000";
                     t.$("error").innerHTML = "如果有错误，请使用橡皮擦：";
                     t.isEraser = false;
@@ -15112,7 +15134,7 @@ window.parseJSON = function(data) {
 window.goTo = function(area,state){
     console.log("goTo area="+area);
     history.pushState({area:area,state:state||""}, "页面标题", "piczoom.html?area="+area+"&state=test")
-    view.onshow(area);
+    view.onshow(area,state);
 }
 
 window.addEventListener("popstate", function() {
@@ -15147,12 +15169,12 @@ window.view = {
         $('.slide_title_outer').on('click', function(e){
             $(e.target).siblings().css("background-color","#fff");
             $(e.target).css("background-color","#3f3f3f");
-            G.pic.border = /\d+/.exec(e.target.className)[0];
+            G.pic.borderId = /\d+/.exec(e.target.className)[0];
 
-            $(".border_image").css("border-image",$(e.target).css("background-image").replace("qiniucdn.com/hk-s","qiniucdn.com/hk-l")+" 70 70 round");
-            $(".-moz-border-image").css("border-image",$(e.target).css("background-image").replace("qiniucdn.com/hk-s","qiniucdn.com/hk-l")+" 70 70 round");
-            $(".-webkit-border-image").css("border-image",$(e.target).css("background-image").replace("qiniucdn.com/hk-s","qiniucdn.com/hk-l")+" 70 70 round");
-            $(".-o-border-image").css("border-image",$(e.target).css("background-image").replace("qiniucdn.com/hk-s","qiniucdn.com/hk-l")+" 70 70 round");
+            $(".border_image").css("border-image",$(e.target).css("background-image").replace("qiniucdn.com/n-hk-s","qiniucdn.com/n-hk-l")+" 70 70 round");
+            $(".-moz-border-image").css("border-image",$(e.target).css("background-image").replace("qiniucdn.com/n-hk-s","qiniucdn.com/n-hk-l")+" 70 70 round");
+            $(".-webkit-border-image").css("border-image",$(e.target).css("background-image").replace("qiniucdn.com/n-hk-s","qiniucdn.com/n-hk-l")+" 70 70 round");
+            $(".-o-border-image").css("border-image",$(e.target).css("background-image").replace("qiniucdn.com/n-hk-s","qiniucdn.com/n-hk-l")+" 70 70 round");
 
         });
         this.onload();
@@ -15160,7 +15182,7 @@ window.view = {
     onload:function(){
         this.onshow();
     },
-    onshow:function(area){
+    onshow:function(area, state){
 
         var that = this;
         console.log("onshow area="+area);
@@ -15185,9 +15207,10 @@ window.view = {
         }
 
 
-        if(area == "show"){
+        if(area == "show" && state != "finishUpload" && state != "confirm"){
+            var artId = $.getQuery("artId") || 'ECDB430C-EFD5-45C3-943B-4183AED0684D';
             var ajax = new XMLHttpRequest();
-            ajax.open('GET', 'http://192.168.1.116/X_1_FirstWebAPI/api/art/get', true);
+            ajax.open('GET', 'http://172.16.1.204/X_1_FirstWebAPI/api/art/get?artId='+artId, true);
             // ajax.setRequestHeader("If-Modified-Since", "0");
             ajax.onreadystatechange = function() {
                 if (ajax.readyState === 4 && ajax.status === 200) {
@@ -15197,7 +15220,16 @@ window.view = {
                 }
             };
             ajax.send();
-        }else if(area == "intro"){
+        }
+        else if (area == "show" && state == "finishUpload"){
+            that.render(area);
+            var img = $(".viewport-show .pic-zoom")[0];
+            $(img).attr("style","");
+        }
+        else if (area == "show" && state == "confirm"){
+            that.render(area);
+        }
+        else if(area == "intro"){
             window.uploader = Qiniu.uploader({
                 runtimes: 'html5,flash,html4',
                 browse_button: 'uploadDiv',
@@ -15207,7 +15239,7 @@ window.view = {
                 flash_swf_url: 'Moxie.swf',
                 dragdrop: true,
                 chunk_size: '4mb',
-                uptoken_url: 'http://192.168.1.116/X_1_FirstWebAPI/api/qiniu/get',
+                uptoken_url: 'http://172.16.1.204/X_1_FirstWebAPI/api/qiniu/get',
                 domain: 'http://7xkkuk.com2.z0.glb.qiniucdn.com/',
                 // downtoken_url: '/downtoken',
                 // unique_names: true,
@@ -15240,7 +15272,8 @@ window.view = {
                         // }
                     },
                     'UploadProgress': function(up, file) {
-                        console.log("UploadProgress");
+                        console.log("UploadProgress",file.percent + "%");
+                        $(".ui-progressbar").css("width",file.percent*0.8 + "%");
                         // var progress = new FileProgress(file, 'fsUploadProgress');
                         // var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
 
@@ -15249,7 +15282,11 @@ window.view = {
                     'UploadComplete': function(up, file) {
                         console.log("UploadComplete");
                         // alert(G.pic.type+" "+G.pic[G.pic.type]);
-
+                        if(G&&G.pic&&G.pic["bkg"]){
+                            var img = $(".viewport-show .pic-zoom img")[0];//document.createElement('img');
+                            img.title = "";
+                            img.src = G.pic.host+G.pic["bkg"];
+                        }
                         goTo('canvas');
                         // $('#success').show();
                     },
@@ -15279,9 +15316,25 @@ window.view = {
             });
         } 
     },
-    render:function(area,data){
-        if(area == "show" || !area){
+    render:function(area,res){
+        if(area == "show"){
             console.log("render");
+
+            $('.infoBox').hide();
+            $(".commentBox").hide();
+            $(".borderChoose").hide();
+
+            if(res){
+                G&&G.pic&&(G.pic["bkg"] = res.picKey);
+                G&&G.pic&&(G.pic["sign"] = res.signKey);
+                G&&G.pic&&(G.pic["css"] = res.css);
+                G&&G.pic&&(G.pic["score"] = res.score);
+                G&&G.pic&&(G.pic["artName"] = res.artName);
+                G&&G.pic&&(G.pic["scoreComment"] = res.scoreComment);
+                G&&G.pic&&(G.pic["commentIdList"] = res.commentIdList);
+            }
+
+            
             if(G&&G.pic&&G.pic["bkg"]){
                 var img = $(".viewport-show .pic-zoom img")[0];//document.createElement('img');
                 img.title = "";
@@ -15292,11 +15345,33 @@ window.view = {
                 img.title = "";
                 img.src = G.pic.host+G.pic["sign"];
             }
-
-
-            $('.infoBox').hide();
-            $(".commentBox").hide();
-            $(".borderChoose").hide();
+            if(G&&G.pic&&G.pic["css"]){
+                var img = $(".viewport-show .pic-zoom")[0];
+                $(img).attr("style",G.pic["css"]);
+            }
+            if(G&&G.pic&&G.pic["score"]){
+                var div = $(".viewport-show .price-text i")[0];
+                var score = G.pic["score"];
+                if(score.toString().length>3){
+                    scoreStr = score.replace(/(\d)(\d{3})(?=(?:\d{4})*(?!\d))/g,'$1,$2'); 
+                }else{
+                    scoreStr = score;
+                }
+                $(div).html("$ "+scoreStr);
+            }
+            if(G&&G.pic&&G.pic["artName"]){
+                var div = $(".viewport-show .name-show div")[0];
+                $(div).html("《"+G.pic["artName"]+"》");
+            }
+            if(G&&G.pic&&G.pic["commentIdList"]){
+                var name = commentIdList[G.pic.commentIdList-1].name;
+                // var comment = commentIdList[G.pic.commentIdList-1].comment;
+                var comment = G.pic.scoreComment;
+                $(".commentBox-comment .nickname").html(name);
+                $(".commentBox-comment .comment-content").html(comment);
+                $(".commentBox-comment .avatar").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+name+".jpg)");
+            }
+            
 
             if(history.state.state == ""){
                 $('.show-init').show();
@@ -15311,40 +15386,76 @@ window.view = {
             else if(history.state.state == "confirm"){
                 $('.show-confirm').show();
 
-                var ajax = new XMLHttpRequest();
-                ajax.open('GET', 'http://192.168.1.116/X_1_FirstWebAPI/api/art/get?data='+data, true);
-                ajax.onreadystatechange = function() {
-                    if (ajax.readyState === 4 && ajax.status === 200) {
-                        var res = parseJSON(ajax.responseText);
-                        console.log(res);
-                        $(".commentBox-comment").show();
-                        var name = commentIdList[res.commentIdList-1].name;
-                        var comment = commentIdList[res.commentIdList-1].comment;
-                        $(".commentBox-comment .nickname").html(name);
-                        $(".commentBox-comment .comment-content").html(comment);
-                        $(".commentBox-comment .avatar").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+name+".jpg)");
+                $.ajax({
+                    url:'http://172.16.1.204/X_1_FirstWebAPI/api/art/post',
+                    type:"POST",
+                    // contentType:"application/json; charset=utf-8",
+                    data:{"":JSON.stringify(G.postData)},
+                    success: function(res){
+                        console.log("show share",res);
+                        var dialogIdRand = Math.floor(Math.random()*dialogIdList.length);
+                        var dialog = dialogIdList[dialogIdRand];
 
-                        var dialogIdListSp = res.dialogIdList.split(",");
-                        var dialog = dialogIdList[dialogIdListSp[0]-1];
-
-                        $(".commentBox-discus").show();
                         $(".commentBox-discus .nickname").html(dialog.dialog1);
                         $(".commentBox-discus .nickname-right").html(dialog.dialog2);
 
                         $(".commentBox-discus .avatar-left").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+dialog.name1+".jpg)");
                         $(".commentBox-discus .avatar-right").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+dialog.name2+".jpg)");
 
-                        if(dialogIdList.length){
-                            $(".discusing").hide();
-                            dialogIdList.forEach(function(c, i){
-                                console.log(c);
-                            });
+                        $(".fixed-mask").show();
+                        if(res){
+                            G.pic = res;
+                            //替换分数和名字
+                            //显示评论和对话
+                            if(G&&G.pic&&G.pic["score"]){
+                                var div = $(".viewport-show .price-text i")[0];
+                                var score = G.pic["score"];
+                                if(score.toString().length>3){
+                                    scoreStr = score.replace(/(\d)(\d{3})(?=(?:\d{4})*(?!\d))/g,'$1,$2'); 
+                                }else{
+                                    scoreStr = score;
+                                }
+                                $(div).html("$ "+scoreStr);
+                            }
+                            if(G&&G.pic&&G.pic["artName"]){
+                                var div = $(".viewport-show .name-show div")[0];
+                                $(div).html("《"+G.pic["artName"]+"》");
+                            }
+                            if(G&&G.pic&&G.pic["scoreComment"]){
+                                var div = $(".commentBox-comment .comment-content")[0];
+                                $(div).html(G.pic["scoreComment"]);
+                            }
+
+                                // $(div).html(G.pic["scoreComment"]);
+                            $(".show-init").show();
+                            $(".show-init-confirm-not").hide();
+                            // $(".discusing").hide();
+
                         }
                     }
-                };
-                ajax.send(JSON.stringify(data));
+                })
+
+                // var ajax = new XMLHttpRequest();
+                // var data = [{"artId":7,"artName":"test007","openId":"","picKey":"lipper.jpg","css":"","borderId":7,"signKey":"FpAAO2CE7pZzNKFdpEUb4HQ_dRY9","uploadDate":"0001-01-01T00:00:00","score":1888,"commentIdList":"1,2,6"}];
+                // ajax.open('POST', 'http://172.16.1.204/X_1_FirstWebAPI/api/art/post', true);            
+                // // ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+                // ajax.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+                // ajax.onreadystatechange = function() {
+                //     if (ajax.readyState === 4 && ajax.status === 200) {
+                //         var res = parseJSON(ajax.responseText);
+                //         console.log(res);
+                //         $(".commentBox-comment").show();
+                //         var name = commentIdList[res.commentIdList-1].name;
+                //         var comment = commentIdList[res.commentIdList-1].comment;
+                //         $(".commentBox-comment .nickname").html(name);
+                //         $(".commentBox-comment .comment-content").html(comment);
+                //         $(".commentBox-comment .avatar").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+name+".jpg)");
+
+                        
+                //     }
+                // };
+                // ajax.send(JSON.stringify(data));
             }
-            $('.viewport-show');
         }
     }
 };
@@ -15356,9 +15467,6 @@ $(function () {
     });
     paint.init();
     document.getElementById('canvas').width  = window.innerWidth;
-    // document.getElementById('canvas').height = window.innerHeight;
-    // var cxt = document.getElementById('canvas').getContext('2d');
-    // cxt.globalAlpha = "0.5";
 
     //上传图片按钮
     // var upfile = document.querySelector('#uploadBtn');
@@ -15385,31 +15493,34 @@ $(function () {
     document.querySelector('#confirm').onclick=function(){
         G.artId = Guid();
         G.artName = $("#artName").val();
-        G.css = $(".border_image").attr("style");
+        if(!artName){
+            alert("确定要做无名氏吗？");
+            return;
+        }
+        G.pic.css = $($(".viewport-show .pic-zoom")[0]).attr("style");
         G.uploadDate = (new Date()).getTime();
 
-        var data = {
+        G.postData = {
             artId : G.artId,
             artName : G.artName,
-            openId : "",
+            openId : "openid",
             picKey : G.pic.bkg,
-            css : G.css,
-            bordeId : G.pic.border,
+            css : G.pic.css,
+            bordeId : G.pic.borderId,
             signKey : G.pic.sign,
-            uploadDate : G.uploadDate 
+            uploadDate : G.uploadDate ,
             // score : ,
-            // commentIdList : 
+            // commentIdList: "2" 
+            dialogIdList:"2"
         }
-
-
         goTo('show',"confirm");
+    }
 
-        
+    document.querySelector('.fixed-mask').onclick=function(){
+        $(this).hide()
     }
     
 
-    $('.pic-container').hide();
-    $('.pic-container').show();
 
     var area = $.getQuery('area');
     goTo(area);

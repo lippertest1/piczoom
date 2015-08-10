@@ -18,22 +18,46 @@
 
 </head>
 <body>
-    <div class='viewport-show'>
+    <div class='viewport-show' style="display:none">
         <div class="pic-container box-center">
             <div class="page border_image">
                 <div class="pic-zoom">
-                    <img src="lipper.jpg"/>
+                    <img />
                     <!--a href="http://www.lipperhome.com">your own text</a-->
                 </div>
             </div>
         </div>
         <div class="pic-sign">
-            <img style="background-color:rgba(255,255,255,0.5)" src="http://7xkkuk.com2.z0.glb.qiniucdn.com//Fjc1A5UWpt9SMylmR_GroKiyS2Kx"/>
+            <img  />
+        </div>
+
+        <div class="fixed-mask" style="display:none">
+            <div class="flt-msk">
+                <div class=" show-confirm discusing" >   
+                    <div class="box-center">
+                        <div class="fa fa-2x">砖家正在讨论中</div>
+                    </div>
+                    <div class="box-center">
+                        <div class="fa fa-2x">。。。。。。</div>
+                    </div>
+                </div>
+
+                <div class=" commentBox-discus">   
+                    <div class="left"> 
+                        <div class="avatar avatar-left fa-2x" style="background-image:url(http://7xkkuk.com2.z0.glb.qiniucdn.com/安格尔.jpg)">&nbsp;</div>
+                        <div class="nickname fa-1x colorA" >请问你的作品都在表达什么？</div>
+                    </div>
+                    <div class="right"> 
+                        <div class="avatar-right fa-2x" style="background-image:url(http://7xkkuk.com2.z0.glb.qiniucdn.com/毕加索.jpg)">&nbsp;</div>
+                        <div class="nickname-right fa-1x colorB" >漂亮就行！</div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="infoBox show-init" style="display:none">       
             <div class="price-text box-center">
-                <i class="fa fa-4x">$ 8,900</i>
+                <i class="fa fa-4x"></i>
                 
             </div>
             <div class="split box-center">
@@ -42,7 +66,7 @@
                 <i class="fa fa-star"></i>
             </div>
             <div class="name-show box-center">
-                <div class="fa fa-2x">《夜晚的伦敦皮卡迪亚》</div>
+                <div class="fa fa-2x"></div>
             </div>
         </div>
 
@@ -60,35 +84,17 @@
             </div>
         </div>
 
-        <div class="infoBox show-confirm discusing" style="display:none">   
-            <div class="box-center">
-                <div class="fa fa-2x">砖家正在讨论中</div>
-            </div>
-            <div class="box-center">
-                <div class="fa fa-2x">。。。。。。</div>
-            </div>
-        </div>
+        
 
         <div class="commentBox show-init commentBox-comment">   
             <div > 
-                <div class="avatar fa-2x" style="background-image:url(http://7xkkuk.com2.z0.glb.qiniucdn.com/伦勃朗.jpg)">&nbsp;</div>
-                <div class="nickname fa-2x" >伦勃朗</div>
+                <div class="avatar fa-2x">&nbsp;</div>
+                <div class="nickname fa-2x" ></div>
             </div>
             <div class="box-center comment">
                 <i class="fa fa-quote-left" style="margin-top:-5px">&nbsp;</i>
-                <div class="comment-content">这是一个为了艺术可以不顾一切的人</div>
+                <div class="comment-content"></div>
                 <i class="fa fa-quote-right" style="margin-bottom:-5px"></i>
-            </div>
-        </div>
-
-        <div class="commentBox show-init commentBox-discus">   
-            <div > 
-                <div class="avatar avatar-left fa-2x" style="background-image:url(http://7xkkuk.com2.z0.glb.qiniucdn.com/安格尔.jpg)">&nbsp;</div>
-                <div class="nickname fa-1x colorA" >请问你的作品都在表达什么？</div>
-            </div>
-            <div > 
-                <div class="avatar-right fa-2x" style="background-image:url(http://7xkkuk.com2.z0.glb.qiniucdn.com/毕加索.jpg)">&nbsp;</div>
-                <div class="nickname-right fa-1x colorB" >漂亮就行！</div>
             </div>
         </div>
 
@@ -125,11 +131,12 @@
     </div>
     
 
-    <div class='viewport-intro'>
-        <div class="box-center">
-            <img src="lipper.jpg" style="height:400px"></img>
+    <div class='viewport-intro' style="display:none">
+        <div class="box-center" style="margin-top:40px">
+            <img src="http://7xkkuk.com2.z0.glb.qiniucdn.com/intro.jpg" style="height:400px"></img>
         </div>
 
+        <div class="ui-progressbar" style="width: 0%;"></div>
         <div class="commentBox finishUpload">   
             <div class="box-center button-container" id="button-container">
                 <div id="uploadDiv" class="button fa-2x" onclick=" document.getElementById('uploadBtn').click(); " style="background-color: #435984; margin:20px 0">
@@ -142,7 +149,7 @@
     </div> 
 
 
-    <div class='viewport-canvas'>
+    <div class='viewport-canvas' style="display:none">
         <div class="faa"> 
             <div class="top" style="display:none"> 
                 <div id="color"> 
@@ -172,10 +179,14 @@
                 <div class="tips box-center">为自己的作品签上大名吧~</div>
             </div>
             <canvas id="canvas" placeholder='asd' width='500' height='300'>您的浏览器不支持 canvas 标签</canvas> 
-            <div class="font" id="font"> 
+            <!--div class="font" id="font"> 
                 <input type="button" value="细" style="color: #4D4C52;background-color: #4D4C52;"> 
                 <input type="button" value="中" style="color: #3f3f3f;background-color: #3f3f3f;" class="grea"> 
                 <input type="button" value="粗" style="color: #000;background-color: #000;"> 
+            </div--> 
+            <div class="font" id="font"> 
+                <input type="button" value="" style="color: #fff;background-color: #000;"> 
+                <input type="button" value="" style="color: #000;background-color: #fff;"> 
             </div> 
         </div> 
         <div class="canvas-bottom">
@@ -193,6 +204,7 @@
             </div>
         </div>   
     </div> 
+
 
 </body>
     <script type="text/javascript" src="piczoom.min.js"></script>
