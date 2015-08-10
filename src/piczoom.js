@@ -173,6 +173,9 @@ window.view = {
             that.render(area);
             var img = $(".viewport-show .pic-zoom")[0];
             $(img).attr("style","");
+
+            var slide_dom_string = '<div class="slider-page slide-page-1"></div><div class="slider-page slide-page-2"></div><div class="slider-page slide-page-3"></div><div class="slider-page slide-page-4"></div><div class="slider-page slide-page-5"></div><div class="slider-page slide-page-6"></div><div class="slider-page slide-page-7"></div><div class="slider-page slide-page-8"></div><div class="slider-page slide-page-9"></div><div class="slider-page slide-page-10"></div><div class="slider-page slide-page-11"></div><div class="slider-page slide-page-12"></div><div class="slider-page slide-page-13"></div><div class="slider-page slide-page-14"></div><div class="slider-page slide-page-15"></div>';
+            $('#slide_title_div').append(slide_dom_string);
             var slide_title_div = new Slider('.slide_title_outer', {
                 widthScale: 1.2/5,
                 moveFromScale: 1.2/5,
