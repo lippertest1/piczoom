@@ -161,7 +161,7 @@ window.view = {
         if(area == "show" && state != "finishUpload" && state != "confirm"){
             var artId = $.getQuery("artId") || 'ECDB430C-EFD5-45C3-943B-4183AED0684D';
             var ajax = new XMLHttpRequest();
-            ajax.open('GET', 'http://192.168.1.116/X_1_FirstWebAPI/api/art/get?artId='+artId, true);
+            ajax.open('GET', 'http://campaign.vart.cc/201508/api/art/get?artId='+artId, true);
             // ajax.setRequestHeader("If-Modified-Since", "0");
             ajax.onreadystatechange = function() {
                 if (ajax.readyState === 4 && ajax.status === 200) {
@@ -218,7 +218,7 @@ window.view = {
                 flash_swf_url: 'Moxie.swf',
                 dragdrop: true,
                 chunk_size: '4mb',
-                uptoken_url: 'http://192.168.1.116/X_1_FirstWebAPI/api/qiniu/get',
+                uptoken_url: 'http://campaign.vart.cc/201508/api/qiniu/get',
                 domain: 'http://7xkkuk.com2.z0.glb.qiniucdn.com/',
                 // downtoken_url: '/downtoken',
                 // unique_names: true,
@@ -372,7 +372,7 @@ window.view = {
                 $('.show-confirm').show();
 
                 $.ajax({
-                    url:'http://192.168.1.116/X_1_FirstWebAPI/api/art/post',
+                    url:'http://campaign.vart.cc/201508/api/art/post',
                     type:"POST",
                     // contentType:"application/json; charset=utf-8",
                     data:{"":JSON.stringify(G.postData)},
@@ -425,7 +425,7 @@ window.view = {
 
                 // var ajax = new XMLHttpRequest();
                 // var data = [{"artId":7,"artName":"test007","openId":"","picKey":"lipper.jpg","css":"","borderId":7,"signKey":"FpAAO2CE7pZzNKFdpEUb4HQ_dRY9","uploadDate":"0001-01-01T00:00:00","score":1888,"commentIdList":"1,2,6"}];
-                // ajax.open('POST', 'http://192.168.1.116/X_1_FirstWebAPI/api/art/post', true);            
+                // ajax.open('POST', 'http://campaign.vart.cc/201508/api/art/post', true);            
                 // // ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
                 // ajax.setRequestHeader("Content-Type", "application/json;charset=utf-8");
                 // ajax.onreadystatechange = function() {
@@ -486,7 +486,7 @@ $(function () {
             $("#artName").attr("placeholder",'请输入作品名');
             return;
         }
-        G.pic.css = $($(".viewport-show .pic-zoom")[0]).attr("style");
+        G.pic.css = JSON.stringify($($(".viewport-show .pic-zoom")[0]).attr("style")).replace(',"webkitTextDecorationSkip":"","webkitTextDecorationStyle":"","webkitTextDecorationsInEffect":"","webkitTextEmphasis":"","webkitTextEmphasisColor":"","webkitTextEmphasisPosition":"","webkitTextEmphasisStyle":"","webkitTextFillColor":"","webkitTextOrientation":"","webkitTextSecurity":"","webkitTextSizeAdjust":"","webkitTextStroke":"","webkitTextStrokeColor":"","webkitTextStrokeWidth":"","webkitTextUnderlinePosition":"","webkitTouchCallout":"","webkitTransform":"","webkitTransformOrigin":"","webkitTransformOriginX":"","webkitTransformOriginY":"","webkitTransformOriginZ":"","webkitTransformStyle":"","webkitTransition":"","webkitTransitionDelay":"","webkitTransitionDuration":"","webkitTransitionProperty":"","webkitTransitionTimingFunction":"","webkitUserDrag":"","webkitUserModify":"","webkitUserSelect":"","webkitWritingMode":"","whiteSpace":"","widows":"","width":"","wordBreak":"","wordSpacing":"","wordWrap":"","writingMode":"","zIndex":"","zoom":"","length":0',"").replace('"alignmentBaseline":"","background":"","backgroundAttachment":"","backgroundBlendMode":"","backgroundClip":"","backgroundColor":"","backgroundImage":"","backgroundOrigin":"","backgroundPosition":"","backgroundPositionX":"","backgroundPositionY":"","backgroundRepeat":"","backgroundRepeatX":"","backgroundRepeatY":"","backgroundSize":"","baselineShift":"","border":"","borderBottom":"","borderBottomColor":"","borderBottomLeftRadius":"","borderBottomRightRadius":"","borderBottomStyle":"","borderBottomWidth":"","borderCollapse":"","borderColor":"","borderImage":"","borderImageOutset":"","borderImageRepeat":"","borderImageSlice":"","borderImageSource":"","borderImageWidth":"","borderLeft":"","borderLeftColor":"","borderLeftStyle":"","borderLeftWidth":"","borderRadius":"","borderRight":"","borderRightColor":"","borderRightStyle":"","borderRightWidth":"","borderSpacing":"","borderStyle":"","borderTop":"","borderTopColor":"","borderTopLeftRadius":"","borderTopRightRadius":"","borderTopStyle":"","borderTopWidth":"","borderWidth":"","bottom":"","boxShadow":"","boxSizing":"","bufferedRendering":"","captionSide":"","clear":"","clip":"","clipPath":"","clipRule":"","color":"","colorInterpolation":"","colorInterpolationFilters":"","colorProfile":"","colorRendering":"","content":"","counterIncrement":"","counterReset":"","cursor":"","direction":"","display":"","dominantBaseline":"","emptyCells":"","enableBackground":"","fill":"","fillOpacity":"","fillRule":"","filter":"","float":"","floodColor":"","floodOpacity":"","font":"","fontFamily":"","fontSize":"","fontStretch":"","fontStyle":"","fontVariant":"","fontWeight":"","glyphOrientationHorizontal":"","glyphOrientationVertical":"","height":"","imageRendering":"","isolation":"","kerning":"","left":"","letterSpacing":"","lightingColor":"","lineHeight":"","listStyle":"","listStyleImage":"","listStylePosition":"","listStyleType":"","margin":"","marginBottom":"","marginLeft":"","marginRight":"","marginTop":"","marker":"","markerEnd":"","markerMid":"","markerStart":"","mask":"","maskType":"","maxHeight":"","maxWidth":"","minHeight":"","minWidth":"","mixBlendMode":"","objectFit":"","opacity":"","orphans":"","outline":"","outlineColor":"","outlineOffset":"","outlineStyle":"","outlineWidth":"","overflow":"","overflowWrap":"","overflowX":"","overflowY":"","padding":"","paddingBottom":"","paddingLeft":"","paddingRight":"","paddingTop":"","page":"","pageBreakAfter":"","pageBreakBefore":"","pageBreakInside":"","paintOrder":"","pointerEvents":"","position":"","quotes":"","resize":"","right":"","shapeRendering":"","size":"","speak":"","src":"","stopColor":"","stopOpacity":"","stroke":"","strokeDasharray":"","strokeDashoffset":"","strokeLinecap":"","strokeLinejoin":"","strokeMiterlimit":"","strokeOpacity":"","strokeWidth":"","tabSize":"","tableLayout":"","textAlign":"","textAnchor":"","textDecoration":"","textIndent":"","textLineThrough":"","textLineThroughColor":"","textLineThroughMode":"","textLineThroughStyle":"","textLineThroughWidth":"","textOverflow":"","textOverline":"","textOverlineColor":"","textOverlineMode":"","textOverlineStyle":"","textOverlineWidth":"","textRendering":"","textShadow":"","textTransform":"","textUnderline":"","textUnderlineColor":"","textUnderlineMode":"","textUnderlineStyle":"","textUnderlineWidth":"","top":"","transition":"","transitionDelay":"","transitionDuration":"","transitionProperty":"","transitionTimingFunction":"","unicodeBidi":"",',"").replace('"webkitBoxOrdinalGroup":"","webkitBoxOrient":"","webkitBoxPack":"","webkitBoxReflect":"","webkitBoxShadow":"","webkitClipPath":"","webkitColorCorrection":"","webkitColumnAxis":"","webkitColumnBreakAfter":"","webkitColumnBreakBefore":"","webkitColumnBreakInside":"","webkitColumnCount":"","webkitColumnFill":"","webkitColumnGap":"","webkitColumnProgression":"","webkitColumnRule":"","webkitColumnRuleColor":"","webkitColumnRuleStyle":"",','');
         G.uploadDate = (new Date()).getTime();
 
         G.postData = {
