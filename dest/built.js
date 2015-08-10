@@ -6428,6 +6428,8 @@ define("moxie/runtime/html5/file/FileInput", [
 
 				shimContainer = I.getShimContainer();
 
+
+				_options.multiple= false;
 				if(options.direct){
 					shimContainer.innerHTML = '<input id="' + I.uid +'" type="input" style="font-size:999px;opacity:0;"' +
 						(_options.multiple && I.can('select_multiple') ? 'multiple' : '') + 
@@ -13609,7 +13611,7 @@ window.plupload = plupload;
             },
 
             setContainerY: function (y) {
-                y=274;
+                // y=274;
                 return this.container.height(y);
             },
 
@@ -15140,7 +15142,7 @@ window.goTo = function(area,state){
 window.addEventListener("popstate", function() {
     console.log("popState history.state="+JSON.stringify(history.state));
     var currentState = history.state;
-    view.onshow(history.state.area);                                         
+    // view.onshow(history.state && history.state.area);                                         
 });
 
 window.G = {};
@@ -15153,36 +15155,16 @@ G.pic.type="bkg";//or border
 window.view = {
     init:function(){
 
-        var slide_title_div = new Slider('.slide_title_outer', {
-            widthScale: 1.2/5,
-            moveFromScale: 1.2/5,
-            X: true,
-            Y: false,
-            Xfrom: true,
-            Yfrom: false,
-            resizeInInit: true,
-            offsetPageCount: 2,
-            allPageCountPercent: 15,
-            slideBackScale: 11
-        });
-
-        $('.slide_title_outer').on('click', function(e){
-            $(e.target).siblings().css("background-color","#fff");
-            $(e.target).css("background-color","#3f3f3f");
-            G.pic.borderId = /\d+/.exec(e.target.className)[0];
-
-            $(".border_image").css("border-image",$(e.target).css("background-image").replace("qiniucdn.com/n-hk-s","qiniucdn.com/n-hk-l")+" 70 70 round");
-            $(".-moz-border-image").css("border-image",$(e.target).css("background-image").replace("qiniucdn.com/n-hk-s","qiniucdn.com/n-hk-l")+" 70 70 round");
-            $(".-webkit-border-image").css("border-image",$(e.target).css("background-image").replace("qiniucdn.com/n-hk-s","qiniucdn.com/n-hk-l")+" 70 70 round");
-            $(".-o-border-image").css("border-image",$(e.target).css("background-image").replace("qiniucdn.com/n-hk-s","qiniucdn.com/n-hk-l")+" 70 70 round");
-
-        });
+        
         this.onload();
     },
     onload:function(){
         this.onshow();
     },
     onshow:function(area, state){
+        area = area||$.getQuery("area");
+
+        G.pic.host="http://7xkkuk.com2.z0.glb.qiniucdn.com/";
 
         var that = this;
         console.log("onshow area="+area);
@@ -15210,7 +15192,7 @@ window.view = {
         if(area == "show" && state != "finishUpload" && state != "confirm"){
             var artId = $.getQuery("artId") || 'ECDB430C-EFD5-45C3-943B-4183AED0684D';
             var ajax = new XMLHttpRequest();
-            ajax.open('GET', 'http://172.16.1.204/X_1_FirstWebAPI/api/art/get?artId='+artId, true);
+            ajax.open('GET', 'http://campaign.vart.cc/201508/api/art/get?artId='+artId, true);
             // ajax.setRequestHeader("If-Modified-Since", "0");
             ajax.onreadystatechange = function() {
                 if (ajax.readyState === 4 && ajax.status === 200) {
@@ -15225,9 +15207,37 @@ window.view = {
             that.render(area);
             var img = $(".viewport-show .pic-zoom")[0];
             $(img).attr("style","");
+
+            var slide_dom_string = '<div class="slider-page slide-page-1"></div><div class="slider-page slide-page-2"></div><div class="slider-page slide-page-3"></div><div class="slider-page slide-page-4"></div><div class="slider-page slide-page-5"></div><div class="slider-page slide-page-6"></div><div class="slider-page slide-page-7"></div><div class="slider-page slide-page-8"></div><div class="slider-page slide-page-9"></div><div class="slider-page slide-page-10"></div><div class="slider-page slide-page-11"></div><div class="slider-page slide-page-12"></div><div class="slider-page slide-page-13"></div><div class="slider-page slide-page-14"></div><div class="slider-page slide-page-15"></div>';
+            $('#slide_title_div').append(slide_dom_string);
+            var slide_title_div = new Slider('.slide_title_outer', {
+                widthScale: 1.2/5,
+                moveFromScale: 1.2/5,
+                X: true,
+                Y: false,
+                Xfrom: true,
+                Yfrom: false,
+                resizeInInit: true,
+                offsetPageCount: 2,
+                allPageCountPercent: 15,
+                slideBackScale: 11
+            });
+
+            $('.slide_title_outer').on('click', function(e){
+                $(e.target).siblings().css("background-color","#fff");
+                $(e.target).css("background-color","#3f3f3f");
+                G.pic.borderId = /\d+/.exec(e.target.className)[0];
+
+                $(".border_image").css("border-image",$(e.target).css("background-image").replace("qiniucdn.com/n-hk-s","qiniucdn.com/n-hk-l")+" 70 70 round");
+                $(".-moz-border-image").css("border-image",$(e.target).css("background-image").replace("qiniucdn.com/n-hk-s","qiniucdn.com/n-hk-l")+" 70 70 round");
+                $(".-webkit-border-image").css("border-image",$(e.target).css("background-image").replace("qiniucdn.com/n-hk-s","qiniucdn.com/n-hk-l")+" 70 70 round");
+                $(".-o-border-image").css("border-image",$(e.target).css("background-image").replace("qiniucdn.com/n-hk-s","qiniucdn.com/n-hk-l")+" 70 70 round");
+
+            });
         }
         else if (area == "show" && state == "confirm"){
             that.render(area);
+            history.replaceState({}, "asdasd", location.href+"area=show&artId="+G.artId);
         }
         else if(area == "intro"){
             window.uploader = Qiniu.uploader({
@@ -15239,7 +15249,7 @@ window.view = {
                 flash_swf_url: 'Moxie.swf',
                 dragdrop: true,
                 chunk_size: '4mb',
-                uptoken_url: 'http://172.16.1.204/X_1_FirstWebAPI/api/qiniu/get',
+                uptoken_url: 'http://campaign.vart.cc/201508/api/qiniu/get',
                 domain: 'http://7xkkuk.com2.z0.glb.qiniucdn.com/',
                 // downtoken_url: '/downtoken',
                 // unique_names: true,
@@ -15274,6 +15284,7 @@ window.view = {
                     'UploadProgress': function(up, file) {
                         console.log("UploadProgress",file.percent + "%");
                         $(".ui-progressbar").css("width",file.percent*0.8 + "%");
+                        $(".ui-progressbar-text").show();
                         // var progress = new FileProgress(file, 'fsUploadProgress');
                         // var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
 
@@ -15287,6 +15298,10 @@ window.view = {
                             img.title = "";
                             img.src = G.pic.host+G.pic["bkg"];
                         }
+                        var img = $(".viewport-show .pic-sign img")[0];//document.createElement('img');
+                        img.title = "";
+                        img.src = "";
+                        $(".ui-progressbar-text").hide();
                         goTo('canvas');
                         // $('#success').show();
                     },
@@ -15363,8 +15378,9 @@ window.view = {
                 var div = $(".viewport-show .name-show div")[0];
                 $(div).html("《"+G.pic["artName"]+"》");
             }
-            if(G&&G.pic&&G.pic["commentIdList"]){
-                var name = commentIdList[G.pic.commentIdList-1].name;
+            if(G&&G.pic&&G.pic["scoreComment"]){
+                G.pic.commentIdList = Math.floor(commentIdList.length * Math.random());
+                var name = commentIdList[G.pic.commentIdList%commentIdList.length].name;
                 // var comment = commentIdList[G.pic.commentIdList-1].comment;
                 var comment = G.pic.scoreComment;
                 $(".commentBox-comment .nickname").html(name);
@@ -15373,21 +15389,21 @@ window.view = {
             }
             
 
-            if(history.state.state == ""){
+            if(!history.state || (history.state && !history.state.state) ){
                 $('.show-init').show();
 
                 // $(".show-finishUpload").show();
                 // $(".borderChoose").show();
             }
-            else if(history.state.state == "finishUpload"){
+            else if(history.state && history.state.state == "finishUpload"){
                 $(".show-finishUpload").show();
                 $(".borderChoose").show();
             }
-            else if(history.state.state == "confirm"){
+            else if(history.state && history.state.state == "confirm"){
                 $('.show-confirm').show();
 
                 $.ajax({
-                    url:'http://172.16.1.204/X_1_FirstWebAPI/api/art/post',
+                    url:'http://campaign.vart.cc/201508/api/art/post',
                     type:"POST",
                     // contentType:"application/json; charset=utf-8",
                     data:{"":JSON.stringify(G.postData)},
@@ -15403,6 +15419,9 @@ window.view = {
                         $(".commentBox-discus .avatar-right").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+dialog.name2+".jpg)");
 
                         $(".fixed-mask").show();
+                        setTimeout(function(){
+                            $(".fixed-mask").hide();
+                        },3000);
                         if(res){
                             G.pic = res;
                             //替换分数和名字
@@ -15437,7 +15456,7 @@ window.view = {
 
                 // var ajax = new XMLHttpRequest();
                 // var data = [{"artId":7,"artName":"test007","openId":"","picKey":"lipper.jpg","css":"","borderId":7,"signKey":"FpAAO2CE7pZzNKFdpEUb4HQ_dRY9","uploadDate":"0001-01-01T00:00:00","score":1888,"commentIdList":"1,2,6"}];
-                // ajax.open('POST', 'http://172.16.1.204/X_1_FirstWebAPI/api/art/post', true);            
+                // ajax.open('POST', 'http://campaign.vart.cc/201508/api/art/post', true);            
                 // // ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
                 // ajax.setRequestHeader("Content-Type", "application/json;charset=utf-8");
                 // ajax.onreadystatechange = function() {
@@ -15467,6 +15486,7 @@ $(function () {
     });
     paint.init();
     document.getElementById('canvas').width  = window.innerWidth;
+    paint.cxt.lineWidth=2;
 
     //上传图片按钮
     // var upfile = document.querySelector('#uploadBtn');
@@ -15493,11 +15513,11 @@ $(function () {
     document.querySelector('#confirm').onclick=function(){
         G.artId = Guid();
         G.artName = $("#artName").val();
-        if(!artName){
-            alert("确定要做无名氏吗？");
+        if(!G.artName){
+            $("#artName").attr("placeholder",'请输入作品名');
             return;
         }
-        G.pic.css = $($(".viewport-show .pic-zoom")[0]).attr("style");
+        G.pic.css = JSON.stringify($($(".viewport-show .pic-zoom")[0]).attr("style")).replace(',"webkitTextDecorationSkip":"","webkitTextDecorationStyle":"","webkitTextDecorationsInEffect":"","webkitTextEmphasis":"","webkitTextEmphasisColor":"","webkitTextEmphasisPosition":"","webkitTextEmphasisStyle":"","webkitTextFillColor":"","webkitTextOrientation":"","webkitTextSecurity":"","webkitTextSizeAdjust":"","webkitTextStroke":"","webkitTextStrokeColor":"","webkitTextStrokeWidth":"","webkitTextUnderlinePosition":"","webkitTouchCallout":"","webkitTransform":"","webkitTransformOrigin":"","webkitTransformOriginX":"","webkitTransformOriginY":"","webkitTransformOriginZ":"","webkitTransformStyle":"","webkitTransition":"","webkitTransitionDelay":"","webkitTransitionDuration":"","webkitTransitionProperty":"","webkitTransitionTimingFunction":"","webkitUserDrag":"","webkitUserModify":"","webkitUserSelect":"","webkitWritingMode":"","whiteSpace":"","widows":"","width":"","wordBreak":"","wordSpacing":"","wordWrap":"","writingMode":"","zIndex":"","zoom":"","length":0',"").replace('"alignmentBaseline":"","background":"","backgroundAttachment":"","backgroundBlendMode":"","backgroundClip":"","backgroundColor":"","backgroundImage":"","backgroundOrigin":"","backgroundPosition":"","backgroundPositionX":"","backgroundPositionY":"","backgroundRepeat":"","backgroundRepeatX":"","backgroundRepeatY":"","backgroundSize":"","baselineShift":"","border":"","borderBottom":"","borderBottomColor":"","borderBottomLeftRadius":"","borderBottomRightRadius":"","borderBottomStyle":"","borderBottomWidth":"","borderCollapse":"","borderColor":"","borderImage":"","borderImageOutset":"","borderImageRepeat":"","borderImageSlice":"","borderImageSource":"","borderImageWidth":"","borderLeft":"","borderLeftColor":"","borderLeftStyle":"","borderLeftWidth":"","borderRadius":"","borderRight":"","borderRightColor":"","borderRightStyle":"","borderRightWidth":"","borderSpacing":"","borderStyle":"","borderTop":"","borderTopColor":"","borderTopLeftRadius":"","borderTopRightRadius":"","borderTopStyle":"","borderTopWidth":"","borderWidth":"","bottom":"","boxShadow":"","boxSizing":"","bufferedRendering":"","captionSide":"","clear":"","clip":"","clipPath":"","clipRule":"","color":"","colorInterpolation":"","colorInterpolationFilters":"","colorProfile":"","colorRendering":"","content":"","counterIncrement":"","counterReset":"","cursor":"","direction":"","display":"","dominantBaseline":"","emptyCells":"","enableBackground":"","fill":"","fillOpacity":"","fillRule":"","filter":"","float":"","floodColor":"","floodOpacity":"","font":"","fontFamily":"","fontSize":"","fontStretch":"","fontStyle":"","fontVariant":"","fontWeight":"","glyphOrientationHorizontal":"","glyphOrientationVertical":"","height":"","imageRendering":"","isolation":"","kerning":"","left":"","letterSpacing":"","lightingColor":"","lineHeight":"","listStyle":"","listStyleImage":"","listStylePosition":"","listStyleType":"","margin":"","marginBottom":"","marginLeft":"","marginRight":"","marginTop":"","marker":"","markerEnd":"","markerMid":"","markerStart":"","mask":"","maskType":"","maxHeight":"","maxWidth":"","minHeight":"","minWidth":"","mixBlendMode":"","objectFit":"","opacity":"","orphans":"","outline":"","outlineColor":"","outlineOffset":"","outlineStyle":"","outlineWidth":"","overflow":"","overflowWrap":"","overflowX":"","overflowY":"","padding":"","paddingBottom":"","paddingLeft":"","paddingRight":"","paddingTop":"","page":"","pageBreakAfter":"","pageBreakBefore":"","pageBreakInside":"","paintOrder":"","pointerEvents":"","position":"","quotes":"","resize":"","right":"","shapeRendering":"","size":"","speak":"","src":"","stopColor":"","stopOpacity":"","stroke":"","strokeDasharray":"","strokeDashoffset":"","strokeLinecap":"","strokeLinejoin":"","strokeMiterlimit":"","strokeOpacity":"","strokeWidth":"","tabSize":"","tableLayout":"","textAlign":"","textAnchor":"","textDecoration":"","textIndent":"","textLineThrough":"","textLineThroughColor":"","textLineThroughMode":"","textLineThroughStyle":"","textLineThroughWidth":"","textOverflow":"","textOverline":"","textOverlineColor":"","textOverlineMode":"","textOverlineStyle":"","textOverlineWidth":"","textRendering":"","textShadow":"","textTransform":"","textUnderline":"","textUnderlineColor":"","textUnderlineMode":"","textUnderlineStyle":"","textUnderlineWidth":"","top":"","transition":"","transitionDelay":"","transitionDuration":"","transitionProperty":"","transitionTimingFunction":"","unicodeBidi":"",',"").replace('"webkitBoxOrdinalGroup":"","webkitBoxOrient":"","webkitBoxPack":"","webkitBoxReflect":"","webkitBoxShadow":"","webkitClipPath":"","webkitColorCorrection":"","webkitColumnAxis":"","webkitColumnBreakAfter":"","webkitColumnBreakBefore":"","webkitColumnBreakInside":"","webkitColumnCount":"","webkitColumnFill":"","webkitColumnGap":"","webkitColumnProgression":"","webkitColumnRule":"","webkitColumnRuleColor":"","webkitColumnRuleStyle":"",','');
         G.uploadDate = (new Date()).getTime();
 
         G.postData = {
@@ -15517,12 +15537,19 @@ $(function () {
     }
 
     document.querySelector('.fixed-mask').onclick=function(){
-        $(this).hide()
+        $(this).hide();
+    }
+    
+    document.querySelector('.rule-mask').onclick=function(){
+        $(this).hide();
+    }
+
+    document.querySelector('.rule-detail').onclick=function(){
+        $(".rule-mask").show();
     }
     
 
-
-    var area = $.getQuery('area');
-    goTo(area);
+    // var area = $.getQuery('area');
+    // goTo(area);
 
 });
