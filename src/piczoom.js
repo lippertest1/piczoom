@@ -131,6 +131,7 @@ window.view = {
         this.onshow();
     },
     onshow:function(area, state){
+        area = area||$.getQuery("area");
 
         G.pic.host="http://7xkkuk.com2.z0.glb.qiniucdn.com/";
 
@@ -205,6 +206,7 @@ window.view = {
         }
         else if (area == "show" && state == "confirm"){
             that.render(area);
+            history.replaceState({}, "asdasd", location.href+"area=show&artId="+G.artId);
         }
         else if(area == "intro"){
             window.uploader = Qiniu.uploader({
@@ -345,7 +347,8 @@ window.view = {
                 var div = $(".viewport-show .name-show div")[0];
                 $(div).html("《"+G.pic["artName"]+"》");
             }
-            if(G&&G.pic&&G.pic["commentIdList"]){
+            if(G&&G.pic&&G.pic["scoreComment"]){
+                G.pic.commentIdList = Math.floor(commentIdList.length * Math.random());
                 var name = commentIdList[G.pic.commentIdList-1].name;
                 // var comment = commentIdList[G.pic.commentIdList-1].comment;
                 var comment = G.pic.scoreComment;
@@ -355,7 +358,7 @@ window.view = {
             }
             
 
-            if(history.state.state == ""){
+            if(history.state && !history.state.state){
                 $('.show-init').show();
 
                 // $(".show-finishUpload").show();
@@ -515,7 +518,7 @@ $(function () {
     }
     
 
-    var area = $.getQuery('area');
-    goTo(area);
+    // var area = $.getQuery('area');
+    // goTo(area);
 
 });
