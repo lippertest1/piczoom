@@ -124,30 +124,7 @@ G.pic.type="bkg";//or border
 window.view = {
     init:function(){
 
-        var slide_title_div = new Slider('.slide_title_outer', {
-            widthScale: 1.2/5,
-            moveFromScale: 1.2/5,
-            X: true,
-            Y: false,
-            Xfrom: true,
-            Yfrom: false,
-            resizeInInit: true,
-            offsetPageCount: 2,
-            allPageCountPercent: 15,
-            slideBackScale: 11
-        });
-
-        $('.slide_title_outer').on('click', function(e){
-            $(e.target).siblings().css("background-color","#fff");
-            $(e.target).css("background-color","#3f3f3f");
-            G.pic.borderId = /\d+/.exec(e.target.className)[0];
-
-            $(".border_image").css("border-image",$(e.target).css("background-image").replace("qiniucdn.com/n-hk-s","qiniucdn.com/n-hk-l")+" 70 70 round");
-            $(".-moz-border-image").css("border-image",$(e.target).css("background-image").replace("qiniucdn.com/n-hk-s","qiniucdn.com/n-hk-l")+" 70 70 round");
-            $(".-webkit-border-image").css("border-image",$(e.target).css("background-image").replace("qiniucdn.com/n-hk-s","qiniucdn.com/n-hk-l")+" 70 70 round");
-            $(".-o-border-image").css("border-image",$(e.target).css("background-image").replace("qiniucdn.com/n-hk-s","qiniucdn.com/n-hk-l")+" 70 70 round");
-
-        });
+        
         this.onload();
     },
     onload:function(){
@@ -196,6 +173,30 @@ window.view = {
             that.render(area);
             var img = $(".viewport-show .pic-zoom")[0];
             $(img).attr("style","");
+            var slide_title_div = new Slider('.slide_title_outer', {
+                widthScale: 1.2/5,
+                moveFromScale: 1.2/5,
+                X: true,
+                Y: false,
+                Xfrom: true,
+                Yfrom: false,
+                resizeInInit: true,
+                offsetPageCount: 2,
+                allPageCountPercent: 15,
+                slideBackScale: 11
+            });
+
+            $('.slide_title_outer').on('click', function(e){
+                $(e.target).siblings().css("background-color","#fff");
+                $(e.target).css("background-color","#3f3f3f");
+                G.pic.borderId = /\d+/.exec(e.target.className)[0];
+
+                $(".border_image").css("border-image",$(e.target).css("background-image").replace("qiniucdn.com/n-hk-s","qiniucdn.com/n-hk-l")+" 70 70 round");
+                $(".-moz-border-image").css("border-image",$(e.target).css("background-image").replace("qiniucdn.com/n-hk-s","qiniucdn.com/n-hk-l")+" 70 70 round");
+                $(".-webkit-border-image").css("border-image",$(e.target).css("background-image").replace("qiniucdn.com/n-hk-s","qiniucdn.com/n-hk-l")+" 70 70 round");
+                $(".-o-border-image").css("border-image",$(e.target).css("background-image").replace("qiniucdn.com/n-hk-s","qiniucdn.com/n-hk-l")+" 70 70 round");
+
+            });
         }
         else if (area == "show" && state == "confirm"){
             that.render(area);
