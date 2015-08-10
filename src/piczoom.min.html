@@ -101,7 +101,7 @@
         <div class="borderChoose"> 
             <div class="flt-djdt-nav slide_title_outer slider-container">
                 <div class="flt-djdt-nav-cnt slide_title_div slider-wrapper" id="slide_title_div">
-                    <div class="slider-page slide-page-1"></div>
+                    <!--div class="slider-page slide-page-1"></div>
                     <div class="slider-page slide-page-2"></div>
                     <div class="slider-page slide-page-3"></div>
                     <div class="slider-page slide-page-4"></div>
@@ -115,7 +115,9 @@
                     <div class="slider-page slide-page-12"></div>
                     <div class="slider-page slide-page-13"></div>
                     <div class="slider-page slide-page-14"></div>
-                    <div class="slider-page slide-page-15"></div>
+                    <div class="slider-page slide-page-15"></div-->
+
+                    <!--div class="slider-page slide-page-1"></div><div class="slider-page slide-page-2"></div><div class="slider-page slide-page-3"></div><div class="slider-page slide-page-4"></div><div class="slider-page slide-page-5"></div><div class="slider-page slide-page-6"></div><div class="slider-page slide-page-7"></div><div class="slider-page slide-page-8"></div><div class="slider-page slide-page-9"></div><div class="slider-page slide-page-10"></div><div class="slider-page slide-page-11"></div><div class="slider-page slide-page-12"></div><div class="slider-page slide-page-13"></div><div class="slider-page slide-page-14"></div><div class="slider-page slide-page-15"></div-->
                 </div>
             </div>
         </div> 
@@ -132,11 +134,26 @@
     
 
     <div class='viewport-intro' style="display:none">
+        <div class="rule-mask" style="display:none">
+            <div class="rule-msk">
+                <span>1、  上传你的艺术作品至VART艺廊参与活动，作品形式不限。<br />
+                2、  通过对作品，画框的选取以及场景的搭配，提升你的作品价值。<br />
+                3、  VART艺廊会针对你的作品最终呈现效果进行价值评估。<br />
+                4、  本活动并非仅供娱乐。<br />
+                5、  每日排名前列的艺术作品将收录进VART活动专题页面。<br />
+                6、  VART将选取优秀的艺术作品收录进VART活动专题页面。<br />
+                7、  创作者可通过VART微信公众账号及VART APP关注活动动态。<br />
+                8、  创作者上传作品，即为默许VART拥有该作品使用权，版权仍归属创作者本人。<br />
+                9、  本活动最终解释权归属于上海沃素网络科技有限公司。</span>
+            </div>
+        </div>
+
         <div class="box-center" style="margin-top:40px">
-            <img src="http://7xkkuk.com2.z0.glb.qiniucdn.com/intro.jpg" style="height:400px"></img>
+            <img src="http://7xkkuk.com2.z0.glb.qiniucdn.com/intro.jpg" style="height: 50%;"></img>
         </div>
 
         <div class="ui-progressbar" style="width: 0%;"></div>
+        <div class="ui-progressbar-text" style="display:none">上传中......</div>
         <div class="commentBox finishUpload">   
             <div class="box-center button-container" id="button-container">
                 <div id="uploadDiv" class="button fa-2x" onclick=" document.getElementById('uploadBtn').click(); " style="background-color: #435984; margin:20px 0">
@@ -144,6 +161,16 @@
                     上传作品
                 </div>
                 <!--input id="uploadBtn" type="file" accept="image/*" style="visibility: hidden; width: 0px; height: 0px" /-->
+            </div>
+        </div>
+        <div class="commentBox finishUpload rule-detail">   
+            <div class="box-center">
+                 <div class="triangle-up"></div>
+            </div>
+            <div class="box-center button-container" style="color: #8C8C8C;margin: -20px;">
+                <div>
+                    了解活动规则
+                </div>
             </div>
         </div>
     </div> 
