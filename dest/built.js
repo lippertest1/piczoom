@@ -15104,6 +15104,27 @@ dialogIdList =[
     {"name1":"库尔贝", "dialog1":"年轻人，不用在意画的好坏，美与丑，善与恶，到头来都是一片虚无。","name2": "鲁本斯","dialog2": "画家界最伟大的鸡汤大师，鸡汤界最伟大的画家。"},
     {"name1":"佛里达", "dialog1":"谁说自己画的比我好？！来决斗！","name2": "卡拉瓦乔","dialog2":    "决斗？！我喜欢！在哪里？"}
 ]
+endCommentListG=[
+    "你敢点吗？",
+    "但求一战！",
+    "不服戳我啊！",
+    "跪下唱征服！",
+    "快来膜拜我！",
+    "不来一发吗？",
+    "求超越！",
+    "代购算神马！",
+    "叫我陈关西！"
+];
+
+endCommentListB=[
+    "心好累！",
+    "人艰不拆！",
+    "为何要彼此伤害？",
+    "我想静静…"
+];
+
+
+
 
 
 window.parseJSON = function(data) {
@@ -15237,7 +15258,6 @@ window.view = {
         }
         else if (area == "show" && state == "confirm"){
             that.render(area);
-            history.replaceState({}, "asdasd", location.href+"area=show&artId="+G.artId);
         }
         else if(area == "intro"){
             window.uploader = Qiniu.uploader({
@@ -15284,7 +15304,9 @@ window.view = {
                     'UploadProgress': function(up, file) {
                         console.log("UploadProgress",file.percent + "%");
                         $(".ui-progressbar").css("width",file.percent*0.8 + "%");
+                        $(".ui-progressbar").css("height","20px");
                         $(".ui-progressbar-text").show();
+                        $(".ui-progressbar-text").css("height","20px");
                         // var progress = new FileProgress(file, 'fsUploadProgress');
                         // var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
 
@@ -15336,7 +15358,7 @@ window.view = {
             console.log("render");
 
             $('.infoBox').hide();
-            $(".commentBox").hide();
+            $(".commentBox").hide();endCommentListG
             $(".borderChoose").hide();
 
             if(res){
@@ -15449,6 +15471,30 @@ window.view = {
                             $(".show-init").show();
                             $(".show-init-confirm-not").hide();
                             // $(".discusing").hide();
+                            
+                            var score = G.pic.score;
+                            var endComment = "";
+                            if(score=="无法估价"){
+                                document.title = "VART艺廊为了评估我的作品导致系统全线崩坏，求赞我！";
+                            }
+                            else{
+                                if(score==0){
+                                    document.title="VART艺廊为我的作品估价$0,我是1好嘛！";
+                                }
+                                else if(score==100000){
+                                    document.title="VART艺廊为我的作品估价$100000,一定交给国家！";
+                                }
+                                else if(score<0){
+                                    document.title="VART艺廊为我的作品估价$"+score+"这是什么鬼！";
+                                }
+                                else if(score<999){
+                                    document.title="VART艺廊为我的作品估价$"+score+endCommentListG[Math.floor(endCommentListG.length*Math.random())%endCommentListG.length];
+                                }
+                                else if(score>=999){
+                                    document.title="VART艺廊为我的作品估价$"+score+endCommentListB[Math.floor(endCommentListB.length*Math.random())%endCommentListB.length];
+                                }
+                            }
+                            history.replaceState({}, "asdasd", location.href+"area=show&artId="+G.artId);
 
                         }
                     }
@@ -15456,7 +15502,7 @@ window.view = {
 
                 // var ajax = new XMLHttpRequest();
                 // var data = [{"artId":7,"artName":"test007","openId":"","picKey":"lipper.jpg","css":"","borderId":7,"signKey":"FpAAO2CE7pZzNKFdpEUb4HQ_dRY9","uploadDate":"0001-01-01T00:00:00","score":1888,"commentIdList":"1,2,6"}];
-                // ajax.open('POST', 'http://campaign.vart.cc/201508/api/art/post', true);            
+                // ajax.open('POST', 'http://192.168.1.116/X_1_FirstWebAPI/api/art/post', true);            
                 // // ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
                 // ajax.setRequestHeader("Content-Type", "application/json;charset=utf-8");
                 // ajax.onreadystatechange = function() {
