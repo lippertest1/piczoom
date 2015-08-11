@@ -296,7 +296,9 @@ window.view = {
                     'UploadProgress': function(up, file) {
                         console.log("UploadProgress",file.percent + "%");
                         $(".ui-progressbar").css("width",file.percent*0.8 + "%");
+                        $(".ui-progressbar").css("height","20px");
                         $(".ui-progressbar-text").show();
+                        $(".ui-progressbar-text").css("height","20px");
                         // var progress = new FileProgress(file, 'fsUploadProgress');
                         // var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
 
