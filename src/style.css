@@ -475,6 +475,9 @@ div.pic-zoom div.description p{
 .commentBox *{
     margin: 8px 0px;
 }
+.commentBox-init *{
+    margin: 4px 0px;
+}
 
 .avatar{
     display:inline-block;
@@ -500,6 +503,7 @@ div.pic-zoom div.description p{
 .nickname{
     display:inline-block;
     margin-left: 10px;
+    color:black;
 }
 .nickname-right {
     display: inline-block;
