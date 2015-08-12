@@ -528,7 +528,7 @@ $(function () {
 
     var isdrag=false;   
     var tx,x,ty,y;
-    var width =60,height =60,rotation = 0; 
+    var width =60,height =60,rotation = 0,scale=1; 
        
     $(function(){   
         document.getElementById("moveid").addEventListener('touchstart',touchStart);  
@@ -548,32 +548,39 @@ $(function () {
         tx = transfrom_info && transfrom_info[4] || 0;
         ty = transfrom_info && (transfrom_info[5] || "").replace(/\)/, "").trim() || 0;
     
-       $("#moveid")[0].style.webkitTransform = "rotate(" + ((rotation) % 360) + "deg) translate("+","+")";  
+       // $("#moveid")[0].style.webkitTransform = "rotate(" + ((rotation) % 360) + "deg) translate("+","+")";  
        x = e.touches[0].pageX;
        y = e.touches[0].pageY;  
     }
     function gesturechange(e){
+        isdrag=false;
         e.preventDefault();
         var style = e.target.style;  
-        style.width = (width * e.scale) + "px";  
-        style.height = (height * e.scale) + "px";  
+        scale= e.scale;
+        console.log("gesturechange");
+        // style.width = (width * e.scale) + "px";  
+        // style.height = (height * e.scale) + "px";  
         // style.webkitTransform = "rotate(" + ((rotation + e.rotation) % 360) + "deg)";  
-        $("#moveid")[0].style.webkitTransform = "rotate(" + ((rotation + e.rotation) % 360) + "deg)";  
+        $("#moveid")[0].style.webkitTransform = "rotate(" + ((rotation + e.rotation) % 360) + "deg) scale("+e.scale+","+e.scale+") translate("+tx+"px,"+ty+"px)";  
+        
     }
     function gestureend(e){   
-        width *= e.scale;  
-        height *= e.scale;  
+        // width *= e.scale;  
+        // height *= e.scale;  
         rotation = (rotation + e.rotation) % 360;  
     };   
     function touchMove(e){   
       if (isdrag){
        e.preventDefault();
-           var n = tx + e.touches[0].pageX - x;
-           var h = ty + e.touches[0].pageY - y;   
+           var n = parseInt(tx) + e.touches[0].pageX - x;
+           var h = parseInt(ty) + e.touches[0].pageY - y;   
            // $("#moveid").css("left",n); 
            // $("#moveid").css("top",h);    
+           // console.log(tx,e.touches[0].pageX , x);
+           // console.log(ty,e.touches[0].pageY , y);
+           console.log("touchMove");
 
-            $("#moveid")[0].style.webkitTransform = "rotate(" + ((rotation) % 360) + "deg) translate("+n+","+h+")"; 
+            $("#moveid")[0].style.webkitTransform = "rotate(" + ((rotation) % 360) + "deg) scale("+scale+","+scale+") translate("+n+"px,"+h+"px)"; 
        }  
     }    
 
