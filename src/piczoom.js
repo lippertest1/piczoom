@@ -525,6 +525,54 @@ $(function () {
     $('div.pic-zoom').each(function () {
         new PicZoom($(this), {});
     });
+
+    // var isdrag=false;   
+    // var tx,x,ty,y;
+    // var width =60,height =60,rotation = 0; 
+       
+    // $(function(){   
+    //     document.getElementById("moveid").addEventListener('touchstart',touchStart);  
+    //     document.getElementById("moveid").addEventListener('touchmove',touchMove);
+    //     document.getElementById("moveid").addEventListener('touchend',function(){  
+    //         isdrag = false;  
+    //     });
+    //     document.getElementById("moveid").addEventListener('gesturechange',gesturechange);
+    //     document.getElementById("moveid").addEventListener('gestureend',gestureend);
+    // });
+    // function touchStart(e){   
+    //    isdrag = true; 
+    //    e.preventDefault();
+    //    tx = parseInt($("#moveid").css('left'));    
+    //    ty = parseInt($("#moveid").css('top'));  
+    //    x = e.touches[0].pageX;
+    //    y = e.touches[0].pageY;  
+    // }
+    // function gesturechange(e){
+    //     e.preventDefault();
+    //     var style = e.target.style;  
+    //     style.width = (width * e.scale) + "px";  
+    //     style.height = (height * e.scale) + "px";  
+    //     // style.webkitTransform = "rotate(" + ((rotation + e.rotation) % 360) + "deg)";  
+    //     $("#moveid")[0].style.webkitTransform = "rotate(" + ((rotation + e.rotation) % 360) + "deg)";  
+    // }
+    // function gestureend(e){   
+    //     width *= e.scale;  
+    //     height *= e.scale;  
+    //     rotation = (rotation + e.rotation) % 360;  
+    // };   
+    // function touchMove(e){   
+    //   if (isdrag){
+    //    e.preventDefault();
+    //        var n = tx + e.touches[0].pageX - x;
+    //        var h = ty + e.touches[0].pageY - y;   
+    //        $("#moveid").css("left",n); 
+    //        $("#moveid").css("top",h);    
+    //    }  
+    // }    
+
+
+
+
     paint.init();
     document.getElementById('canvas').width  = window.innerWidth;
     paint.cxt.lineWidth=2;

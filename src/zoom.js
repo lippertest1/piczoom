@@ -7,6 +7,7 @@
                 this.el = $(el);
                 this.zoomFactor = 1;
                 this.lastScale = 1;
+                this.rotation=0;
                 this.offset = {
                     x: 0,
                     y: 0
@@ -50,6 +51,9 @@
                 this.lastDragPosition = false;
                 this.hasInteraction = true;
                 this.handleDrag(event);
+            },
+            handleUpdate: function (event,ro) {
+                this.end(ro);
             },
 
             handleDrag: function (event) {
@@ -407,10 +411,16 @@
                 });
             },
 
-            end: function () {
-                this.hasInteraction = false;
-                this.sanitize();
-                this.update();
+            end: function (ro) {
+                if(ro){
+                    this.updatePlaned= false;
+                    this.update(ro);
+                }
+                else{
+                    this.hasInteraction = false;
+                    this.sanitize();
+                    this.update();
+                }
             },
 
             //Binds all required event listeners
@@ -421,7 +431,7 @@
             },
 
             //Updates the css values according to the current zoom factor and offset
-            update: function () {
+            update: function (ro) {
 
                 if (this.updatePlaned) {
                     return;
@@ -437,9 +447,9 @@
                     var zoomFactor = this.getInitialZoomFactor() * this.zoomFactor,
                         offsetX = -this.offset.x / zoomFactor,
                         offsetY = -this.offset.y / zoomFactor,
-                        transform3d =   'rotate('+this.rotateAngle+'rad) scale3d('     + zoomFactor + ', '  + zoomFactor + ',1) ' +
+                        transform3d =   ' scale3d('     + zoomFactor + ', '  + zoomFactor + ',1) ' +
                             'translate3d(' + offsetX    + 'px,' + offsetY    + 'px,0px)',
-                        transform2d =   'rotate('+this.rotateAngle+'rad) scale('       + zoomFactor + ', '  + zoomFactor + ') ' +
+                        transform2d =   ' scale('       + zoomFactor + ', '  + zoomFactor + ') ' +
                             'translate('   + offsetX    + 'px,' + offsetY    + 'px)',
                         removeClone = (function () {
                             if (this.clone) {
@@ -447,6 +457,11 @@
                                 delete this.clone;
                             }
                         }).bind(this);
+                        if(ro){
+                            // transform3d = ro + transform3d;
+                            // transform2d = ro + transform2d;
+                            // alert(transform3d);
+                        }
 
                     // Scale 3d and translate3d are faster (at least on ios)
                     // but they also reduce the quality.
@@ -510,7 +525,7 @@
                 lastTouchStart = null,
                 startTouches = null,
 
-                setInteraction = function (newInteraction, event) {
+                setInteraction = function (newInteraction, event,ro) {
                     if (interaction !== newInteraction) {
 
                         if (interaction && !newInteraction) {
@@ -533,16 +548,23 @@
                                 break;
                         }
                     }
+                    if(ro){
+                        target.handleUpdate(event,ro);
+                    }
                     interaction = newInteraction;
                 },
 
-                updateInteraction = function (event) {
+                updateInteraction = function (event,ro) {
                     if (fingers === 2) {
                         setInteraction('zoom');
                     } else if (fingers === 1 && target.canDrag()) {
                         setInteraction('drag', event);
                     } else {
                         setInteraction(null, event);
+                    }
+
+                    if(ro){
+                        setInteraction(null, event,ro);
                     }
                 },
 
@@ -647,6 +669,30 @@
                     updateInteraction(event);
                 }
             });
+            // el.addEventListener('gesturechange',function(e){
+
+            //     e.preventDefault();
+            //     this.zoomFactor =e.scale;  
+            //     if(typeof (this.rotation)=="undefined"){
+            //         this.rotation=0;
+            //     }
+            //     // var style = e.target.style;  
+            //     // style.width = (width * e.scale) + "px";  
+            //     // style.height = (height * e.scale) + "px";  
+            //     // style.webkitTransform = "rotate(" + ((this.rotation + e.rotation) % 360) + "deg)";  
+            //     var tmpRo ="rotate(" + ((this.rotation + e.rotation) % 360) + "deg)";  
+            //     // this.update(tmpRo);
+            //     updateInteraction(event,tmpRo)
+            
+            // });
+            // el.addEventListener('gestureend',function(e){   
+
+            //     this.zoomFactor =e.scale;  
+            //     this.rotation =(this.rotation + e.rotation) % 360;  
+            //     // width *= e.scale;  
+            //     // height *= e.scale;  
+            //     // rotation = (rotation + e.rotation) % 360;  
+            // });
         };
 
         return PicZoom;
