@@ -271,6 +271,8 @@ div.page{
     text-align: left;
 }
 div.border_image{
+    height:200px;
+    overflow: hidden;
     border:15px solid transparent;
     border-color:#F3BF2E #F6CD51 #F3BF2E #F3C030;
     display: block;
