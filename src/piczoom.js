@@ -413,12 +413,13 @@ window.view = {
             }
             else if(history.state && history.state.state == "finishUpload"){
                 $(".show-finishUpload").show();
+                turnOn();
                 $('.show-init').hide();
                 $(".borderChoose").show();
             }
             else if(history.state && history.state.state == "confirm"){
                 $('.show-confirm').show();
-
+                turnOff();
                 $.ajax({
                     url:'http://campaign.vart.cc/201508/api/art/post',
                     type:"POST",
@@ -530,7 +531,7 @@ $(function () {
     var tx,x,ty,y;
     var width =60,height =60,rotation = 0,scale=1; 
        
-    $(function(){   
+    turnOn =function(){   
         document.getElementById("moveid").addEventListener('touchstart',touchStart);  
         document.getElementById("moveid").addEventListener('touchmove',touchMove);
         document.getElementById("moveid").addEventListener('touchend',function(){  
@@ -538,7 +539,17 @@ $(function () {
         });
         document.getElementById("moveid").addEventListener('gesturechange',gesturechange);
         document.getElementById("moveid").addEventListener('gestureend',gestureend);
-    });
+    }
+    turnOff =function(){   
+        document.getElementById("moveid").removeEventListener('touchstart',touchStart);  
+        document.getElementById("moveid").removeEventListener('touchmove',touchMove);
+        document.getElementById("moveid").removeEventListener('touchend',function(){  
+            isdrag = false;  
+        });
+        document.getElementById("moveid").removeEventListener('gesturechange',gesturechange);
+        document.getElementById("moveid").removeEventListener('gestureend',gestureend);
+    }
+
     function touchStart(e){   
        isdrag = true; 
        e.preventDefault();
