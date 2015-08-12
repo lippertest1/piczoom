@@ -44,6 +44,13 @@
 .tips-pencil{
     margin-top: 20%;
 }
+.share-div{
+    position: absolute;
+    height: 100px;
+    right: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 999;
+}
 .triangle-up {
     width: 0;
     height: 0;

@@ -588,6 +588,13 @@ $(function () {
     document.querySelector('.rule-detail').onclick=function(){
         $(".rule-mask").show();
     }
+
+    document.querySelector('.button-share').onclick=function(){
+        $(".share-div").show();
+    }
+    document.querySelector('.share-div').onclick=function(){
+        $(".share-div").hide();
+    }
     
 
     // var area = $.getQuery('area');
