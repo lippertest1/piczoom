@@ -91,6 +91,25 @@ endCommentListB=[
     "为何要彼此伤害？",
     "我想静静…"
 ];
+borderIdList=[
+    "木质1",
+    "木质1",
+    "木质2",
+    "木质3",
+    "塑料制1",
+    "塑料制2",
+    "现代1",
+    "现代带黑框黑",
+    "现代带框黑",
+    "现代带框红",
+    "现代带框黄",
+    "现代带框青",
+    "现代带青框红",
+    "现代红",
+    "现代黄",
+    "现代青",
+    "现代青"
+]
 
 
 
@@ -338,9 +357,15 @@ window.view = {
                 G&&G.pic&&(G.pic["artName"] = res.artName);
                 G&&G.pic&&(G.pic["scoreComment"] = res.scoreComment);
                 G&&G.pic&&(G.pic["commentIdList"] = res.commentIdList);
+                G&&G.pic&&(G.pic["borderId"] = res.borderId);
             }
 
-            
+            if(G&&G.pic&&G.pic["borderId"]){
+                $(".border_image").css("border-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/n-hk-l-"+borderIdList[G.pic["borderId"]]+".png) 70 70 round");
+                $(".-moz-border-image").css("border-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/n-hk-l-"+borderIdList[G.pic["borderId"]]+".png) 70 70 round");
+                $(".-webkit-border-image").css("border-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/n-hk-l-"+borderIdList[G.pic["borderId"]]+".png) 70 70 round");
+                $(".-o-border-image").css("border-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/n-hk-l-"+borderIdList[G.pic["borderId"]]+".png) 70 70 round");
+            }
             if(G&&G.pic&&G.pic["bkg"]){
                 var img = $(".viewport-show .pic-zoom img")[0];//document.createElement('img');
                 img.title = "";
@@ -388,6 +413,7 @@ window.view = {
             }
             else if(history.state && history.state.state == "finishUpload"){
                 $(".show-finishUpload").show();
+                $('.show-init').hide();
                 $(".borderChoose").show();
             }
             else if(history.state && history.state.state == "confirm"){
@@ -541,7 +567,7 @@ $(function () {
             openId : "openid",
             picKey : G.pic.bkg,
             css : G.pic.css,
-            bordeId : G.pic.borderId,
+            borderId : G.pic.borderId,
             signKey : G.pic.sign,
             uploadDate : G.uploadDate ,
             // score : ,
