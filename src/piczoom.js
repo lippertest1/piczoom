@@ -595,6 +595,11 @@ $(function () {
     document.querySelector('.share-div').onclick=function(){
         $(".share-div").hide();
     }
+
+    document.querySelector('.button-ranking').onclick=function(){
+        // $(".share-div").hide();
+    }
+    
     
 
     // var area = $.getQuery('area');
