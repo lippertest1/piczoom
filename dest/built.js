@@ -13236,6 +13236,7 @@ window.plupload = plupload;
                 this.el = $(el);
                 this.zoomFactor = 1;
                 this.lastScale = 1;
+                this.rotation=0;
                 this.offset = {
                     x: 0,
                     y: 0
@@ -13279,6 +13280,9 @@ window.plupload = plupload;
                 this.lastDragPosition = false;
                 this.hasInteraction = true;
                 this.handleDrag(event);
+            },
+            handleUpdate: function (event,ro) {
+                this.end(ro);
             },
 
             handleDrag: function (event) {
@@ -13636,10 +13640,16 @@ window.plupload = plupload;
                 });
             },
 
-            end: function () {
-                this.hasInteraction = false;
-                this.sanitize();
-                this.update();
+            end: function (ro) {
+                if(ro){
+                    this.updatePlaned= false;
+                    this.update(ro);
+                }
+                else{
+                    this.hasInteraction = false;
+                    this.sanitize();
+                    this.update();
+                }
             },
 
             //Binds all required event listeners
@@ -13650,7 +13660,7 @@ window.plupload = plupload;
             },
 
             //Updates the css values according to the current zoom factor and offset
-            update: function () {
+            update: function (ro) {
 
                 if (this.updatePlaned) {
                     return;
@@ -13666,9 +13676,9 @@ window.plupload = plupload;
                     var zoomFactor = this.getInitialZoomFactor() * this.zoomFactor,
                         offsetX = -this.offset.x / zoomFactor,
                         offsetY = -this.offset.y / zoomFactor,
-                        transform3d =   'rotate('+this.rotateAngle+'rad) scale3d('     + zoomFactor + ', '  + zoomFactor + ',1) ' +
+                        transform3d =   ' scale3d('     + zoomFactor + ', '  + zoomFactor + ',1) ' +
                             'translate3d(' + offsetX    + 'px,' + offsetY    + 'px,0px)',
-                        transform2d =   'rotate('+this.rotateAngle+'rad) scale('       + zoomFactor + ', '  + zoomFactor + ') ' +
+                        transform2d =   ' scale('       + zoomFactor + ', '  + zoomFactor + ') ' +
                             'translate('   + offsetX    + 'px,' + offsetY    + 'px)',
                         removeClone = (function () {
                             if (this.clone) {
@@ -13676,6 +13686,11 @@ window.plupload = plupload;
                                 delete this.clone;
                             }
                         }).bind(this);
+                        if(ro){
+                            // transform3d = ro + transform3d;
+                            // transform2d = ro + transform2d;
+                            // alert(transform3d);
+                        }
 
                     // Scale 3d and translate3d are faster (at least on ios)
                     // but they also reduce the quality.
@@ -13739,7 +13754,7 @@ window.plupload = plupload;
                 lastTouchStart = null,
                 startTouches = null,
 
-                setInteraction = function (newInteraction, event) {
+                setInteraction = function (newInteraction, event,ro) {
                     if (interaction !== newInteraction) {
 
                         if (interaction && !newInteraction) {
@@ -13762,16 +13777,23 @@ window.plupload = plupload;
                                 break;
                         }
                     }
+                    if(ro){
+                        target.handleUpdate(event,ro);
+                    }
                     interaction = newInteraction;
                 },
 
-                updateInteraction = function (event) {
+                updateInteraction = function (event,ro) {
                     if (fingers === 2) {
                         setInteraction('zoom');
                     } else if (fingers === 1 && target.canDrag()) {
                         setInteraction('drag', event);
                     } else {
                         setInteraction(null, event);
+                    }
+
+                    if(ro){
+                        setInteraction(null, event,ro);
                     }
                 },
 
@@ -13876,6 +13898,30 @@ window.plupload = plupload;
                     updateInteraction(event);
                 }
             });
+            // el.addEventListener('gesturechange',function(e){
+
+            //     e.preventDefault();
+            //     this.zoomFactor =e.scale;  
+            //     if(typeof (this.rotation)=="undefined"){
+            //         this.rotation=0;
+            //     }
+            //     // var style = e.target.style;  
+            //     // style.width = (width * e.scale) + "px";  
+            //     // style.height = (height * e.scale) + "px";  
+            //     // style.webkitTransform = "rotate(" + ((this.rotation + e.rotation) % 360) + "deg)";  
+            //     var tmpRo ="rotate(" + ((this.rotation + e.rotation) % 360) + "deg)";  
+            //     // this.update(tmpRo);
+            //     updateInteraction(event,tmpRo)
+            
+            // });
+            // el.addEventListener('gestureend',function(e){   
+
+            //     this.zoomFactor =e.scale;  
+            //     this.rotation =(this.rotation + e.rotation) % 360;  
+            //     // width *= e.scale;  
+            //     // height *= e.scale;  
+            //     // rotation = (rotation + e.rotation) % 360;  
+            // });
         };
 
         return PicZoom;
@@ -15122,6 +15168,25 @@ endCommentListB=[
     "为何要彼此伤害？",
     "我想静静…"
 ];
+borderIdList=[
+    "木质1",
+    "木质1",
+    "木质2",
+    "木质3",
+    "塑料制1",
+    "塑料制2",
+    "现代1",
+    "现代带黑框黑",
+    "现代带框黑",
+    "现代带框红",
+    "现代带框黄",
+    "现代带框青",
+    "现代带青框红",
+    "现代红",
+    "现代黄",
+    "现代青",
+    "现代青"
+]
 
 
 
@@ -15369,9 +15434,15 @@ window.view = {
                 G&&G.pic&&(G.pic["artName"] = res.artName);
                 G&&G.pic&&(G.pic["scoreComment"] = res.scoreComment);
                 G&&G.pic&&(G.pic["commentIdList"] = res.commentIdList);
+                G&&G.pic&&(G.pic["borderId"] = res.borderId);
             }
 
-            
+            if(G&&G.pic&&G.pic["borderId"]){
+                $(".border_image").css("border-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/n-hk-l-"+borderIdList[G.pic["borderId"]]+".png) 70 70 round");
+                $(".-moz-border-image").css("border-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/n-hk-l-"+borderIdList[G.pic["borderId"]]+".png) 70 70 round");
+                $(".-webkit-border-image").css("border-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/n-hk-l-"+borderIdList[G.pic["borderId"]]+".png) 70 70 round");
+                $(".-o-border-image").css("border-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/n-hk-l-"+borderIdList[G.pic["borderId"]]+".png) 70 70 round");
+            }
             if(G&&G.pic&&G.pic["bkg"]){
                 var img = $(".viewport-show .pic-zoom img")[0];//document.createElement('img');
                 img.title = "";
@@ -15419,11 +15490,13 @@ window.view = {
             }
             else if(history.state && history.state.state == "finishUpload"){
                 $(".show-finishUpload").show();
+                turnOn();
+                $('.show-init').hide();
                 $(".borderChoose").show();
             }
             else if(history.state && history.state.state == "confirm"){
                 $('.show-confirm').show();
-
+                turnOff();
                 $.ajax({
                     url:'http://campaign.vart.cc/201508/api/art/post',
                     type:"POST",
@@ -15527,9 +15600,81 @@ window.view = {
 
 //main
 $(function () {
-    $('div.pic-zoom').each(function () {
-        new PicZoom($(this), {});
-    });
+    // $('div.pic-zoom').each(function () {
+    //     new PicZoom($(this), {});
+    // });
+
+    var isdrag=false;   
+    var tx,x,ty,y;
+    var width =60,height =60,rotation = 0,scale=1; 
+       
+    turnOn =function(){   
+        document.getElementById("moveid").addEventListener('touchstart',touchStart);  
+        document.getElementById("moveid").addEventListener('touchmove',touchMove);
+        document.getElementById("moveid").addEventListener('touchend',function(){  
+            isdrag = false;  
+        });
+        document.getElementById("moveid").addEventListener('gesturechange',gesturechange);
+        document.getElementById("moveid").addEventListener('gestureend',gestureend);
+    }
+    turnOff =function(){   
+        document.getElementById("moveid").removeEventListener('touchstart',touchStart);  
+        document.getElementById("moveid").removeEventListener('touchmove',touchMove);
+        document.getElementById("moveid").removeEventListener('touchend',function(){  
+            isdrag = false;  
+        });
+        document.getElementById("moveid").removeEventListener('gesturechange',gesturechange);
+        document.getElementById("moveid").removeEventListener('gestureend',gestureend);
+    }
+
+    function touchStart(e){   
+       isdrag = true; 
+       e.preventDefault();
+       // tx = parseInt($("#moveid").css('left'));    
+       // ty = parseInt($("#moveid").css('top'));  
+       var transfrom_info = window.getComputedStyle(e.currentTarget, null).getPropertyValue("-webkit-transform").split(',');
+        tx = transfrom_info && transfrom_info[4] || 0;
+        ty = transfrom_info && (transfrom_info[5] || "").replace(/\)/, "").trim() || 0;
+    
+       // $("#moveid")[0].style.webkitTransform = "rotate(" + ((rotation) % 360) + "deg) translate("+","+")";  
+       x = e.touches[0].pageX;
+       y = e.touches[0].pageY;  
+    }
+    function gesturechange(e){
+        isdrag=false;
+        e.preventDefault();
+        var style = e.target.style;  
+        scale= e.scale;
+        console.log("gesturechange");
+        // style.width = (width * e.scale) + "px";  
+        // style.height = (height * e.scale) + "px";  
+        // style.webkitTransform = "rotate(" + ((rotation + e.rotation) % 360) + "deg)";  
+        $("#moveid")[0].style.webkitTransform = "rotate(" + ((rotation + e.rotation) % 360) + "deg) scale("+e.scale+","+e.scale+") translate("+tx+"px,"+ty+"px)";  
+        
+    }
+    function gestureend(e){   
+        // width *= e.scale;  
+        // height *= e.scale;  
+        rotation = (rotation + e.rotation) % 360;  
+    };   
+    function touchMove(e){   
+      if (isdrag){
+       e.preventDefault();
+           var n = parseInt(tx) + e.touches[0].pageX - x;
+           var h = parseInt(ty) + e.touches[0].pageY - y;   
+           // $("#moveid").css("left",n); 
+           // $("#moveid").css("top",h);    
+           // console.log(tx,e.touches[0].pageX , x);
+           // console.log(ty,e.touches[0].pageY , y);
+           console.log("touchMove");
+
+            $("#moveid")[0].style.webkitTransform = "rotate(" + ((rotation) % 360) + "deg) scale("+scale+","+scale+") translate("+n+"px,"+h+"px)"; 
+       }  
+    }    
+
+
+
+
     paint.init();
     document.getElementById('canvas').width  = window.innerWidth;
     paint.cxt.lineWidth=2;
@@ -15572,7 +15717,7 @@ $(function () {
             openId : "openid",
             picKey : G.pic.bkg,
             css : G.pic.css,
-            bordeId : G.pic.borderId,
+            borderId : G.pic.borderId,
             signKey : G.pic.sign,
             uploadDate : G.uploadDate ,
             // score : ,
@@ -15593,6 +15738,18 @@ $(function () {
     document.querySelector('.rule-detail').onclick=function(){
         $(".rule-mask").show();
     }
+
+    document.querySelector('.button-share').onclick=function(){
+        $(".share-div").show();
+    }
+    document.querySelector('.share-div').onclick=function(){
+        $(".share-div").hide();
+    }
+
+    document.querySelector('.button-ranking').onclick=function(){
+        // $(".share-div").hide();
+    }
+    
     
 
     // var area = $.getQuery('area');
