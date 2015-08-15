@@ -425,6 +425,24 @@ div.pic-zoom div.description p{
     font-size: 14px;
 }
 
+.fixed-mask-share {
+    position: fixed;
+    z-index: 99;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: rgba(0,0,0,.5);
+}
+.flt-msk-share{
+    z-index: 999;
+    position: absolute;
+    width: 100%;    
+    color: #fff;
+    font-size: 14px;
+}
+
 .rule-mask {
     position: fixed;
     z-index: 99;
