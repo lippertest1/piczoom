@@ -425,9 +425,6 @@ window.view = {
             else if(history.state && history.state.state == "confirm"){
                 $('.show-confirm').show();
                 $(".fixed-mask").show();
-                setTimeout(function(){
-                    $(".fixed-mask").hide();
-                },3000);
                 turnOff();
                 $.ajax({
                     dataType: 'json',
