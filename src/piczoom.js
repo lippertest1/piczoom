@@ -378,7 +378,7 @@ window.view = {
             }
             if(G&&G.pic&&G.pic["css"]){
                 var img = $(".viewport-show .pic-zoom")[0];
-                $(img).attr("style",G.pic["css"]);
+                $(img).attr("style",JSON.parse(G.pic["css"]));
             }
             if(G&&G.pic&&G.pic["score"]){
                 var div = $(".viewport-show .price-text i")[0];
