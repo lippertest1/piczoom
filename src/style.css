@@ -47,7 +47,7 @@
 .share-div{
     position: absolute;
     /*height: 100px;*/
-    width: :100%;
+    width: 100%;
     right: 0;
     background-color: rgba(0,0,0,0.5);
     z-index: 999;
