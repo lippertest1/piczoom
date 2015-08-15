@@ -14042,27 +14042,44 @@ window.plupload = plupload;
             };
             this.changeColor();
             this.imgurl.onclick = function() {
-                var base64 = t.getUrl();
 
-                var pic = base64.split(",")[1];
-                var url = "http://up.qiniu.com/putb64/-1"; 
-                var xhr = new XMLHttpRequest();
-                
-                xhr.onreadystatechange=function(){
-                    if (xhr.readyState==4 && xhr.status=="200"){
-                        xhr.responseText;
-                        var res=JSON.parse(xhr.responseText);
-                        typeof(G)!="undefined"&&G&&G.pic&&(G.pic["sign"] = res.key);
-                        goTo('show','finishUpload');
-                        // var img = $(".viewport-show .pic-zoom img")[0];//document.createElement('img');
-                        // img.title = file[file.length-1].name;
-                        // img.src = G.pic.host+G.pic["bkg"];
+                var ajax = new XMLHttpRequest();
+                ajax.open('GET', 'http://campaign.vart.cc/201508/api/qiniu/get', true);
+                // alert("open");
+                ajax.onreadystatechange = function() {
+                    // alert(ajax.readyState+"   "+ ajax.status);
+                    if (ajax.readyState == 4 && ajax.status == 200) {
+                        var res = parseJSON(ajax.responseText);
+
+                        var base64 = t.getUrl();
+
+                        var pic = base64.split(",")[1];
+                        var url = "http://up.qiniu.com/putb64/-1"; 
+                        var xhr = new XMLHttpRequest();
+                        
+                        xhr.onreadystatechange=function(){
+                            // alert(xhr.readyState+"   "+ xhr.status);
+                            if (xhr.readyState==4 && xhr.status=="200"){
+                                xhr.responseText;
+                                var res=JSON.parse(xhr.responseText);
+                                typeof(G)!="undefined"&&G&&G.pic&&(G.pic["sign"] = res.key);
+                                goTo('show','finishUpload');
+                                // var img = $(".viewport-show .pic-zoom img")[0];//document.createElement('img');
+                                // img.title = file[file.length-1].name;
+                                // img.src = G.pic.host+G.pic["bkg"];
+                            }
+                        }
+                        xhr.open("POST", url, true); 
+                        xhr.setRequestHeader("Content-Type", "application/octet-stream"); 
+                        xhr.setRequestHeader("Authorization", "UpToken "+G.pic.token); 
+                        xhr.send(pic);
                     }
-                }
-                xhr.open("POST", url, true); 
-                xhr.setRequestHeader("Content-Type", "application/octet-stream"); 
-                xhr.setRequestHeader("Authorization", "UpToken "+G.pic.token); 
-                xhr.send(pic);
+                    // if(ajax.readyState == 4 && ajax.status != 200){
+                    //     alert(ajax.reponse);
+                    //     alert(ajax.responseText);
+                    // }
+                };
+                ajax.send();
             };
             /*橡皮擦*/
             this.$("eraser").onclick = function(e) {
@@ -15455,7 +15472,12 @@ window.view = {
             }
             if(G&&G.pic&&G.pic["css"]){
                 var img = $(".viewport-show .pic-zoom")[0];
-                $(img).attr("style",G.pic["css"]);
+                try{
+                    $(img).attr("style",JSON.parse(G.pic["css"]));
+                }
+                catch(e){
+                    $(img).attr("style",G.pic["css"]);
+                }
             }
             if(G&&G.pic&&G.pic["score"]){
                 var div = $(".viewport-show .price-text i")[0];
@@ -15496,12 +15518,15 @@ window.view = {
             }
             else if(history.state && history.state.state == "confirm"){
                 $('.show-confirm').show();
+                $(".fixed-mask").show();
                 turnOff();
                 $.ajax({
+                    dataType: 'json',
                     url:'http://campaign.vart.cc/201508/api/art/post',
                     type:"POST",
-                    // contentType:"application/json; charset=utf-8",
-                    data:{"":JSON.stringify(G.postData)},
+                    contentType:"application/json; charset=utf-8",
+                    // data:{"":JSON.stringify(G.   )},
+                    data:JSON.stringify(G.postData),
                     success: function(res){
                         console.log("show share",res);
                         var dialogIdRand = Math.floor(Math.random()*dialogIdList.length);
@@ -15513,10 +15538,7 @@ window.view = {
                         $(".commentBox-discus .avatar-left").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+dialog.name1+".jpg)");
                         $(".commentBox-discus .avatar-right").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+dialog.name2+".jpg)");
 
-                        $(".fixed-mask").show();
-                        setTimeout(function(){
-                            $(".fixed-mask").hide();
-                        },3000);
+                        
                         if(res){
                             G.pic = res;
                             //替换分数和名字

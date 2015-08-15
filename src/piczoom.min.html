@@ -12,14 +12,18 @@
 
     </style>
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 
 </head>
 <body>
     <div class='viewport-show' style="display:none">
-        <img title="" src="http://7xkkuk.com2.z0.glb.qiniucdn.com/o_19shgoshs1dba5sg1ce8o6p9179.png" class="share-div" style="display:none">
+        <div class="fixed-mask-share share-div" style="display:none">
+            <div class="flt-msk-share">
+                <img title="" src="http://7xkkuk.com2.z0.glb.qiniucdn.com/o_19shgoshs1dba5sg1ce8o6p9179.png" style="width: 100%;">
+            </div>
+        </div>
         <div class="pic-container box-center">
             <div class="page border_image">
                 <div class="pic-zoom" id="moveid">
@@ -56,7 +60,7 @@
             </div>
         </div>
 
-        <div class="infoBox show-init" style="display:none">       
+        <div class="infoBox show-init" style="display:none; height: 88px;">       
             <div class="price-text box-center">
                 <i class="fa fa-4x" style="    font-size: 3em;"></i>
                 
@@ -71,9 +75,9 @@
             </div>
         </div>
 
-        <div class="infoBox show-finishUpload" style="display:none">       
-            <div class="price-text box-center">
-                <input type="text" class="button fa-2x" id="artName" style="color:#000; background-color: #FFF; margin:20px 0 ;width: 80%;" placeholder="作品名">
+        <div class="infoBox show-finishUpload" style="display:none">    
+            <div class="price-text ">
+                <input type="text" class="button fa-2x" id="artName" style="color:#000; background-color: #FFF; margin: 0 0 0 10% ;width: 80%;" placeholder="作品名">
                     
                 </input>
             </div>
@@ -100,11 +104,11 @@
         </div>
 
         <div class="infoBox show-confirm" style="display:none">     
-            <div class="box-center button-container show-confirm">
-                <div class="button button-share" style="background-color: #FDA128; margin: 20px 8px 0px 20px; padding: 10px 0px; ">
+            <div class="  button-container show-confirm">
+                <div class="button button-share" style="background-color: #FDA128; margin: 20px 3% 0px 8%; width:38%; padding: 10px 0px; display: inline-block; ">
                     分享给好友
                 </div>
-                <div class="button button-ranking" style="background-color: #435984; margin: 20px 20px 0px 8px; padding: 10px 0px; ">
+                <div class="button button-ranking" style="background-color: #435984; margin: 20px 8% 0px 3%; width:38%; padding: 10px 0px; display: inline-block; ">
                     全球估值排行
                 </div>
             </div>
@@ -162,12 +166,14 @@
         </div>
 
         <div class="box-center" style="">
-            <img src="http://7xkkuk.com2.z0.glb.qiniucdn.com/intro.jpg" style="width: 100%;"></img>
+            <img src="http://7xkkuk.com2.z0.glb.qiniucdn.com/intro.jpg" style="width: 80%; margin: 0 10%;"></img>
         </div>
 
         
+        <div class="ui-progressbar" style="width: 0%;"></div>
+        <div class="ui-progressbar-text" style="display:none">上传中......</div>
         <div class="commentBox finishUpload">   
-            <div class="box-center button-container" id="button-container">
+            <div class="box-center button-container" id="button-container" style="margin: 0;">
                 <div id="uploadDiv" class="button fa-2x" onclick=" document.getElementById('uploadBtn').click(); " style="background-color: #435984; margin:20px 0">
                     <i class="fa fa-camera-retro"></i>&nbsp;&nbsp;
                     上传作品
@@ -175,8 +181,6 @@
                 <!--input id="uploadBtn" type="file" accept="image/*" style="visibility: hidden; width: 0px; height: 0px" /-->
             </div>
         </div>
-        <div class="ui-progressbar" style="width: 0%;"></div>
-        <div class="ui-progressbar-text" style="display:none">上传中......</div>
         <div class="commentBox finishUpload rule-detail">   
             <div class="box-center">
                  <div class="triangle-up"></div>
