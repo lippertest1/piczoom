@@ -419,6 +419,10 @@ window.view = {
             }
             else if(history.state && history.state.state == "confirm"){
                 $('.show-confirm').show();
+                $(".fixed-mask").show();
+                setTimeout(function(){
+                    $(".fixed-mask").hide();
+                },3000);
                 turnOff();
                 $.ajax({
                     url:'http://campaign.vart.cc/201508/api/art/post',
@@ -436,10 +440,7 @@ window.view = {
                         $(".commentBox-discus .avatar-left").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+dialog.name1+".jpg)");
                         $(".commentBox-discus .avatar-right").css("background-image","url(http://7xkkuk.com2.z0.glb.qiniucdn.com/"+dialog.name2+".jpg)");
 
-                        $(".fixed-mask").show();
-                        setTimeout(function(){
-                            $(".fixed-mask").hide();
-                        },3000);
+                        
                         if(res){
                             G.pic = res;
                             //替换分数和名字
