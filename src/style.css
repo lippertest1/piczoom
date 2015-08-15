@@ -559,6 +559,9 @@ div.pic-zoom div.description p{
 
 .button-container{
 }
+#button-container input{
+    margin-top: -8px;
+}
 .button{
     background-color: #1e1e1e;
     text-align:center;
