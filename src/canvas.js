@@ -105,27 +105,44 @@
             };
             this.changeColor();
             this.imgurl.onclick = function() {
-                var base64 = t.getUrl();
 
-                var pic = base64.split(",")[1];
-                var url = "http://up.qiniu.com/putb64/-1"; 
-                var xhr = new XMLHttpRequest();
-                
-                xhr.onreadystatechange=function(){
-                    if (xhr.readyState==4 && xhr.status=="200"){
-                        xhr.responseText;
-                        var res=JSON.parse(xhr.responseText);
-                        typeof(G)!="undefined"&&G&&G.pic&&(G.pic["sign"] = res.key);
-                        goTo('show','finishUpload');
-                        // var img = $(".viewport-show .pic-zoom img")[0];//document.createElement('img');
-                        // img.title = file[file.length-1].name;
-                        // img.src = G.pic.host+G.pic["bkg"];
+                var ajax = new XMLHttpRequest();
+                ajax.open('GET', 'http://campaign.vart.cc/201508/api/qiniu/get', true);
+                // alert("open");
+                ajax.onreadystatechange = function() {
+                    // alert(ajax.readyState+"   "+ ajax.status);
+                    if (ajax.readyState == 4 && ajax.status == 200) {
+                        var res = parseJSON(ajax.responseText);
+
+                        var base64 = t.getUrl();
+
+                        var pic = base64.split(",")[1];
+                        var url = "http://up.qiniu.com/putb64/-1"; 
+                        var xhr = new XMLHttpRequest();
+                        
+                        xhr.onreadystatechange=function(){
+                            // alert(xhr.readyState+"   "+ xhr.status);
+                            if (xhr.readyState==4 && xhr.status=="200"){
+                                xhr.responseText;
+                                var res=JSON.parse(xhr.responseText);
+                                typeof(G)!="undefined"&&G&&G.pic&&(G.pic["sign"] = res.key);
+                                goTo('show','finishUpload');
+                                // var img = $(".viewport-show .pic-zoom img")[0];//document.createElement('img');
+                                // img.title = file[file.length-1].name;
+                                // img.src = G.pic.host+G.pic["bkg"];
+                            }
+                        }
+                        xhr.open("POST", url, true); 
+                        xhr.setRequestHeader("Content-Type", "application/octet-stream"); 
+                        xhr.setRequestHeader("Authorization", "UpToken "+G.pic.token); 
+                        xhr.send(pic);
                     }
-                }
-                xhr.open("POST", url, true); 
-                xhr.setRequestHeader("Content-Type", "application/octet-stream"); 
-                xhr.setRequestHeader("Authorization", "UpToken "+G.pic.token); 
-                xhr.send(pic);
+                    // if(ajax.readyState == 4 && ajax.status != 200){
+                    //     alert(ajax.reponse);
+                    //     alert(ajax.responseText);
+                    // }
+                };
+                ajax.send();
             };
             /*橡皮擦*/
             this.$("eraser").onclick = function(e) {
