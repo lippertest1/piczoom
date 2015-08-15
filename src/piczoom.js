@@ -430,10 +430,12 @@ window.view = {
                 },3000);
                 turnOff();
                 $.ajax({
+                    dataType: 'json',
                     url:'http://campaign.vart.cc/201508/api/art/post',
                     type:"POST",
-                    // contentType:"application/json; charset=utf-8",
-                    data:{"":JSON.stringify(G.postData)},
+                    contentType:"application/json; charset=utf-8",
+                    // data:{"":JSON.stringify(G.   )},
+                    data:JSON.stringify(G.postData),
                     success: function(res){
                         console.log("show share",res);
                         var dialogIdRand = Math.floor(Math.random()*dialogIdList.length);
