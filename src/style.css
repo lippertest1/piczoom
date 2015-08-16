@@ -528,11 +528,13 @@ div.pic-zoom div.description p{
 }
 
 .nickname{
+    background-size: 100% 100% !important;
     display:inline-block;
     margin-left: 10px;
     color:black;
 }
 .nickname-right {
+    background-size: 100% 100% !important;
     display: inline-block;
     margin: -9px 0px 10px;
     float: right;
