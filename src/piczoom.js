@@ -532,73 +532,93 @@ $(function () {
     //     new PicZoom($(this), {});
     // });
 
-    var isdrag=false;   
-    var tx,x,ty,y;
-    var width =60,height =60,rotation = 0,scale=1; 
-       
-    turnOn =function(){   
-        document.getElementById("moveid").addEventListener('touchstart',touchStart);  
-        document.getElementById("moveid").addEventListener('touchmove',touchMove);
-        document.getElementById("moveid").addEventListener('touchend',function(){  
-            isdrag = false;  
-        });
-        document.getElementById("moveid").addEventListener('gesturechange',gesturechange);
-        document.getElementById("moveid").addEventListener('gestureend',gestureend);
-    }
-    turnOff =function(){   
-        document.getElementById("moveid").removeEventListener('touchstart',touchStart);  
-        document.getElementById("moveid").removeEventListener('touchmove',touchMove);
-        document.getElementById("moveid").removeEventListener('touchend',function(){  
-            isdrag = false;  
-        });
-        document.getElementById("moveid").removeEventListener('gesturechange',gesturechange);
-        document.getElementById("moveid").removeEventListener('gestureend',gestureend);
-    }
+    // var isdrag=false;   
+    // var tx,x,ty,y;
+    // var width =60,height =60,rotation = 0,scale=1; 
 
-    function touchStart(e){   
-       isdrag = true; 
-       e.preventDefault();
-       // tx = parseInt($("#moveid").css('left'));    
-       // ty = parseInt($("#moveid").css('top'));  
-       var transfrom_info = window.getComputedStyle(e.currentTarget, null).getPropertyValue("-webkit-transform").split(',');
-        tx = transfrom_info && transfrom_info[4] || 0;
-        ty = transfrom_info && (transfrom_info[5] || "").replace(/\)/, "").trim() || 0;
-    
-       // $("#moveid")[0].style.webkitTransform = "rotate(" + ((rotation) % 360) + "deg) translate("+","+")";  
-       x = e.touches[0].pageX;
-       y = e.touches[0].pageY;  
-    }
-    function gesturechange(e){
-        isdrag=false;
-        e.preventDefault();
-        var style = e.target.style;  
-        scale= e.scale;
-        console.log("gesturechange");
-        // style.width = (width * e.scale) + "px";  
-        // style.height = (height * e.scale) + "px";  
-        // style.webkitTransform = "rotate(" + ((rotation + e.rotation) % 360) + "deg)";  
-        $("#moveid")[0].style.webkitTransform = "rotate(" + ((rotation + e.rotation) % 360) + "deg) scale("+e.scale+","+e.scale+") translate("+tx+"px,"+ty+"px)";  
-        
-    }
-    function gestureend(e){   
-        // width *= e.scale;  
-        // height *= e.scale;  
-        rotation = (rotation + e.rotation) % 360;  
-    };   
-    function touchMove(e){   
-      if (isdrag){
-       e.preventDefault();
-           var n = parseInt(tx) + e.touches[0].pageX - x;
-           var h = parseInt(ty) + e.touches[0].pageY - y;   
-           // $("#moveid").css("left",n); 
-           // $("#moveid").css("top",h);    
-           // console.log(tx,e.touches[0].pageX , x);
-           // console.log(ty,e.touches[0].pageY , y);
-           console.log("touchMove");
+    var el = document.getElementById("moveid");
+    var START_X = 0;
+    var START_Y = 0;
+    var transform = {
+        translate: { x: START_X, y: START_Y },
+        scale: 1,
+        angle: 0,
+        rx: 0,
+        ry: 0,
+        rz: 0
+    };
+    var ticking = false;
 
-            $("#moveid")[0].style.webkitTransform = "rotate(" + ((rotation) % 360) + "deg) scale("+scale+","+scale+") translate("+n+"px,"+h+"px)"; 
-       }  
-    }    
+    var hammertime = new Hammer.Manager(el);
+    // hammertime.add(new Hammer.Rotate());  
+    hammertime.add(new Hammer.Pan({ threshold: 0, pointers: 0 }));
+    hammertime.add(new Hammer.Swipe()).recognizeWith(hammertime.get('pan'));
+    hammertime.add(new Hammer.Rotate({ threshold: 0 })).recognizeWith(hammertime.get('pan'));
+    hammertime.add(new Hammer.Pinch({ threshold: 0 })).recognizeWith([hammertime.get('pan'), hammertime.get('rotate')]);
+
+    turnOn =function(){ 
+        hammertime.on("panstart panmove", onPan);
+        hammertime.on("rotatestart rotatemove", onRotate);
+        hammertime.on("pinchstart pinchmove", onPinch);
+
+    }
+    turnOff =function(){ 
+        hammertime.off("panstart panmove", onPan);
+        hammertime.off("rotatestart rotatemove", onRotate);
+        hammertime.off("pinchstart pinchmove", onPinch);
+    }
+    function updateElementTransform() {
+        var value = [
+            'translate3d(' + transform.translate.x + 'px, ' + transform.translate.y + 'px, 0)',
+            'scale(' + transform.scale + ', ' + transform.scale + ')',
+            'rotate3d('+ transform.rx +','+ transform.ry +','+ transform.rz +','+  transform.angle + 'deg)'
+        ];
+
+        value = value.join(" ");
+        el.style.webkitTransform = value;
+        el.style.mozTransform = value;
+        el.style.transform = value;
+        ticking = false;
+    }
+    var reqAnimationFrame = (function () {
+        return window[Hammer.prefixed(window, 'requestAnimationFrame')] || function (callback) {
+            window.setTimeout(callback, 1000 / 60);
+        };
+    })();
+    function requestElementUpdate() {
+        if(!ticking) {
+            reqAnimationFrame(updateElementTransform);
+            ticking = true;
+        }
+    }
+    function onPan(ev) {
+        transform.translate = {
+            x: START_X + ev.deltaX,
+            y: START_Y + ev.deltaY
+        };
+
+        // logEvent(ev);
+        requestElementUpdate();
+    }
+    function onPinch(ev) {
+        if(ev.type == 'pinchstart') {
+            initScale = transform.scale || 1;
+        }
+        transform.scale = initScale * ev.scale;
+
+        // logEvent(ev);
+        requestElementUpdate();
+    }
+    function onRotate(ev) {
+        if(ev.type == 'rotatestart') {
+            initAngle = transform.angle || 0;
+        }
+        transform.rz = 1;
+        transform.angle = initAngle + ev.rotation;
+
+        // logEvent(ev);
+        requestElementUpdate();
+    }   
 
 
 
@@ -677,8 +697,6 @@ $(function () {
     document.querySelector('.button-ranking').onclick=function(){
         // $(".share-div").hide();
     }
-    
-    
 
     // var area = $.getQuery('area');
     // goTo(area);
