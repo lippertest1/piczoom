@@ -550,13 +550,6 @@ window.view = {
 
 //main
 $(function () {
-    // $('div.pic-zoom').each(function () {
-    //     new PicZoom($(this), {});
-    // });
-
-    // var isdrag=false;   
-    // var tx,x,ty,y;
-    // var width =60,height =60,rotation = 0,scale=1; 
 
     var el = document.getElementById("moveid");
     var START_X = 0;
