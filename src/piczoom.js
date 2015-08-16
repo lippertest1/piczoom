@@ -700,6 +700,8 @@ $(function () {
     document.querySelector('.ranking-div').onclick=function(){
         $(".ranking-div").hide();
     }
+    $('.border_image').css('height',$('.border_image').width()*7/12+'px');
+    
 
     // var area = $.getQuery('area');
     // goTo(area);
