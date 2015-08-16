@@ -695,7 +695,10 @@ $(function () {
     }
 
     document.querySelector('.button-ranking').onclick=function(){
-        // $(".share-div").hide();
+        $(".ranking-div").show();
+    }
+    document.querySelector('.ranking-div').onclick=function(){
+        $(".ranking-div").hide();
     }
 
     // var area = $.getQuery('area');
