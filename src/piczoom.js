@@ -522,6 +522,28 @@ window.view = {
                 // };
                 // ajax.send(JSON.stringify(data));
             }
+            var score = G.pic.score;
+            var endComment = "";
+            if(score=="无法估价"){
+                document.title = "VART艺廊为了评估我的作品导致系统全线崩坏，求赞我！";
+            }
+            else{
+                if(score==0){
+                    document.title="VART艺廊为我的作品估价$0,我是1好嘛！";
+                }
+                else if(score==100000){
+                    document.title="VART艺廊为我的作品估价$100000,一定交给国家！";
+                }
+                else if(score<0){
+                    document.title="VART艺廊为我的作品估价$"+score+"这是什么鬼！";
+                }
+                else if(score<999){
+                    document.title="VART艺廊为我的作品估价$"+score+endCommentListG[Math.floor(endCommentListG.length*Math.random())%endCommentListG.length];
+                }
+                else if(score>=999){
+                    document.title="VART艺廊为我的作品估价$"+score+endCommentListB[Math.floor(endCommentListB.length*Math.random())%endCommentListB.length];
+                }
+            }
         }
     }
 };
